@@ -29,7 +29,7 @@ One of the great things about using containerization is that we can run multiple
 
 Now if throw Kubernetes into the mix we can replicate a container or groups of containers (known as pods [@kubePods]) among multiple nodes on demand just by adding a new node into the Kubernetes cluster [@kubernetesCluster]. This is achieved by Kubernetes having a master node within the cluster which contains a copy of the master (or deployment) pod (among other things). If a pod closes for whatever reason (whether it be a crash or graceful) or a new node is added the Kubernetes will spin up new pods automatically to meet the Kubernetes desired state.
 
-![module_02_first_appkubernetesCluster] (https://github.com/Ashley-Sands/Comp-260/raw/master/images/module_02_first_app.png) 
+![module_02_first_appkubernetesCluster](https://github.com/Ashley-Sands/Comp-260/raw/master/images/module_02_first_app.png)  
 [@ref]
 
 Now that we're armed with a (very) basic understanding of docker and Kubernetes, we're able to tackle our scalability vs performance issue form whole new perspective. 
