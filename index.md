@@ -53,7 +53,7 @@ Now if we look back figure [@ &Docker Contaner Basic Setup], our setup is still 
 
 At this point, I decided to benchmark the two solutions locally rather than deploying the system over multiple nodes (I'll write about the deployment at a later date). To see if there were any obvious gains with the "containerized" version over the "all-in-one" version and to weed out any potential bottlenecks, also by benchmarking it locally we eliminate any network traffic, so we should have more precise timings. 
 
-# The Benchmark tests.
+# The Benchmark test.
 
 For the benchmark I will be running the "all-in-one" solution in a single container (no other container running at all) against the "containerized" version as demonstrated in figure [@ &Docker Container Basic Setup] also I will be running the benchmarks with a single client and multiple clients locally. 
 The benchmark times will be the overall time taken to send and have the message returned to the client (PING test).   
