@@ -96,10 +96,10 @@ As we can see from the brief benchmark there is an improvement using the microse
 [Fig. 4] Diagram showing how the all-in-one solution can be split into individual components  
 [Fig. 5] Diagram showing complete set of required components and bridge network setup  
 [Fig. 6] Complete state diagram, demonstrating the clients life cycle  
-[Fig. 7] Infrastructure diagram
-[Fig. 8] The overall journey the ping packet takes
-[Fig. 9] results of 600 pings for 3 clients using the All-in-one approach (time in ms) 
-[Fig. 10] results of 600 pings for 3 clients using the mocro-service approach (time in ms)
+[Fig. 7] Infrastructure diagram  
+[Fig. 8] The overall journey the ping packet takes  
+[Fig. 9] results of 600 pings for 3 clients using the All-in-one approach (time in ms)   
+[Fig. 10] results of 600 pings for 3 clients using the mocro-service approach (time in ms)  
 
 
 
