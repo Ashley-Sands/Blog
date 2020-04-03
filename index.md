@@ -47,36 +47,36 @@ So, in order to overcome this new problem, we need to add an intermediate step i
 
 So, our docker setup becomes something more like, 
 ![& Docker Contaner Basic Setup](https://github.com/Ashley-Sands/Comp-260/raw/master/images/dockerBasic.png)  
-[Fig. 5, Diagrame showing compleat set of required commpoents and bridge network setup]
+[Fig. 5, Diagram showing compleat set of required components and bridge network setup]
 
 The way that this works is during the initial connection stages the user is registered into the network by assigning them a unique registration key via the 'client authorization' container. Once the client can be recognized within the network, they can move onto the lobbies container where they are pinged a list of available game lobbies every few seconds. After the user has decided what lobby they want to join they are forwarded onto the unique instance of the game lobby they have selected. Finally, once the lobby has enough users to launch, the game is queued to await a game slot to become available. Once the slot becomes available the players are moved onto a unique game instance container and the lobby is shut down to free resources.
 ![& Server 2 non poster](https://github.com/Ashley-Sands/Comp-260/raw/master/images/Server%202%20poster.png)  
-[Fig. 6, Compleat state diagrame, demanstrating the clients life cycle]
+[Fig. 6, Compleat state diagram, demonstrating the clients life cycle]
 
-Now if we look back at figure 5 (Fig. 5), our setup is still not practical when it comes to saleability since we still have all of our containers running on a single node and eventually we'll run into same issues as the "all-in-one" solution and run out of resources. Furthermore it’s also not practical to scale all of our containers up to a 1 to 1 basis. For instance, we don’t need to have one 'client authorization' container per lobby per game, rather we can split up our containers and distribute them among multiple nodes depending on how performance critical they are.
+Now if we look back at figure 5 (Fig. 5), our setup is still not practical when it comes to saleability since we still have all of our containers running on a single node and eventually we'll run into the same issues as the "all-in-one" solution and run out of resources. Furthermore it’s also not practical to scale all of our containers up to a 1 to 1 basis. For instance, we don’t need to have one 'client authorization' container per lobby per game, rather we can split up our containers and distribute them among multiple nodes depending on how performance critical they are.
 ![& docker inferstuctur UML](https://github.com/Ashley-Sands/Comp-260/raw/master/images/infrastructure.png)
-[Fig. 7, Infastructure diagrame]
+[Fig. 7, Infrastructure diagram]
 
-As we can see from the diagrame [Fig. 7], a [load balancer](https://www.citrix.com/en-gb/glossary/load-balancing.html) [9] has been added before the first 2 nodes. This alows us to distribute our clients eventually among nodes that contain componetns that are not state inderpendent of each other (i.e the 'Client Authoriation' and 'Lobby list' componets). Once the client has choosen a lobby to join, we are then able to send them the address of the server contating the instance of the lobby that they need to join. Once the lobby period if over the client is once again notified to change to a game server. You may notice that theres no 'container Selector' present on the game servers, this is because the game instance is our most preformance critical component, the thinking behind it is to have a little transision points as posible, as each one will take a little processing time.
+As we can see from the diagrame [Fig. 7], a [load balancer](https://www.citrix.com/en-gb/glossary/load-balancing.html) [9] has been added before the first 2 nodes. This allows us to distribute our clients eventually among nodes that contain components that are not state independent of each other (i.e the 'Client Authorization' and 'Lobby list' components). Once the client has chosen a lobby to join, we are then able to send them the address of the server containing the instance of the lobby that they need to join. Once the lobby period if over the client is once again notified to change to a game server. You may notice that there's no 'container Selector' present on the game servers, this is because the game instance is our most performance critical component, the thinking behind it is to have a little transition points as possible, as each one will take a little processing time.
 
-# A very breif benchmark test.
-For the benchmark I will be running the "all-in-one" solution in a single container (no other container running at all) against the "containerized" version as demonstrated in figure 5 [Fig. 5]. For this the benchmark was run locally to eliminate any network traffic, using only three clients. For the test each clients pings the server 10 times a second, while the server ends the client a lobby list every 1 second. We will be messurering the overrall time taken to send, process and have the packet returned to the client.
+# A very brief benchmark test.
+For the benchmark I will be running the "all-in-one" solution in a single container (no other container running at all) against the "containerized" version as demonstrated in figure 5 [Fig. 5]. For this the benchmark was run locally to eliminate any network traffic, using only three clients. For the test each client pings the server 10 times a second, while the server ends the client a lobby list every 1 second. We will be measuring the overall time taken to send, process and have the packet returned to the client.
 
 ![& benchmark timeline](https://github.com/Ashley-Sands/Comp-260/raw/master/images/benchmark%20timeline.png)  
-[Fig. 8, The overall jorney the pinng packet takes]
+[Fig. 8, The overall journey the ping packet takes]
 
 ![figur 9](https://github.com/Ashley-Sands/Comp-260/raw/master/images/3clientPingAIO.PNG)  
-[Fig 9, results of 600 pings for 3 clients useing the All-in-one approch (time in ms) ]
+[Fig 9, results of 600 pings for 3 clients using the All-in-one approach (time in ms) ]
 
 ![figur 10](https://github.com/Ashley-Sands/Comp-260/raw/master/images/3clientPingC.PNG)  
-[Fig 10, results of 600 pings for 3 clients useing the mocro-service approch (time in ms) ]
+[Fig 10, results of 600 pings for 3 clients using the mocro-service approach (time in ms) ]
 
-As we can see from the results the is roughly 20ms improvment using the contatnerized approch althrough there is much larger range. Im going to invertergate this futher in the coming weeks and will post my finding in coming week in a follow up post :D.
+As we can see from the results there is roughly 20ms improvement using the containerized approach although there is much larger range. I'm going to investigate this further in the coming weeks and will post my finding in coming week in a follow up post :D.
 
 # To wrap it up.
-When i first started out on this project, I never imanaged that I would end up desining a multiplayer server that could scale is such a way.  
-Creating a scalble solution for a multiplayer server is a mammoth task, and if its only for a few clients its proberly not worth it, as it takes a lot time and requires knolage of a lot of different APIs and serives. Not to forgot the infrastructure resources that are required of which all cost money. On the other hand however using a micro-service approch give more controle of each indervidule components of the network, resulting in a cleaner and easer to manager code base. 
-As we can see from the breif benchmark there is an imporvment using the micro-serive approch, so we are moving in the right direction, and requires some futher diging. Stay tuned!
+When I first started out on this project, I never imagined that I would end up designing a multiplayer server that could scale in such a way.  
+Creating a scalable solution for a multiplayer server is a mammoth task, and if it's only for a few clients it's probably not worth it, as it takes a lot of time and requires knowledge of a lot of different APIs and services. Not to forget the infrastructure resources that are required of which all cost money. On the other hand however, using a microservice approach gives more control of each individual component of the network, resulting in a cleaner and easier to manage code base. 
+As we can see from the brief benchmark there is an improvement using the microservice approach, so we are moving in the right direction, and requires some further digging. Stay tuned!
 
 ### References / Links
 [3] [docker](https://www.docker.com/)  
@@ -93,13 +93,14 @@ As we can see from the breif benchmark there is an imporvment using the micro-se
 [Fig. 1] all-in-one server state UML  
 [Fig. 2] Reverse Proxy ( [Source](https://www.sidneyw.com/go-reverse-proxy/) )  
 [Fig. 3] Kubernetes Cluster ( [source](https://kubernetes.io/docs/tutorials/kubernetes-basics/deploy-app/deploy-intro/) )  
-[Fig. 4] Diagrame showing how the all-in-one solution can be split into indervidule components  
-[Fig. 5] Diagrame showing compleat set of required commpoents and bridge network setup  
-[Fig. 6] Compleat state diagrame, demanstrating the clients life cycle  
-[Fig. 7] Infastructure diagrame
-[Fig. 8] The overall jorney the pinng packet takes
-[Fig. 9]
-[Fig. 10]
+[Fig. 4] Diagram showing how the all-in-one solution can be split into individual components  
+[Fig. 5] Diagram showing complete set of required components and bridge network setup  
+[Fig. 6] Complete state diagram, demonstrating the clients life cycle  
+[Fig. 7] Infrastructure diagram
+[Fig. 8] The overall journey the ping packet takes
+[Fig. 9] results of 600 pings for 3 clients using the All-in-one approach (time in ms) 
+[Fig. 10] results of 600 pings for 3 clients using the mocro-service approach (time in ms)
+
 
 
 
