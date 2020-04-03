@@ -101,16 +101,27 @@ As we can see from the brief benchmark there is an improvement using the microse
 ### References
 
 [1] T. K.  Authors,  “Kubernetes,”  [Online].  available:https://kubernetes.io/, [Accessed:  02-April-2020].  
+
 [2] I. C. Education, “Containerization explained,” [Online]. available: https://www.ibm.com/cloud/learn/containerization, [Accessed:  02-April-2020].  
+
 [3] Docker,   “Docker,”   [Online].   available:https://www.docker.com/,   [Accessed:02-April-2020].  
+
 [4] I. Eldridge,   “What   is   container   orchestration?”[Online].   available:https://blog.newrelic.com/engineering/container-orchestration-explained/,[Accessed:02-April-2020].  
+
 [5] Docker, “Docker networks - overview,” [Online]. available:  https://docs.docker.com/network/, [Accessed:  02-April-2020].  
+
 [6] M.  Rouse,   “Proxy  server),”   [Online].  available:    https://whatis.techtarget.com/definition/proxy-server, [Accessed:  02-April-2020].  
+
 [7] T. K. Authors, “Pods - kubernetes,” [Online]. available: https://kubernetes.io/docs/concepts/workloads/pods/pod/, [Accessed:  02-April-2020].  
+
 [8] Google,   “Cluster   architecture,”   [Online].   available:https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture, [Accessed:  02-April-2020].  
+
 [9] citrix.com, “What is load balancing?”  [Online]. available:  https://www.citrix.com/en-gb/glossary/load-balancing.html, [Accessed:  02-April-2020].  
+
 [10] S. WIJNGAARDE, “Capturing metrics with go’s reverse proxy,” [Online]. available:https://www.sidneyw.com/, [Accessed:  03-April-2020].
+
 [11] T.  K.  Authors,  “Deploying  your  first  app  on  kubernetes,”  [Online].  available:https://kubernetes.io/docs/tutorials/kubernetes-basics/deploy-app/deploy-intro/,[Accessed:  03-April-2020].
+
 
 ### List of Figers
 
