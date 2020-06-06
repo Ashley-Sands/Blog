@@ -1,0 +1,87 @@
+
+body{
+    background-color: black;
+    height: 100%;
+}
+
+a.cli-command
+{
+    /*background: rgb(70, 70, 70);*/
+    border: 1px solid rgb(70, 70, 70);
+    text-decoration: none;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-right: 4px;
+    margin-left: 4px;
+}
+
+a.cli-command:hover
+{
+    border: 0px;
+    color: rgb(180, 180, 180);
+    margin-left: 6px;
+}
+
+p
+{
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+p, a
+{
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+p.console-input{
+    float: left;
+}
+
+div.console-input{
+    
+    overflow: hidden;
+}
+
+#pg-console-input
+{
+    width: 100%;
+    display: inline-block;
+}
+
+#console-text-input
+{
+    position: relative;
+    left: 8px;
+    display: inline-block;
+}
+
+#console-input-cursor-hold{
+    position: relative;
+    left: 240px;    /*11px per char*/
+    top: -23px;
+    width: 11px;
+}
+
+#console-input-cursor{
+    position: relative;
+    left: 0px;    /*11px per char*/
+    background-color: rgb(70, 255, 70);
+    border: 1px solid green;
+    height: 20px;
+    width: 100%;
+    display: inline-block;
+
+}
+
+p.console-input-cursor-current-char
+{
+    position: relative;
+    top: -2px;
+    left: 1px;
+    color: black;
+
+}
