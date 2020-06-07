@@ -1,10 +1,7 @@
 
 class Command
 {
-    constructor()
-    {
-        
-    }
+    constructor() { }
 
     get validCommands()
     {
@@ -19,12 +16,13 @@ class Command
          *  executes the command.
          *  @param htmlElement: the element to print the responce into.
          */
+        htmlElement.innerHTML = "== TEST CONTENT =="
     }
 
     IsCommand( comm )
     {
         /** Is the command in the list of valid commands */
-        return this.commands.includes( comm, 0 );
+        return this.validCommands.includes( comm.toLowerCase(), 0 );
     }
 
 }
