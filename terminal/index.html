@@ -3,12 +3,11 @@
 <html>
     <head>
         <title>Ashley Sands</title>
-        <link rel="stylesheet" type="text/css" href="includes/default.css">
+        <link rel="stylesheet" type="text/css" href="./includes/default.css">
     </head>
-    <script src="includes/js/textInput.js"></script>
-    <script src="includes/js/main.js"></script>
+    <script src="./includes/js/textInput.js"></script>
+    <script src="./includes/js/main.js"></script>
     <body>
-        <p id="debug"></p></p>
         <div id="pg-console-hold">
             <div id="pg-console-content">
                 <p>
@@ -26,19 +25,22 @@
                     Type <a href="" class="cli-command">`Help`</a> for help at any time!<br />
                     <br />
                     Last Updated: 06/06/2020 @ 04:34 (BST +1)<br />
-                    ================================================================<br />
                 </p>
-                <p>
+                <p id="cli-commands-hold" class="cli-commands-undocked" > 
+                    ================================================================<br />
                     Commands
                     <a href="#home" class="cli-command">cd /home/</a>
                     <a href="#git" class="cli-command">ls ~/git</a>
                     <a href="#blog" class="cli-command">ls ~/blog</a>
                     <a href="#about" class="cli-command">cd ~/about</a>
+                    <br />
+                    ================================================================
                 </p>
-                <p>
-                    ================================================================<br />
-                </p>
+                <div id="cli-commands-docked-spacer"></div>
             </div>
+
+            <p id="debug">debug</p>
+
             <div id="console-outer-content-hold"></div>
             <div id="pg-console-input">
                 <p class="console-input">guest@ams-portfolio:~$</p>

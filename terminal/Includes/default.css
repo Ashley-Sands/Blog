@@ -1,7 +1,6 @@
 
 body{
     background-color: black;
-    height: 100%;
 }
 
 a.cli-command
@@ -61,14 +60,14 @@ div.console-input{
 
 #console-input-cursor-hold{
     position: relative;
-    left: 240px;    /*11px per char*/
+    left: 240px; 
     top: -23px;
     width: 11px;
 }
 
 #console-input-cursor{
     position: relative;
-    left: 0px;    /*11px per char*/
+    left: 0px;    /*11px per char (more like 10.625ish)*/
     background-color: rgb(70, 255, 70);
     border: 1px solid green;
     height: 20px;
@@ -84,4 +83,27 @@ p.console-input-cursor-current-char
     left: 1px;
     color: black;
 
+}
+
+p.cli-commands-docked
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: black;
+    margin: 8px;
+    margin-top: 0px;
+    padding-top: 6px;
+    z-index: 999;
+
+}
+
+#cli-commands-hold
+{
+}
+
+#cli-commands-docked-spacer
+{
+    display: unset;
+    height: 40px;
 }
