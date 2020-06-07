@@ -90,7 +90,6 @@ main = function()
         {
             document.getElementById("cli-commands-hold").className = "cli-commands-undocked";
             document.getElementById("cli-commands-docked-spacer").style.display = "unset";
-
         }
 
     };
