@@ -79,16 +79,7 @@ main = function()
 
     window.onscroll = function(event) {
 
-        document.getElementById("debug").innerHTML = "scroll";
-        var winHeight = window.innerHeight;
-        var bodyHeight = htmlBody.offsetHeight;
-        var heightDif = bodyHeight - winHeight;    // total amount that we can scroll
-        
-        if ( heightDif < 0 ) return;                // body of page is within the height of the inner window.
-
         var scrollPos = window.scrollY;
-
-        document.getElementById("debug").innerHTML = ` win: ${winHeight} body: ${bodyHeight} dif: ${heightDif} sp: ${scrollPos}`;
 
         if (scrollPos > 210)
         {
