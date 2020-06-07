@@ -1,12 +1,14 @@
 
 class Command
 {
-    constructor() { }
+    constructor( content_url ) 
+    {
+        this.url = content_url;
+     }
 
     get validCommands()
     {
         /** requires override. returns list of accepted commands */
-
         return [];
     }
 
@@ -16,7 +18,8 @@ class Command
          *  executes the command.
          *  @param htmlElement: the element to print the responce into.
          */
-        htmlElement.innerHTML = "== TEST CONTENT =="
+        Command._LoadContent( this.url, htmlElement );
+        
     }
 
     IsCommand( comm )
@@ -25,7 +28,7 @@ class Command
         return this.validCommands.includes( comm.toLowerCase(), 0 );
     }
 
-    static LoadContent( url, responceElem )
+    static _LoadContent( url, responceElem )
     {
         var request = new XMLHttpRequest();
         request.onreadystatechange = function() 
@@ -36,10 +39,10 @@ class Command
             }
             else if ( this.status >= 300)
             {
-                responceElem.innerHTML = "Error"
+                responceElem.innerHTML = ` Error: ${this.status}`
             }
         };
-        
+
         request.open("GET", url, true);
         request.send();
     }

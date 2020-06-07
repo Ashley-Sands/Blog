@@ -14,7 +14,7 @@ main = function()
     var lastContentId = -1;
 
     var commands = [
-        new HomeCommand()
+        new HomeCommand( "http://localhost/index.txt" )
     ]
 
     var history = []
