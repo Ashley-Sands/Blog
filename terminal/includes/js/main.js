@@ -26,11 +26,12 @@ main = function()
 
         
         var charCode = e.charCode;
+        this.DisableDefaults( charCode, e, "code" )
 
         if ( charCode == 13 )   // ignore enter
             return;
 
-        //document.getElementById("debug").innerHTML = ` ${charCode}`;
+        document.getElementById("debug").innerHTML = ` ${charCode}`;
 
         input.AppendText( String.fromCharCode(charCode) );
 
@@ -41,6 +42,8 @@ main = function()
     htmlBody.addEventListener( "keydown", (e) => {
 
         var keyCode = e.code;
+        this.DisableDefaults( keyCode, e, "key" )
+        //document.getElementById("debug").innerHTML = ` ${keyCode}`;
 
         switch ( keyCode )
         {
@@ -52,11 +55,9 @@ main = function()
                 break;
             case "ArrowUp":
                 SetFromHistory(-1);
-                e.preventDefault();
                 break;
             case "ArrowDown":
                 SetFromHistory(1);
-                e.preventDefault()
                 break;
             case "NumpadEnter":
             case "Enter": 
@@ -65,7 +66,7 @@ main = function()
                     var command = input.text;
 
                     history.push( command );
-                    currentHistoryId = history.length;  //
+                    currentHistoryId = history.length;
 
                     this.AddContent( command );
                     input.ClearText();
@@ -73,11 +74,12 @@ main = function()
                 break
             case "Backspace": 
                 input.RemoveChar(false);
-                e.preventDefault();
                 break;
             case "Delete": 
                 input.RemoveChar(true);
-                e.preventDefault();
+                break;
+            case "Slash":   // since we have disabled the defaults of shash we need to manuly get it to add the slash.
+                
                 break;
         }
 
@@ -100,12 +102,42 @@ main = function()
 
     };
 
+    DisableDefaults = function( key, event, type="key" )
+    {
+        var disabled = [];
+
+        switch( type.toLowerCase() ){
+        case "key":
+            disabled = [
+                "ArrowUp",
+                "ArrowDown",
+                "Backspace",    // disable backspace, as its STILL back in firefox (and probs some other browers too)
+                "Delete",
+                "keyCode",
+            ]
+            break;
+        case "code":
+            disabled = [
+                // disable defaults on slash as its brings up the quick search in firefox.
+                // By disabling the keycode we still get the key press but ignore the default action.
+                // if we disable it via the key, it will ignore the press as well :) 
+                47        
+            ]
+            break;
+        }
+
+        if ( disabled.indexOf(key) >= 0 )
+        {
+            event.preventDefault();
+        }
+    }
+
     SetFromHistory = function(dir)
     {
         var nextElem = currentHistoryId + dir;
         currentHistoryId = Math.max( 0, Math.min(nextElem, history.length ) );
 
-        document.getElementById("debug").innerHTML = ` ${currentHistoryId}`;
+        //document.getElementById("debug").innerHTML = ` ${currentHistoryId}`;
 
         if ( currentHistoryId == history.length )
             input.SetText( "" );
