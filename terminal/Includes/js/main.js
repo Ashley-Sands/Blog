@@ -41,7 +41,6 @@ main = function()
     htmlBody.addEventListener( "keydown", (e) => {
 
         var keyCode = e.code;
-        //document.getElementById("debug").innerHTML = ` ${keyCode}`;
 
         switch ( keyCode )
         {
@@ -74,9 +73,11 @@ main = function()
                 break
             case "Backspace": 
                 input.RemoveChar(false);
+                e.preventDefault();
                 break;
             case "Delete": 
                 input.RemoveChar(true);
+                e.preventDefault();
                 break;
         }
 
