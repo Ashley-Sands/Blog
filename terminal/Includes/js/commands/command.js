@@ -1,9 +1,10 @@
 
 class Command
 {
-    constructor( content_url ) 
+    constructor( content_page ) 
     {
-        this.url = content_url;
+        var baseUrl = "http://localhost/Portfolio2.0/terminal/pages/"
+        this.url = baseUrl + content_page;
      }
 
     get validCommands()
