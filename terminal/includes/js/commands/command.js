@@ -3,7 +3,7 @@ class Command
 {
     constructor( content_page ) 
     {
-        var baseUrl = Const.basePath;
+        var baseUrl = `${Const.basePath}/pages/`;
         this.url = baseUrl + content_page;
      }
 
