@@ -5,6 +5,9 @@
         <title>Ashley Sands</title>
         <link rel="stylesheet" type="text/css" href="./includes/styles/common.css">
         <link rel="stylesheet" type="text/css" href="./includes/styles/index.css">
+
+        <script src="./includes/js/common.js"></script>
+
     </head>
     <body>
         <div id="site-sellect-outer-hold">
@@ -13,7 +16,7 @@
             <p class="site-select-head" >Wellcome to the home of </p>
             <p class="hand-writing inline">Ashley Sands</p>
             </div>
-            <p class="site-select-info" >Sellect the version of the site you would like to view</p>
+            <p class="site-select-info" >Select the version of the site you would like to view</p>
 
             <a href="default.html">
                 <div id="classic-site-hold" class="site-select-tab" >
@@ -35,12 +38,15 @@
                     also there maybe a couple of features that are currently unavailable.
                 </p>
                 <p class="hand-writing center"><br />Ashley M Sands</p>
-                <p id="year" class="hand-writing center">2020</p>
-                <p class="last-updated">Last Updated: 27/06/2020 @ 18:30 BST</p>
+                <p id="year" class="hand-writing center">---</p>
+                <p class="last-updated">Last Updated: 27/06/2020 </p>
             </div>
 
         </div>
 
 
     </body>
+    <script>
+        document.getElementById("year").innerHTML = Year();
+    </script>
 </html>

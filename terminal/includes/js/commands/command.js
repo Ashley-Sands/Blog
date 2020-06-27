@@ -40,7 +40,7 @@ class Command
             }
             else if ( this.status >= 300)
             {
-                responceElem.innerHTML = ` Error: ${this.status}`
+                responceElem.innerHTML = `Error: ${this.status}`
             }
         };
 
