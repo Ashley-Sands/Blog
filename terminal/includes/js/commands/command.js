@@ -3,7 +3,7 @@ class Command
 {
     constructor( content_page ) 
     {
-        var baseUrl = "http://localhost/Portfolio2.0/terminal/pages/"
+        var baseUrl = Const.basePath;
         this.url = baseUrl + content_page;
      }
 
