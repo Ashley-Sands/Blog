@@ -36,11 +36,11 @@ p.hand-writing{
     letter-spacing: 3px;
 }
 
-#inline.hand-writing{
+.inline{
     display: inline;
 }
 
-#center.hand-writing{
+.center{
     text-align: center;
 }
 
