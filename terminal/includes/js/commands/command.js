@@ -19,7 +19,7 @@ class Command
          *  executes the command.
          *  @param htmlElement: the element to print the responce into.
          */
-        Common._LoadContent( this.url, htmlElement );
+        Common.LoadContent( this.url, htmlElement );
         
     }
 
