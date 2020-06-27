@@ -1,0 +1,11 @@
+p
+{
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+p, a
+{
+    font-size: 16px;
+    letter-spacing: 1px;
+}

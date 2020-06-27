@@ -21,19 +21,11 @@ a.cli-command:hover
     margin-left: 6px;
 }
 
-p
-{
-    margin-top: 3px;
-    margin-bottom: 3px;
-}
-
 p, a
 {
     color: white;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
-    font-size: 16px;
-    letter-spacing: 1px;
 }
 
 p.console-input{
