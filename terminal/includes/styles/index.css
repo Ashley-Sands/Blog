@@ -1,6 +1,3 @@
-@font-face{
-    font-family: amshw; src: url('../amshw.ttf');
-}
 
 body{
     background-color: #f0f0f0;
@@ -32,18 +29,18 @@ p, h1, h2, h3{
     font-family: Arial, Helvetica, sans-serif;
 }
 
-p.sig{
+p.hand-writing{
     font-family: amshw, Arial, Helvetica, sans-serif;
     font-weight: bolder;
     font-size: 18px;
     letter-spacing: 3px;
 }
 
-#inline.sig{
+#inline.hand-writing{
     display: inline;
 }
 
-#center.sig{
+#center.hand-writing{
     text-align: center;
 }
 
