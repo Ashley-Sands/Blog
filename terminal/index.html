@@ -40,7 +40,7 @@
                 </p>
                 <p class="hand-writing center"><br />Ashley M Sands</p>
                 <p id="year" class="hand-writing center">---</p>
-                <p class="last-updated">Last Updated: 27/06/2020 </p>
+                <p id="last-updated" class="last-updated">Last Updated: 27/06/2020 </p>
             </div>
 
         </div>
@@ -49,6 +49,8 @@
     </body>
     <script>
         document.getElementById("year").innerHTML = Common.Year();
-        Common.FetchHeader(  )
+        Common.FetchHeader( Const.basePath+"/index.html", "Last-Modified", 
+                            document.getElementById("last-updated"), 
+                            "Last Updated<br/>{responce}" )
     </script>
 </html>
