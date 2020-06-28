@@ -2,6 +2,10 @@
     font-family: amshw; src: url('../amshw.ttf');
 }
 
+p, h1, h2, h3, h4, h5, h6{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 p{
     margin-top: 3px;
     margin-bottom: 3px;
@@ -10,4 +14,19 @@ p{
 p, a{
     font-size: 16px;
     letter-spacing: 1px;
+}
+
+.inline{
+    display: inline;
+}
+
+.center{
+    text-align: center;
+}
+
+p.hand-writing{
+    font-family: amshw, Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    font-size: 18px;
+    letter-spacing: 3px;
 }
