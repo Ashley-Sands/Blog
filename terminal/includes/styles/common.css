@@ -6,6 +6,10 @@ p, h1, h2, h3, h4, h5, h6{
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.mono-font{
+    font-family: 'Courier New', Courier, monospace;
+}
+
 p{
     margin-top: 3px;
     margin-bottom: 3px;
@@ -24,9 +28,13 @@ p, a{
     text-align: center;
 }
 
-p.hand-writing{
+.hand-writing{
     font-family: amshw, Arial, Helvetica, sans-serif;
     font-weight: bolder;
-    font-size: 18px;
     letter-spacing: 3px;
 }
+
+p.hand-writing{
+    font-size: 18px;
+}
+
