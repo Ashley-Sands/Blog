@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Ashley Sands</title>
+        <link rel="stylesheet" type="text/css" href="./includes/styles/common.css">
+        <link rel="stylesheet" type="text/css" href="./includes/styles/index.css">
+
+        <script src="./includes/js/const.js"></script>
+        <script src="./includes/js/common.js"></script>
+
+    </head>
+    <body>
+        <div id="site-sellect-outer-hold">
+
+            <div id="center-heading">
+                <p class="site-select-head" >Wellcome to the home of </p>
+                <p class="hand-writing inline">Ashley Sands</p>
+            </div>
+
+            <p class="site-select-info" >Select the version of the site you would like to view</p>
+
+            <a href="default.html">
+                <div id="classic-site-hold" class="site-select-tab" >
+                    <h2 id="classic-content" class="site-title">Classic Site</h2>
+                    <p id="classic-content"  class="header-label" >Just your everyday website</p>
+                </div>
+            </a>
+            
+            <a href="terminal.html">
+                <div id="terminal-site-hold" class="site-select-tab" >
+                    <h2 id="terminal-content" class="site-title">~$ ams-terminal -u guest</h2>
+                    <p id="terminal-content"  class="header-label" >View and use the site as if it was a terminal application</p>
+                </div>
+            </a>
+
+            <div id="center-footer">
+                <p>
+                    Please beaware that the site is currently a work in progress (WIP)<br/>
+                    as a result some items may not be displayed correctly<br />
+                    also there maybe a couple of features that are currently unavailable.
+                </p>
+                <p class="hand-writing center"><br />Ashley M Sands</p>
+                <p id="year" class="hand-writing center">----</p>
+                <p id="last-updated" class="last-updated">Last Updated: 27/06/2020 </p>
+            </div>
+
+        </div>
+
+    </body>
+    <script>
+        document.getElementById("year").innerHTML = Common.Year();
+        Common.FetchHeader( Const.basePath+"/index.html", "Last-Modified", 
+                            document.getElementById("last-updated"), 
+                            "Last Updated<br/>{responce}" )
+    </script>
+</html>

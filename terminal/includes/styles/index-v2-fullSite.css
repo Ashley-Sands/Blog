@@ -1,0 +1,101 @@
+
+body{
+    background-color: #e0e0e0;
+}
+
+.site-select-tab{
+    position: absolute;
+    display: inline-block;
+    width: 48%;
+    height: 95px;
+    border: solid 3px black;
+    box-sizing: content-box;
+}
+
+#site-sellect-outer-hold{
+    position: absolute;
+    top: 35px;
+    height: 400px;
+    left: 20%;
+    right: 20%;
+}
+
+#terminal-site-hold{
+    left: 50%;
+}
+
+p, h1, h2, h3{
+    text-align: center;
+}
+
+#center-heading{
+    margin: auto;
+    width: fit-content;
+}
+
+p.site-select-head{
+    font-weight: bolder;
+    display: inline-block;
+}
+
+p.site-select-info{
+    margin-bottom: 25px;
+}
+
+p.header-label{
+    font-weight: lighter;
+    font-size: 12px;
+}
+
+h2.site-title{
+    font-weight: bolder;
+    margin-bottom: 8px
+}
+
+#terminal-content.header-label, #terminal-content.site-title{
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#classic-content.header-label, #classic-content.site-title{
+    color: black;
+}
+
+/* Tab backgrounds for normal, hover and active*/
+
+#terminal-site-hold{
+    background-color: #303030;
+}
+
+#terminal-site-hold:hover{
+    background-color: #202020;
+}
+
+#terminal-site-hold:active{
+    background-color: #404040;
+}
+
+#classic-site-hold{
+    background-color: #a0a0a0;
+}
+
+#classic-site-hold:hover{
+    background-color: #909090;
+}
+
+#classic-site-hold:active{
+    background-color: #b0b0b0;
+}
+
+/* End of tab bg */
+
+#center-footer{
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+}
+
+p.last-updated{
+    margin-top: 16px;
+    font-size: 10px;
+}
