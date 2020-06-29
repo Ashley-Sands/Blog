@@ -18,14 +18,15 @@ body{
 #outer-nav-hold{
     position: relative;
     float: left;
+    min-width: 265px;
+    width: 17vw; /*17% of viewport width*/ /*org 325px;*/
+    max-width: 325px;
 }
 
 .nav-button-hold
 {
     position: relative;
-    min-width: 265px;
-    width: 17vw; /*17% of viewport width*/ /*org 325px;*/
-    max-width: 325px;
+
 
     min-height: 75px;
     height: 18vh; /*18% of viewport height*/ /*org 95px;*/
@@ -75,12 +76,16 @@ h2.nav-button-content{
 
 /* Nav button colors, default, hover and active */
 
+.header-gray{
+ /*   background-color: #cbcbcb;*/
+}
+
 .nav-gray-1{
-    background-color: #cbcbcb;
+    background-color: #9b9b9b;
 }
 
 .nav-gray-1:hover{
-    background-color: #9b9b9b;
+    background-color: #7b7b7b;
 }
 
 .nav-gray-1:active{
@@ -89,14 +94,75 @@ h2.nav-button-content{
 
 /* Content area */
 
-.content-outter-hold{
-
+.content-header-hold{
     position: relative;
-    top: 18vh;
-    margin: 0px;
-    margin-left: 8px;
     box-sizing: border-box;
-    min-height: 400px;
-    border: 2px solid black;
-    display: inline-block;
+    width:100%;
+
+    min-height: 75px;
+    height: 18vh; /*18% of viewport height*/ /*org 95px;*/
+    max-height: 115px;
+
+ /*   border-bottom: solid 2px black;*/
+    
+}
+
+.main-content-area-hold{
+    position: relative;
+    z-index: -100;
+
+    margin-left: 20px;
+    margin-right: 20px;
+    min-width: 600px;   /* this could be smaller if we alow the links to srink a lil more*/
+
+}
+
+#content-spacer{
+    position: relative;
+    height: 3vh;
+    width: 100%;
+}
+
+.min-space{
+    min-height: 24px;
+}
+
+.content-area{
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+h1.content-heading{
+    font-size: 48px;
+    font-weight: lighter;
+}
+
+mark{
+    padding: 2px 6vw 5px 6vw;
+}
+
+mark.heading{
+    background-color: #b0b0b0;
+    padding-bottom: 18px;
+    border: solid 2px black;
+    box-shadow: 0px 4px 3px black;
+}
+
+mark.sub-heading{
+    background-color: #909090;
+    padding: 4px 4vw 5px 4vw;
+    border: solid 1px black;
+    box-shadow: 0px 3px 3px black;
+
+}
+
+p.sub-heading{
+    margin-top: 8px;
+}
+
+.footer{
+    position: relative;
+    top: 16vh;
+    width: 100%;
 }

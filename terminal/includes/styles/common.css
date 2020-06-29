@@ -28,6 +28,11 @@ p, a{
     text-align: center;
 }
 
+.center-auto-margin{
+    text-align: center;
+    margin: auto;
+}
+
 .hand-writing{
     font-family: amshw, Arial, Helvetica, sans-serif;
     font-weight: bolder;
@@ -36,5 +41,10 @@ p, a{
 
 p.hand-writing{
     font-size: 18px;
+}
+
+p.last-updated{
+    margin-top: 8px;
+    font-size: 10px;
 }
 

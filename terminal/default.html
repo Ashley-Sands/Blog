@@ -12,18 +12,6 @@
 
         <div id="outter-content-hold">
 
-            <div id="" class="content-outter-hold">
-                Sorry, still need to add contet here, or it loading?? 
-            </div>
-
-        <!--
-            <div id="center-heading">
-                <!-- TODO: this should be loaded in via ajex 
-                <p class="site-select-head inline" >Wellcome to the home of </p>
-                <p class="hand-writing inline">Ashley Sands</p>
-
-            </div> -->
-
             <!-- nav area -->
 
             <div id="outer-nav-hold">
@@ -57,7 +45,7 @@
                 <div class="nav-button-hold">
                     <a href="index2.html" class="nav-button-link" >
                         <div class="nav-button">
-                            <h2 class="nav-button-content nav-upper-center-align">Blogs</h2>   
+                            <h2 class="nav-button-content nav-upper-center-align">Blogs</h2>    
                             <p  class="nav-button-content nav-lower-center-align">Things I Write About</p>     
                         </div>
                     </a>
@@ -73,11 +61,53 @@
                 </div>
             </div>
 
+
+
             <!-- main content area -->
 
+            <div id="" class="main-content-area-hold">
 
+                <!-- heading and uper content spacer -->
+                <div id="" class="content-header-hold header-gray">
+                    <div id="content-spacer"></div>
+                    <h1 class="center-auto-margin hand-writing content-heading">>> <mark class="heading">About</mark> <<</h1>
+                    <p class="center sub-heading"><mark class="sub-heading">Who Am I</mark></p>
+                </div>
+
+                <!-- content and mid content spacer -->
+                <div id="" class="content-area" >
+                    <div id="content-spacer" class="min-space"></div>
+                    <p class="center">Sorry, still need to add contet here. :( </p> 
+                </div>
+
+                <!-- footer and lower content spacer -->
+                <div class="footer" >
+                    <div id="content-spacer" class="min-space"></div>
+                    <p class="center">
+                        Please beaware that the site is currently a work in progress (WIP)<br/>
+                        as a result some items may not be displayed correctly<br />
+                        also there maybe a couple of features that are currently unavailable.
+                    </p>
+                    <div id="content-spacer" class="min-space"></div>
+                    <p class="center">
+                        Found an issue or typo?<br />
+                        If so, please feel free to open a ticket on <a href="https://github.com/Ashley-Sands/ashley-sands.github.io/issues" target="_black">GitHub</a>
+                    </p>
+                    <div id="content-spacer" class="min-space"></div>
+                    <p class="hand-writing center">Ashley M Sands</p>
+                    <p id="year" class="hand-writing center">----</p>
+                    <p id="last-updated" class="center last-updated">Last Updated: --/--/---- </p>
+                </div>
+
+            </div>
 
         </div>
 
     </body>
+    <script>
+        document.getElementById("year").innerHTML = Common.Year();
+        Common.FetchHeader( Const.basePath+"/default.html", "Last-Modified", 
+                            document.getElementById("last-updated"), 
+                            "Last Updated<br/>{responce}" )
+    </script>
 </html>
