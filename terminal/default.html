@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="nav-button-hold button-pointer">
-                    <a class="nav-button-link" onclick="LoadContent('blog')">
+                    <a class="nav-button-link" onclick="LoadContent('blogs')">
                         <div class="nav-button">
                             <h2 class="nav-button-content nav-upper-center-align">Blogs</h2>    
                             <p  class="nav-button-content nav-lower-center-align">Things I Write About</p>     
@@ -68,8 +68,8 @@
                 <!-- heading and uper content spacer -->
                 <div class="content-header-hold header-gray">
                     <div id="content-spacer"></div>
-                    <h1 class="center-auto-margin hand-writing content-heading">>> <mark id="content-header" class="heading">Git</mark> <<</h1>
-                    <p class="center sub-heading"><mark id="content-sub-heading" class="sub-heading">My Prjects</mark></p>
+                    <h1 class="center-auto-margin hand-writing content-heading">>> <mark id="content-header" class="heading">----</mark> <<</h1>
+                    <p class="center sub-heading"><mark id="content-sub-heading" class="sub-heading">--</mark></p>
                 </div>
 
                 <!-- content and mid content spacer -->
@@ -104,11 +104,12 @@
         </div>
 
     </body>
+    <script src="./includes/js/default.js"></script>
     <script>
+        LoadContent('about')
         document.getElementById("year").innerHTML = Common.Year();
         Common.FetchHeader( Const.basePath+"/default.html", "Last-Modified", 
                             document.getElementById("last-updated"), 
                             "Last Updated<br/>{responce}" )
     </script>
-    <script src="./includes/js/default.js"></script>
 </html>
