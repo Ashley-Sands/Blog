@@ -17,15 +17,13 @@
             <div id="outer-nav-hold">
 
                 <div class="nav-button-hold">
-                    <a href="index.html" class="nav-button-link" >
-                        <div class="nav-button nav-top-border nav-gray-1">
-                            <h2 class="nav-button-content hand-writing nav-upper-center-align">AshleySands.co.uk</h2>      
-                        </div>
-                    </a>
+                    <div class="nav-button nav-top-border nav-gray-1">
+                        <h2 class="nav-button-content hand-writing nav-upper-center-align">AshleySands.co.uk</h2>      
+                    </div>
                 </div>
 
-                <div class="nav-button-hold">
-                    <a href="index.html" class="nav-button-link" >
+                <div class="nav-button-hold button-pointer">
+                    <a class="nav-button-link" onclick="LoadContent('about')">
                         <div class="nav-button">
                             <h2 class="nav-button-content nav-upper-center-align">About</h2>   
                             <p  class="nav-button-content nav-lower-center-align">Who Am I</p>     
@@ -33,8 +31,8 @@
                     </a>
                 </div>
 
-                <div class="nav-button-hold">
-                    <a href="index1.html" class="nav-button-link" >
+                <div class="nav-button-hold button-pointer">
+                    <a class="nav-button-link" onclick="LoadContent('git')">
                         <div class="nav-button">
                             <h2 class="nav-button-content nav-upper-center-align">Git</h2>   
                             <p  class="nav-button-content nav-lower-center-align">My projects</p>     
@@ -42,8 +40,8 @@
                     </a>
                 </div>
 
-                <div class="nav-button-hold">
-                    <a href="index2.html" class="nav-button-link" >
+                <div class="nav-button-hold button-pointer">
+                    <a class="nav-button-link" onclick="LoadContent('blog')">
                         <div class="nav-button">
                             <h2 class="nav-button-content nav-upper-center-align">Blogs</h2>    
                             <p  class="nav-button-content nav-lower-center-align">Things I Write About</p>     
@@ -51,8 +49,8 @@
                     </a>
                 </div>
 
-                <div class="nav-button-hold">
-                    <a href="index2.html" class="nav-button-link" >
+                <div class="nav-button-hold button-pointer">
+                    <a class="nav-button-link">
                         <div class="nav-button">
                             <h2 class="nav-button-content nav-upper-center-align mono-font">~$ ams-terminal -u guest</h2>   
                             <p  class="nav-button-content nav-lower-center-align mono-font">View the site as a terminal application</p>     
@@ -68,16 +66,18 @@
             <div id="" class="main-content-area-hold">
 
                 <!-- heading and uper content spacer -->
-                <div id="" class="content-header-hold header-gray">
+                <div class="content-header-hold header-gray">
                     <div id="content-spacer"></div>
-                    <h1 class="center-auto-margin hand-writing content-heading">>> <mark class="heading">About</mark> <<</h1>
-                    <p class="center sub-heading"><mark class="sub-heading">Who Am I</mark></p>
+                    <h1 class="center-auto-margin hand-writing content-heading">>> <mark id="content-header" class="heading">Git</mark> <<</h1>
+                    <p class="center sub-heading"><mark id="content-sub-heading" class="sub-heading">My Prjects</mark></p>
                 </div>
 
                 <!-- content and mid content spacer -->
                 <div id="" class="content-area" >
                     <div id="content-spacer" class="min-space"></div>
-                    <p class="center">Sorry, still need to add contet here. :( </p> 
+                    <div id="content-main">
+                        <p class="center">Sorry, still need to add contet here. :( </p>
+                    </div>
                 </div>
 
                 <!-- footer and lower content spacer -->
@@ -110,4 +110,5 @@
                             document.getElementById("last-updated"), 
                             "Last Updated<br/>{responce}" )
     </script>
+    <script src="./includes/js/default.js"></script>
 </html>

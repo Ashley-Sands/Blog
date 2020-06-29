@@ -70,6 +70,14 @@ body{
     text-transform: capitalize;
 }
 
+.button-pointer:hover{
+    cursor: pointer;
+}
+
+a.nav-button-link{
+    text-decoration: none;
+}
+
 h2.nav-button-content{  
     font-weight: bolder;
 }
