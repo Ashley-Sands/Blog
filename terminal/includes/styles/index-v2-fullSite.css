@@ -4,24 +4,23 @@ body{
 }
 
 .site-select-tab{
-    position: absolute;
-    display: inline-block;
+    position: relative;
+    display: block;
     width: 48%;
     height: 95px;
     border: solid 3px black;
-    box-sizing: content-box;
+    box-sizing: border-box;
+    margin-top: 32px;
 }
 
 #site-sellect-outer-hold{
-    position: absolute;
-    top: 35px;
-    height: 400px;
-    left: 20%;
-    right: 20%;
+    position: relative;
+    width: 60vw;
+    margin: 25px auto 50px auto;
 }
 
 #terminal-site-hold{
-    left: 50%;
+    margin-top: 0px;
 }
 
 p, h1, h2, h3{
@@ -90,9 +89,9 @@ h2.site-title{
 /* End of tab bg */
 
 #center-footer{
-    position: absolute;
+    position: relative;
     width: 100%;
-    bottom: 0px;
+    margin-top: 150px;
 }
 
 p.last-updated{
