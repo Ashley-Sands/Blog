@@ -6,8 +6,9 @@ class Common
         return new Date().getFullYear()
     }
 
-    static LoadContent( url, responceElem )
+    static LoadHTMLContent( url, responceElem )
     {
+
         var request = new XMLHttpRequest();
         request.onreadystatechange = function() 
         {
@@ -18,6 +19,28 @@ class Common
             else if ( this.status >= 300)
             {
                 responceElem.innerHTML = `Error: ${this.status}`
+            }
+        };
+
+        request.open("GET", url, true);
+        request.send();
+    }
+
+    static LoadJsonContent( url, jsonFormater )
+    {
+        /**
+         * @param jsonFormater: Function to format json into the current page.
+         */
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function() 
+        {
+            if (this.readyState == 4 && this.status == 200) 
+            {
+                jsonFormater( this.responseText );
+            }
+            else if ( this.status >= 300)
+            {
+                jsonFormater( `{ "header": "Error", "sub-header": "${this.status}", "content": ["Oops..."] }`); 
             }
         };
 
