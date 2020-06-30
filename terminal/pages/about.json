@@ -3,8 +3,8 @@
     "header": "About",
     "subHeader": "Who Am I",
     "contentTemplate": {
-        "name": null,
-        "URL": null
+        "name": "about",
+        "URL": "templates/about.html"
     },
     "content": [
             {
