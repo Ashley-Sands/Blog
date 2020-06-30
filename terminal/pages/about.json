@@ -4,8 +4,8 @@
     "contentTemplate": "about",
     "content": [
             {
-                "textBody": "Sorry, still need to add contet here. :(",
-                "image": "/images/me.png"
+                "textBody": "Sorry, still need to add contet here. :( <br /> But that is an image of me :)",
+                "image": "./includes/images/me.jpeg"
             }         
         ]
 }

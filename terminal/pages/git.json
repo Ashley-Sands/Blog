@@ -2,5 +2,16 @@
     "header": "Git",
     "subHeader": "My Projects",
     "contentTemplate": "git",
-    "content": [ "<p class='center' >Sorry, still need to add contet here. :( </p>" ]
+    "content": [ 
+        {
+            "project_name": "FPS Pacman",
+            "discription": "A Pac man like game with a first person mode :)",
+            "url": "https://github.com/Ashley-Sands/FPS-Pacman"
+        },
+        {
+            "project_name": "Pancake Sim 2000",
+            "discription": "Arduino Project all about fliping Pancakes. Game in SDL  ",
+            "url": "https://github.com/Ashley-Sands/PancakeSim2000"
+        }
+     ]
 }
