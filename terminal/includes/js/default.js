@@ -36,7 +36,7 @@ JsonFormator = function( jsonStr, requestName )
     }
 
     var content = json.content;
-    var outputContent = "No Content!";
+    var outputContent = "";
 
     if ( contentTemplate == null )
     {
@@ -44,15 +44,19 @@ JsonFormator = function( jsonStr, requestName )
     }
     else
     {
-        for ( var i = 0; i < content.Length; i++ )
+        console.log("Building Template Content... element count: " + content.length)
+
+        for ( var i = 0; i < content.length; i++ )
         {
             tempCont = content[i];
+
             keys = Object.keys( tempCont );
             template = templates[ contentTemplate ];
 
-            for ( var k = 0; k < keys.Length; k++)
+            for ( var k = 0; k < keys.length; k++)
             {
-                template = template.replace( `{${k}}`, tempCont[k] );
+                console.log(`Replace {${keys[k]}} with ${tempCont[keys[k]]}`);
+                template = template.replace( `{${keys[k]}}`, tempCont[keys[k]] );
             }
 
             outputContent += template;
@@ -61,7 +65,7 @@ JsonFormator = function( jsonStr, requestName )
 
     headerElement.innerHTML = json.header;
     subHeaderElement.innerHTML = json.subHeader;
-    contentElement.innerHTML = outputContent;
+    contentElement.innerHTML = outputContent == "" ? "No Content :(" : outputContent;
 
 }
 
