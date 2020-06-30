@@ -1,10 +1,6 @@
-
 {
     "header": "Git",
     "subHeader": "My Projects",
-    "contentTemplate": {
-        "name": "git",
-        "URL": "templates/git.html"
-    },
+    "contentTemplate": "git",
     "content": [ "<p class='center' >Sorry, still need to add contet here. :( </p>" ]
 }

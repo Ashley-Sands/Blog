@@ -1,14 +1,11 @@
-
 {
     "header": "About",
     "subHeader": "Who Am I",
-    "contentTemplate": {
-        "name": "about",
-        "URL": "templates/about.html"
-    },
+    "contentTemplate": "about",
     "content": [
             {
-                "message": "<p class='center' >Sorry, still need to add contet here. :( </p>" 
+                "textBody": "Sorry, still need to add contet here. :(",
+                "image": "/images/me.png"
             }         
         ]
 }

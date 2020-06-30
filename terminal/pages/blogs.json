@@ -1,10 +1,6 @@
-
 {
     "header": "Blogs",
     "subHeader": "Things I Write About",
-    "contentTemplate": {
-        "name": "blogs",
-        "URL": "templates/blog.html"
-    },
+    "contentTemplate": "blogs",
     "content": [ "<p class='center' >Sorry, still need to add contet here. :( </p>" ]
 }

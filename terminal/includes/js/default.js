@@ -17,26 +17,51 @@ LoadContent = function( page )
 
 JsonFormator = function( jsonStr, requestName )
 {
+    
     var json = JSON.parse( jsonStr );
+    var contentTemplate = null;
 
     if ( "contentTemplate" in json )
         contentTemplate = json.contentTemplate;
-    else
-        contentTemplate = { name: null }
+
 
     // load the template, if not already loaded
-    if ( contentTemplate.name != null && ( !(contentTemplate.name in templates) || contentTemplate.name != responceQueue.templateName ) )
+    if ( contentTemplate != null && ( !(contentTemplate in templates) ) )
     {
-        LoadTemplate( contentTemplate.name )
+        console.log( `Loading Template for page ${contentTemplate}` )
+        LoadTemplate( contentTemplate )
         responceQueue.templateName = requestName;
         responceQueue.jsonStr = jsonStr;
         return;
     }
 
+    var content = json.content;
+    var outputContent = "No Content!";
+
+    if ( contentTemplate == null )
+    {
+        outputContent = content.join(" ");
+    }
+    else
+    {
+        for ( var i = 0; i < content.Length; i++ )
+        {
+            tempCont = content[i];
+            keys = Object.keys( tempCont );
+            template = templates[ contentTemplate ];
+
+            for ( var k = 0; k < keys.Length; k++)
+            {
+                template = template.replace( `{${k}}`, tempCont[k] );
+            }
+
+            outputContent += template;
+        }
+    }
+
     headerElement.innerHTML = json.header;
     subHeaderElement.innerHTML = json.subHeader;
-
-    contentElement.innerHTML = json.content.join(" ");
+    contentElement.innerHTML = outputContent;
 
 }
 
@@ -44,7 +69,7 @@ LoadTemplate = function( template )
 {
     if ( template in templates ) return;
 
-    Common.LoadContent( Const.basePath + "/pages/" + template + ".html", StoreTemplate, template )
+    Common.LoadContent( Const.basePath + "/pages/templates/" + template + ".html", StoreTemplate, template )
     templates[template] = null; // Add the template to the templates so we dont handle the same request brfore a responce comes back.
 
 }
@@ -58,7 +83,7 @@ StoreTemplate = function( templateStr, pageName )
     // trigger the Json Formater if this page is in the responce Queue.
     if ( responceQueue.templateName == pageName )
     {
-        JsonFormator( responceQueue.jsonData );
+        JsonFormator( responceQueue.jsonStr );
         responceQueue.templateName = null;
         responceQueue.jsonStr = null;
     }
