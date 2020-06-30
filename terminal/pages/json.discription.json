@@ -1,0 +1,34 @@
+// Json format discription.
+
+{
+    "header": "Example",                        // Content to format into the header
+    "subHeader": "Im Am Example",               // Content to format into the sub header
+    "contentTemplate": {                        // (optional) html template to load the content into
+        "name": null,                               // name of template
+        "URL": null                                 // url for template
+    },
+
+    // Content to be loaded into the template if supplied.
+    // If the template is null (or not supplied) content must be
+    // a list of strings which is formated directly into the 
+    // html content element.
+    // Otherwise content should be a list of objects (dicts)
+    // where the keys == the format key ie '[key]' == '{key}'
+    // each object repersents a single template that will all
+    // be formated into the html content element.
+    "content": [                // No Template Method
+        "No template method",
+        "an other line"
+    ],
+    "content": [                // Template Method
+        { 
+            "message": " message to be formated into the first template",
+            "image": "<image src='example.png' />"
+        },
+        {
+            "message": " message to be formated into the second template",
+            "image": "<image src='example2.png' />"
+        }
+    ]
+
+}
