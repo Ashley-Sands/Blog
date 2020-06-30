@@ -18,7 +18,11 @@ LoadContent = function( page )
 JsonFormator = function( jsonStr, requestName )
 {
     var json = JSON.parse( jsonStr );
-    contentTemplate = json.contentTemplate;
+
+    if ( "contentTemplate" in json )
+        contentTemplate = json.contentTemplate;
+    else
+        contentTemplate = { name: null }
 
     // load the template, if not already loaded
     if ( contentTemplate.name != null && ( !(contentTemplate.name in templates) || contentTemplate.name != responceQueue.templateName ) )
