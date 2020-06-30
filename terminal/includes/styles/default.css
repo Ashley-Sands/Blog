@@ -5,7 +5,7 @@ body{
 
 #outter-content-hold{
     position: relative;
-    max-width: 1600px;
+    max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
     padding: 8px;
@@ -22,6 +22,8 @@ body{
     width: 17vw; /*17% of viewport width*/ /*org 325px;*/
     max-width: 325px;
     z-index: 1;
+    margin-right: 50px;
+    height: fit-content;
 }
 
 .nav-button-hold
@@ -177,12 +179,9 @@ p.sub-heading{
 
 /* Templates */
 #git-element{
-    margin-top: 8px;
-    margin-bottom: 4px;
-    /*width: 10vw;*/
-    /*background-color: black;*/
-}
 
-.git-link{
-    
+    margin: auto;
+    margin-top: 12px;
+    margin-bottom: 8px;
+
 }
