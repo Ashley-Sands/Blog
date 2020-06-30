@@ -8,7 +8,9 @@ class Common
 
     static LoadHTMLContent( url, responceElem )
     {
-
+        /**
+         *  Loads content directly into a HTML element
+         */
         var request = new XMLHttpRequest();
         request.onreadystatechange = function() 
         {
@@ -26,22 +28,31 @@ class Common
         request.send();
     }
 
-    static LoadJsonContent( url, jsonFormater )
+    static LoadContent( url, responceHandler, requestName="" )
     {
         /**
-         * @param jsonFormater: Function to format json into the current page.
+         * Loads Content passing the responce into a responce handler function
+         * @param url:              request url
+         * @param responceHandler:  Function to handle the responce. ie formate json into html :)
+         *                          The function must contatin two params. 
+         *                          ResponceStr:    The responce from url
+         *                          requestName:    Name of request
+         * @param requestName:      Name of request, Only used to track request.
          */
+
         var request = new XMLHttpRequest();
         request.onreadystatechange = function() 
         {
             var status = this.status;
             if (this.readyState == 4 && status == 200) 
             {
-                jsonFormater( this.responseText );
+                responceHandler( this.responseText, requestName );
             }
             else if ( status >= 300)
             {
-                jsonFormater( `{ "header": "${status}", "subHeader": "Error", "content": ["<p class='center'>Oops...</p>"] }`); 
+                //TODO: I need to do somthink about this, its not allways correct anymore.
+                // for instance, its doesent always return json anymore 
+                responceHandler( `{ "header": "${status}", "subHeader": "Error", "content": ["<p class='center'>Oops...</p>"] }`, requestName); 
             }
         };
 
@@ -52,6 +63,7 @@ class Common
     static FetchHeader(url, header, responceElem, responceStr="{responce}")
     {
         /**
+         * Fetches the header of a file.
          * @param responceStr: the string that the responce should be formated into.
          *                     the string must contain '{responce}' where the responce
          *                     will be printed

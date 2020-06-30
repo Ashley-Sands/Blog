@@ -2,5 +2,13 @@
 {
     "header": "About",
     "subHeader": "Who Am I",
-    "content": [ "<p class='center' >Sorry, still need to add contet here. :( </p>" ]
+    "contentTemplate": {
+        "name": null,
+        "URL": null
+    },
+    "content": [
+            {
+                "message": "<p class='center' >Sorry, still need to add contet here. :( </p>" 
+            }         
+        ]
 }
