@@ -21,6 +21,7 @@ body{
     min-width: 265px;
     width: 17vw; /*17% of viewport width*/ /*org 325px;*/
     max-width: 325px;
+    z-index: 1;
 }
 
 .nav-button-hold
@@ -117,7 +118,6 @@ h2.nav-button-content{
 
 .main-content-area-hold{
     position: relative;
-    z-index: -100;
 
     margin-left: 20px;
     margin-right: 20px;
@@ -173,4 +173,16 @@ p.sub-heading{
     position: relative;
     top: 16vh;
     width: 100%;
+}
+
+/* Templates */
+#git-element{
+    margin-top: 8px;
+    margin-bottom: 4px;
+    /*width: 10vw;*/
+    /*background-color: black;*/
+}
+
+.git-link{
+    
 }

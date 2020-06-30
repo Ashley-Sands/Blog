@@ -35,12 +35,18 @@ JsonFormator = function( jsonStr, requestName )
         return;
     }
 
+    console.log( jsonStr );
+
     var content = json.content;
     var outputContent = "";
 
     if ( contentTemplate == null )
     {
-        outputContent = content.join(" ");
+        // make sure the fist element of content is a string.
+        if (content.length > 0 && ( typeof content[0] == "string" || content[0] instanceof String) )  // check both primitive and object
+            outputContent = content.join(" ");
+        else
+            console.log(`Warning: Either no content suppled or content is not a String (Content Len: ${content.length}) `)
     }
     else
     {
@@ -49,6 +55,14 @@ JsonFormator = function( jsonStr, requestName )
         for ( var i = 0; i < content.length; i++ )
         {
             tempCont = content[i];
+
+            // make sure that tempCont is not a string or array.
+            if ( typeof tempCont == "string" || tempCont instanceof String || tempCont instanceof Array)  // check both primitive and object
+            {
+                console.log("Error: Content supplied for template was a string or Array. must be json object")
+                break;
+            }
+
 
             keys = Object.keys( tempCont );
             template = templates[ contentTemplate ];
@@ -65,7 +79,7 @@ JsonFormator = function( jsonStr, requestName )
 
     headerElement.innerHTML = json.header;
     subHeaderElement.innerHTML = json.subHeader;
-    contentElement.innerHTML = outputContent == "" ? "No Content :(" : outputContent;
+    contentElement.innerHTML = outputContent == "" ? "<p class='center'>No Content :(</p>" : outputContent;
 
 }
 
