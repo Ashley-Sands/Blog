@@ -90,6 +90,9 @@
                     </p>
                     <div id="content-spacer" class="min-space"></div>
                     <p class="center">
+                        This site is hosted on <a href="">GitHub</a> Pages
+                    </p>
+                    <p class="center">
                         Found an issue or typo?<br />
                         If so, please feel free to open a ticket on <a href="https://github.com/Ashley-Sands/ashley-sands.github.io/issues" target="_black">GitHub</a>
                     </p>
@@ -105,12 +108,4 @@
 
     </body>
     <script src="./includes/js/default.js"></script>
-    <script>
-        // TODO: move into default.js and load selected page :)
-        LoadContent('about')
-        document.getElementById("year").innerHTML = Common.Year();
-        Common.FetchHeader( Const.basePath+"/default.html", "Last-Modified", 
-                            document.getElementById("last-updated"), 
-                            "Last Updated<br/>{responce}" )
-    </script>
 </html>

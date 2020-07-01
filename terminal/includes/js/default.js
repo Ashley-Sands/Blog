@@ -9,10 +9,19 @@ var responceQueue = {
     jsonStr: null
 }
 
+var pages = [ "about", "git", "blogs"]  // assumed that element is the entry page
+
 LoadContent = function( page )
 {
-    Common.LoadContent( Const.basePath + "/pages/" + page + ".json", JsonFormator, page );
+    var url = Const.basePath + "/pages/" + page + ".json";
+    Common.LoadContent( url, JsonFormator, page );
     location.hash = page
+
+    // update the last updated.
+    Common.FetchHeader( url, "Last-Modified", 
+    document.getElementById("last-updated"), 
+    "Last Updated<br/>{responce}" )
+
 }
 
 JsonFormator = function( jsonStr, requestName )
@@ -107,3 +116,17 @@ StoreTemplate = function( templateStr, pageName )
     }
 
 }
+
+// Load the request page, (TODO: it might be worth change if from hash to the history method )
+requestPage = location.hash.substring(1).toLowerCase();
+loadPage = pages[0];
+
+console.log("requestPage is "+requestPage)
+
+if ( pages.includes(requestPage) )
+    loadPage = requestPage;
+
+LoadContent( loadPage );
+
+// update the foot year
+document.getElementById("year").innerHTML = Common.Year();
