@@ -4,11 +4,15 @@
     "contentTemplate": "about",
     "content": [
             {
-                
                 "image": "./includes/images/me.jpeg",
                 "imageCaption": "Me, Testing Games :)",
                 "textBody": "Hello there, Im Ashley Sands a <span>--</span> year old programmer, currently based in {currentLocation}. <br /><br />At present time, i'm studying (BSc) Computing for Game (computer science with a focus on games) at <a href='https://www.falmouth.ac.uk/study/undergraduate/computing-for-games'>Falmouth University</a>.<br />Before starting my studies at Falmouth, I was a chef for roughly 15 years and acquired my NVQ Levels 1, 2 & 3 in catering at <a href='https://www.cornwall.ac.uk/'>Camborn Collage</a>, Cornwall. Mid way through completing my NVQ level 2 at Camborne, I found the joys of programing (roughly <span id='start-programimg-years'>--</span> years ago). Back then i played a tiny parting in running a small (and to be honest, looking back, slightly dodge) shoutcast radio station. Which inspired me to learn web development, with the aim to set up my own shoutcast radio station. Over the next couple of years I taught myself JavaScript and PHP (along with HTML and CSS). Following that, i had a bit of timeout from programing, due to work commitments and also started DJing around town and filled a regular slot on <a href='http://dirtybass.fm'>DirtyBass.FM</a>. The late nights DJing and early morning cooking killed me, so i evenly packed in DJing and replaced with it with game development using <ahref='https://unity.com'>Unity</a> (back in the 3.x days), and i haven't looked back since tho it was a couple of years before i decided i wanted career change and take my programing to the next level. <br /><br />In 2018 i finaly made the leap and started studie Computing for Games at <a href='https://www.falmouth.ac.uk/study/undergraduate/computing-for-games'>Falmouth University</a>. To be honest, it was the best decision I've made in years, during my time there (so far) it has confirmed that programming is what I want to do with my life. <br />While at university we covered a number of subjects that go beyond the realms of video games, while keeping it relevant (to a games course). Each year we have been tasked with making a game as part of multi-discipline team with 6+ members (Designers, Artis, Animators and Programers) which has a strong focus on scrum/lean agile techniques and version control (such as Git), along with servale personal projects which have covered a number of programming languages (C/C++, C#, Python), design patterns (Singletons, Observers and Factories etc...) and game engines / libraries (<a href='https://unity.com/'>Unity</a>, <a href='https://www.unrealengine.com/en-US/' >Unreal</a>, <a href='https://www.libsdl.org/' >SDL</a> and even <a href='https://www.pygame.org/news'>PyGame</a>). <br />Some of my favorite projects have included ... (See Git pag for now.)<br />TBC...",
-                "currentLocation": "a small sea-side town in <a href='https://www.google.co.uk/maps/place/Cornwall/@50.4419899,-5.5177942,9z/data=!3m1!4b1!4m5!3m4!1s0x486ab7f0bf270ec9:0x6e423c85d94b4571!8m2!3d50.2660471!4d-5.0527125'>Cornwall, UK</a>"
+                "currentLocation": "a small sea-side town in <a href='https://www.google.co.uk/maps/place/Cornwall/@50.4419899,-5.5177942,9z/data=!3m1!4b1!4m5!3m4!1s0x486ab7f0bf270ec9:0x6e423c85d94b4571!8m2!3d50.2660471!4d-5.0527125'>Cornwall, UK</a>",
+                "currently": ""
             }         
-        ]
+        ],
+    "jsFunctions": [
+        "Age",
+        "Started-Years-Ago"
+    ]
 }

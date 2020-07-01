@@ -6,6 +6,16 @@ class Common
         return new Date().getFullYear()
     }
 
+    static Age()
+    {
+        return Math.floor( ( new Date() - new Date(1991, 6) ) / Const.OneYearMillis() ); 
+    }
+
+    static StartYearsAgo()
+    {
+        Math.floor( ( new Date() - new Date(2008, 6) ) / Const.OneYearMillis() )
+    }
+
     static LoadHTMLContent( url, responceElem )
     {
         /**

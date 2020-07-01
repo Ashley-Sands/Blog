@@ -29,6 +29,10 @@
             "message": " message to be formated into the second template",
             "image": "<image src='example2.png' />"
         }
+    ],
+    "jsFunction": [                             // (Optional) list of functions to be trigger once page has compleated loading.
+        "functionOne",                          // Functions must have no params or only params with defaults
+        "functionTwo"
     ]
 
 }

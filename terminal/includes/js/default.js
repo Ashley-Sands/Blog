@@ -29,10 +29,13 @@ JsonFormator = function( jsonStr, requestName )
     
     var json = JSON.parse( jsonStr );
     var contentTemplate = null;
+    var jsFunctions = null
 
     if ( "contentTemplate" in json )
         contentTemplate = json.contentTemplate;
 
+    if ( "jsFunctions" in json )
+        jsFunctions = json.jsFunctions;
 
     // load the template, if not already loaded
     if ( contentTemplate != null && ( !(contentTemplate in templates) ) )
@@ -98,6 +101,28 @@ JsonFormator = function( jsonStr, requestName )
     subHeaderElement.innerHTML = json.subHeader;
     contentElement.innerHTML = outputContent == "" ? "<p class='center'>No Content :(</p>" : outputContent;
 
+    if ( jsFunctions != null )
+        for ( var i = 0; i < jsFunctions.length; i++)
+        {
+            TriggerFunction( jsFunctions[i] );
+        }
+
+}
+
+TriggerFunction = function( functName )
+{
+    /** Triggers function with funct name
+     *  iv decided to do this rather then use eval so i dont have to deal with any security floors
+     */
+    switch( functName.toLowerCase() )
+    {
+        case "age":
+            document.getElementById("age").innerHTML = Common.Age();
+            break;
+        case "started-years-ago":
+            document.getElementById("started-years-ago").innerHTML = Common.StartedYearsAgo();
+            break;
+    }
 }
 
 LoadTemplate = function( template )
