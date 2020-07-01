@@ -178,6 +178,36 @@ p.sub-heading{
 }
 
 /* Templates */
+
+/* **about */
+img.large-profile{
+    border: 4px solid black;
+    border-radius: 100%;
+    max-width: 300px;
+    width: 20vw;
+    min-width: 200px;
+    margin: 12px;
+}
+
+mark.large-profile{
+    border-bottom: 2px solid black;
+    background: none;
+    /*padding: 0px 10vw 0px 10vw;*/
+    min-width: 250px;
+    width: 25vw;
+    max-width: 350px;
+
+}
+
+p.large-profile{
+    margin-bottom: 20px;
+}
+
+span.large-profile{
+    display: block;
+}
+
+/* **git */
 #git-element{
 
     margin: auto;
@@ -185,3 +215,5 @@ p.sub-heading{
     margin-bottom: 8px;
 
 }
+
+/* **blogs */
