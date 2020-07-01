@@ -44,8 +44,6 @@ JsonFormator = function( jsonStr, requestName )
         return;
     }
 
-    console.log( jsonStr );
-
     var content = json.content;
     var outputContent = "";
 
@@ -78,8 +76,18 @@ JsonFormator = function( jsonStr, requestName )
 
             for ( var k = 0; k < keys.length; k++)
             {
-                console.log(`Replace {${keys[k]}} with ${tempCont[keys[k]]}`);
-                template = template.replace( `{${keys[k]}}`, tempCont[keys[k]] );
+                var contentString = "error :(";
+
+                // find if the content @ key is a string or an array
+                if ( typeof tempCont[keys[k]] == "string" || tempCont[keys[k]] instanceof String )
+                    contentString = tempCont[ keys[ k ] ]
+                else if( tempCont[keys[k]] instanceof Array )
+                    contentString = tempCont[ keys[ k ] ].join( " " );
+                else
+                    console.log("Error: Could not parse content into html, content is nither a string or array");
+
+                template = template.replace( `{${keys[k]}}`, contentString );
+
             }
 
             outputContent += template;
