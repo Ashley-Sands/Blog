@@ -13,53 +13,34 @@
         <div id="outter-content-hold">
 
             <!-- nav area -->
-
-            <div id="outer-nav-hold">
-
-                <div class="nav-button-hold">
-                    <div class="nav-button nav-top-border nav-gray-1">
-                        <h2 class="nav-button-content hand-writing nav-upper-center-align">AshleySands.co.uk</h2>      
-                    </div>
-                </div>
-
-                <div class="nav-button-hold button-pointer">
-                    <a class="nav-button-link" onclick="LoadContent('about')">
-                        <div class="nav-button">
-                            <h2 class="nav-button-content nav-upper-center-align">About</h2>   
-                            <p  class="nav-button-content nav-lower-center-align">Who Am I</p>     
-                        </div>
-                    </a>
-                </div>
-
-                <div class="nav-button-hold button-pointer">
-                    <a class="nav-button-link" onclick="LoadContent('git')">
-                        <div class="nav-button">
-                            <h2 class="nav-button-content nav-upper-center-align">Git</h2>   
-                            <p  class="nav-button-content nav-lower-center-align">My projects</p>     
-                        </div>
-                    </a>
-                </div>
-
-                <div class="nav-button-hold button-pointer">
-                    <a class="nav-button-link" onclick="LoadContent('blogs')">
-                        <div class="nav-button">
-                            <h2 class="nav-button-content nav-upper-center-align">Blogs</h2>    
-                            <p  class="nav-button-content nav-lower-center-align">Things I Write About</p>     
-                        </div>
-                    </a>
-                </div>
-
-                <div class="nav-button-hold button-pointer">
-                    <a class="nav-button-link">
-                        <div class="nav-button">
-                            <h2 class="nav-button-content nav-upper-center-align mono-font">~$ ams-terminal -u guest</h2>   
-                            <p  class="nav-button-content nav-lower-center-align mono-font">View the site as a terminal application</p>     
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-
+        <div class="site-logo">
+            <h2 class="hand-writing nav-upper-center-align">AshleySands.co.uk</h2>      
+        </div>
+        <ul class="nav-content">    <!-- todo ajex -->
+            
+            <li class="nav-content nav-button-link" onclick="LoadContent('about')" >
+                    <h2 class="nav-button-content nav-upper-center-align">About</h2>   
+                    <p  class="nav-button-content nav-lower-center-align">Who Am I</p>     
+            </li>
+            <li class="nav-content nav-button-link" onclick="LoadContent('git')" >
+                <h2 class="nav-button-content nav-upper-center-align">Git</h2>   
+                <p  class="nav-button-content nav-lower-center-align">My Projects</p>     
+            </li>
+            <li class="nav-content nav-button-link" onclick="LoadContent('blogs')" >
+                <h2 class="nav-button-content nav-upper-center-align">Blogs</h2>   
+                <p  class="nav-button-content nav-lower-center-align">Things I write About</p>     
+            </li>
+        <!--
+            <li class="nav-content nav-button-link" onclick="LoadContent('tutorials')" >
+                <h2 class="nav-button-content nav-upper-center-align">Tutorials</h2>   
+                <p  class="nav-button-content nav-lower-center-align">Sharing is Careing</p>     
+            </li> 
+        -->
+            <li class="nav-content nav-button-terminal">
+                <h2 class="nav-button-content nav-upper-center-align mono-font">~$ ams-terminal -u guest</h2>   
+                <p  class="nav-button-content nav-lower-center-align mono-font">View the site as a terminal application</p>   
+            </li>
+        </ul>
 
             <!-- main content area -->
 
