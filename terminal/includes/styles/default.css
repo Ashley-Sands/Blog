@@ -225,12 +225,7 @@ span.large-profile{
     display: block;
 }
 
-#socal-handles{
-    width: 216px;
-    margin: auto;
-}
-
-#socal-handles img{
+img.socal-handles{
     margin-left: 16px;
     margin-right: 16px;
 }
