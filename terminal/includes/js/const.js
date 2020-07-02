@@ -13,12 +13,12 @@ class Const{
 
     static get OneDayMillis()
     {
-        return 1000/60/60/24;
+        return 1000*60*60*24;
     }
 
     static get OneYearMillis()
     {
-        return this.OneDayMillis / 365;
+        return this.OneDayMillis * 365;
     }
 
 }

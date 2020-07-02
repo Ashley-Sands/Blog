@@ -11,9 +11,9 @@ class Common
         return Math.floor( ( new Date() - new Date(1991, 6) ) / Const.OneYearMillis ); 
     }
 
-    static StartYearsAgo()
+    static StartedYearsAgo()
     {
-        Math.floor( ( new Date() - new Date(2008, 6) ) / Const.OneYearMillis )
+        return Math.floor( ( new Date() - new Date(2008, 1) ) / Const.OneYearMillis )
     }
 
     static LoadHTMLContent( url, responceElem )
