@@ -162,7 +162,7 @@ h2.nav-button-content{
 h1.content-heading{
     font-size: 48px;
     font-weight: lighter;
-    border-bottom: solid 2px black;
+    border-bottom: solid 2px #a8a8a8;
 
 }
 
@@ -180,9 +180,6 @@ span.heading{
 mark.sub-heading{
     /*background-color: #909090;*/
     padding: 4px 4vw 5px 4vw;
-    border: solid 1px black;
-    box-shadow: 0px 3px 3px black;
-
 }
 
 p.sub-heading{
@@ -228,6 +225,15 @@ span.large-profile{
     display: block;
 }
 
+#socal-handles{
+    width: 216px;
+    margin: auto;
+}
+
+#socal-handles img{
+    margin-left: 16px;
+    margin-right: 16px;
+}
 /* **git */
 #git-element{
 
