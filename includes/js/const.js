@@ -5,9 +5,9 @@ class Const{
     {
         
         if (location.hostname == "localhost")
-            return "http://localhost/AshleySands.co.uk/";
+            return "http://localhost/Portfolio2.0";
         else
-            return "https://www.ashleysands.co.uk/"
+            return "https://www.ashleysands.co.uk"
 
     }
 
