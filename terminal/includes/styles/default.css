@@ -250,7 +250,9 @@ img.socal-handles{
     margin: 2%;
     border: solid 2px black;
     box-sizing: border-box;
-    transition: width 2s, height 2s;
+    transition: width 1.5s, height 1.5s;
+
+    overflow: hidden;
 
 }
 
@@ -260,17 +262,19 @@ img.socal-handles{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+
     filter: blur(4px);
     -webkit-filter: blur(4px);
 
-    width: 45%;
-    height: 300px;
+    width: 44.5%;
+    height: 299px;
+
     margin: 0px;
     border-top: none;
     z-index: 0;
     box-sizing: border-box;
 
-    transition: filter 0.5s, -webkit-filter 0.5s;
+    transition: width 1.5s, height 1.5s, filter 0.5s, -webkit-filter 0.5s;
 }
 
 div.git-inner-bg:hover{
@@ -291,9 +295,14 @@ div.git-inner-bg:hover{
     display: inline-block;
     border: solid 2px black;
     box-sizing: border-box;
-    transition: width 2s, height 2s;
+    transition: width 1.5s, height 1.5s;
+}
 
-
+.git-element-active .git-inner-bg{
+    width: 94%;
+    height: 400px;
+    filter: blur(1px);
+    -webkit-filter: blur(1px);
 }
 
 h3.git-heading{
@@ -343,4 +352,7 @@ p.git-discription{
     padding-bottom: 0px;
 }
 
+a.git-link{
+    display: inline;
+}
 /* **blogs */
