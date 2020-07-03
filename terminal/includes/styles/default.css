@@ -118,17 +118,21 @@ h2.nav-button-content{
 
 /* Content area */
 
+.flex{
+    display: inline-table;
+}
+
 .side-content-hold{
-    float: left;
-    position: relative;
-    min-width: 300px;
-    width: 15vw;
-    max-width: 400px;
+    /*float: left;*/
+    position: absolute;
+    /*min-width: 300px;*/
+    width: 25%;
+    /*max-width: 400px;*/
     padding-right: 8px;
     padding-left: 8px;
     margin-right: 32px;
     border-right: solid 2px #c8c8c8;
-
+    height: 70%
 }
 
 .main-content-area-hold{
@@ -156,7 +160,9 @@ h2.nav-button-content{
 .content-area{
     position: relative;
     box-sizing: border-box;
-    width: 100%;
+    width: 75%;
+    left: 28%;
+
 }
 
 h1.content-heading{
