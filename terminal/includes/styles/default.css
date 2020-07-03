@@ -229,13 +229,66 @@ img.socal-handles{
     margin-left: 16px;
     margin-right: 16px;
 }
-/* **git */
-#git-element{
 
-    margin: auto;
-    margin-top: 12px;
-    margin-bottom: 8px;
+#git-element{
+    
+}
+
+/* **git */
+span.git-heading{
+    border-bottom: solid 4px black;
+    display: inline-block;
+    background-color: #c0c0c0;
+    vertical-align: bottom;
+    padding: 8px 0px;
+
+    box-shadow: 0px 4px 6px black;
+    z-index: 200;
 
 }
+
+span.git-sub-discription{
+
+    /*min-height: 25px;*/
+    padding: 12px 12px;
+    border: solid 1px black;
+    border-top: none;
+    display: inline-block;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 50%);
+
+}
+
+p.git-sub-discription{
+    margin-top: 0px;
+    margin-bottom: 25px;
+}
+
+span.git-size{
+    min-width: 350px;
+    width: 47.5vw;
+    max-width: 700px;
+}
+
+span.space{
+    display: block;
+    margin-bottom: 15px;
+}
+
+span.expand-handle{
+
+    /*float: right;*/
+    position: absolute;
+    padding-top: 10px;;
+    background-color: #d8d8d8;
+    padding: 4px;
+    border: solid 1px black;
+    height: 18px;
+    /*margin-top: 20px;*/
+    float: right;
+    margin-top: -15px;
+    right: 55px;
+}
+
 
 /* **blogs */

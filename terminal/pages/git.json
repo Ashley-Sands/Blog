@@ -2,8 +2,7 @@
     "header": "Git",
     "subHeader": "My Projects",
     "contentTemplate": "git",
-    "content": [ 
-        
+    "content": [        
         {
             "project_name": "Pancake Sim 2000",
             "discription": "Arduino and SDL Project all about fliping Pancakes.",
@@ -38,6 +37,11 @@
             "project_name": "Node Graph for Unity",
             "discription": "Base classes for node editor window. ",
             "url": "https://github.com/gizzmo123456/Simple-Unity-Node-Editor"
+        },
+        {
+            "project_name": "WellEscape",
+            "discription": "Top Down Dungeon Crawler Made with PyGame",
+            "url": "https://github.com/Team-Goulash/comp150-game"
         }
      ]
 }
