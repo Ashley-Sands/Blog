@@ -118,10 +118,6 @@ h2.nav-button-content{
 
 /* Content area */
 
-.flex{
-    display: inline-table;
-}
-
 .side-content-hold{
     /*float: left;*/
     position: absolute;
@@ -237,7 +233,9 @@ img.socal-handles{
 }
 
 #git-element{
-    
+    background-color: gray;
+    height: 300px;
+    width: 200px;
 }
 
 /* **git */
