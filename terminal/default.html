@@ -8,7 +8,14 @@
     </head>
     <script src="./includes/js/const.js"></script>
     <script src="./includes/js/common.js"></script>
-    <body> 
+    <script src="./includes/js/elementControl .js"></script>
+    <body>
+
+        <div style="position: fixed; top: 0px; left: 0px; box-sizing: border-box; width: 100vw; border-bottom: solid; z-index: 100; background: white; padding: 0px 16px; margin: 0px;">
+            <p style="font-size: 8pt; text-align: center; text-transform: capitalize;">
+                Please be aware that this site is currently a work in progress. As a result some content may not reflect the final version. (<a href="https://github.com/Ashley-Sands/ashley-sands.github.io/projects/1" target="_blank" style="font-size: 8pt;" >Site Roadmap</a>)
+            </p>
+        </div>
 
         <div id="outter-content-hold">
 
@@ -18,15 +25,15 @@
         </div>
         <ul class="nav-content">    <!-- todo ajex -->
             
-            <li class="nav-content nav-button-link" onclick="LoadContent('about')" >
+            <li class="nav-content nav-button-link nav-inactive" onclick="LoadContent('about');" >
                     <h2 class="nav-button-content nav-upper-center-align">About</h2>   
                     <p  class="nav-button-content nav-lower-center-align">Who Am I</p>     
             </li>
-            <li class="nav-content nav-button-link" onclick="LoadContent('git')" >
+            <li class="nav-content nav-button-link nav-inactive" onclick="LoadContent('git');" >
                 <h2 class="nav-button-content nav-upper-center-align">Git</h2>   
                 <p  class="nav-button-content nav-lower-center-align">My Projects</p>     
             </li>
-            <li class="nav-content nav-button-link" onclick="LoadContent('blogs')" >
+            <li class="nav-content nav-button-link nav-inactive" onclick="LoadContent('blogs');" >
                 <h2 class="nav-button-content nav-upper-center-align">Blogs</h2>   
                 <p  class="nav-button-content nav-lower-center-align">Things I write About</p>     
             </li>
@@ -71,9 +78,9 @@
                 <div class="footer" >
                     <div id="content-spacer" class="min-space"></div>
                     <p class="center">
-                        Please beaware that the site is currently a work in progress (WIP)<br/>
-                        as a result some items may not be displayed correctly<br />
-                        along with missing content. 
+                        Please beaware that the site is currently a work in progress<br/>
+                        As a result the current layout and content may not reflect the final version. <br />
+                        (<a href="https://github.com/Ashley-Sands/ashley-sands.github.io/projects/1" target="_blank">Site Roadmap</a>)
                     </p>
                     <div id="content-spacer" class="min-space"></div>
                     <p class="center">
@@ -106,5 +113,12 @@
 
     </body>
     <script src="./includes/js/default.js"></script>
+    <script >
+        button_thingy = function( elem ){
+            console.log( "element: "+elem.classList );
 
+            //elem.classList.remove( elem.classList[0] );
+            //elem.classList.add( "HeLlOo-WoRlD!" );
+        }
+    </script>
 </html>
