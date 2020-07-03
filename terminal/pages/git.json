@@ -6,12 +6,15 @@
         {
             "project_name": "Pancake Sim 2000",
             "discription": "Arduino and SDL Project all about fliping Pancakes.",
-            "url": "https://github.com/Ashley-Sands/PancakeSim2000"
+            "url": "https://github.com/Ashley-Sands/PancakeSim2000",
+            "background": "url(./includes/images/backgrounds/PancakeSim2000.jpg)"
+
         },
         {
             "project_name": "FPS Pacman",
             "discription": "A Pac man like game with a first person mode :)",
-            "url": "https://github.com/Ashley-Sands/FPS-Pacman"
+            "url": "https://github.com/Ashley-Sands/FPS-Pacman",
+            "background": "url(./includes/images/backgrounds/pacmanish.png)"
         },
         {
             "project_name": "SQLight Explorer",
@@ -26,7 +29,8 @@
         {
             "project_name": "Scalable Multiplayer RPG server",
             "discription": "Multiplayer RPG server that can scale to any number of instances across multiple servers. Using python and Docker.",
-            "url": "https://github.com/Ashley-Sands/Comp-260-TB-RPG-Server"
+            "url": "https://github.com/Ashley-Sands/Comp-260-TB-RPG-Server",
+            "background": "url(./includes/images/backgrounds/console.png)"
         },
         {
             "project_name": "Multiplayer RPG Game",

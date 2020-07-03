@@ -161,6 +161,11 @@ h2.nav-button-content{
 
 }
 
+div.content-header-hold{
+    position: sticky;
+    top: 25px;
+}
+
 h1.content-heading{
     font-size: 48px;
     font-weight: lighter;
@@ -236,6 +241,9 @@ img.socal-handles{
 
 .git-element{
     background-color: gray;
+
+
+
     height: 300px;
     width: 45%;
     display: inline-block;
@@ -244,6 +252,30 @@ img.socal-handles{
     box-sizing: border-box;
     transition: width 2s, height 2s;
 
+}
+
+.git-inner-bg{
+    position: absolute;
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: blur(4px);
+    -webkit-filter: blur(4px);
+
+    width: 45%;
+    height: 300px;
+    margin: 0px;
+    border-top: none;
+    z-index: 0;
+    box-sizing: border-box;
+
+    transition: filter 0.5s, -webkit-filter 0.5s;
+}
+
+div.git-inner-bg:hover{
+    filter: blur(1px);
+    -webkit-filter: blur(1px);
 }
 
 .git-element:hover{
@@ -262,17 +294,6 @@ img.socal-handles{
     transition: width 2s, height 2s;
 
 
-}
-
-.git-inner-bg{
-    position: absolute;
-    background-color: rgba(205,205,205, 33%);
-    width: 45%;
-    height: 300px;
-    margin: 0px;
-    border-top: none;
-    z-index: 0;
-    box-sizing: border-box;
 }
 
 h3.git-heading{
@@ -300,10 +321,26 @@ div.git-discription-hold{
     display: table;
     z-index: 0;
     box-sizing: border-box;
+    pointer-events: none;
+
+}
+
+strong.git-discription-a{
+    background-color: rgba(168, 168, 168, 60%);
+    border: solid 4px rgba(168, 168, 168, 60%);
+    padding: 4px;
+    padding-bottom: 0px;
+
+    display: inline-block;
+    box-sizing: content-box;
+    
 }
 
 p.git-discription{
     text-align: center;
+    padding-top: 50px;
+    letter-spacing: 3px;
+    padding-bottom: 0px;
 }
 
 /* **blogs */
