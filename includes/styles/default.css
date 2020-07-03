@@ -242,11 +242,9 @@ img.socal-handles{
 .git-element{
     background-color: gray;
 
-
-
     height: 300px;
     width: 45%;
-    display: inline-block;
+    display: inline-table;
     margin: 2%;
     border: solid 2px black;
     box-sizing: border-box;
@@ -292,7 +290,7 @@ div.git-inner-bg:hover{
     height: 555px;
     width: 94%;
     margin: 2%;
-    display: inline-block;
+    display: inline-table;
     border: solid 2px black;
     box-sizing: border-box;
     transition: width 1.5s, height 1.5s;
