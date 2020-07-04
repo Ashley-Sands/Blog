@@ -332,7 +332,7 @@ div.git-discription-hold{
 
 }
 
-strong.git-discription-a{
+span.git-discription{
     background-color: rgba(168, 168, 168, 60%);
     border: solid 4px rgba(168, 168, 168, 60%);
     padding: 4px;
