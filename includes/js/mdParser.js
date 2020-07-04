@@ -136,11 +136,13 @@ class MarkDownParse{
         var parsed = false;
 
         do{
+
             var regGroups = regexParseObj.regex.exec(output);
-            print(regGroups);
 
             if ( regGroups != null )
             {
+
+                print(regGroups);
 
                 for ( var j = 0; j < regexParseObj.outKeyCapGroups.length; j++ )
                 {
@@ -155,12 +157,14 @@ class MarkDownParse{
                         }
                         
                         if ( update ){
-                            output = tempOutput + string.substr( regGroups.index, regGroups[0].length );
-                            print(output +"##"+ regGroups.index +"##"+ regGroups[0].length +" ## "+ tempOutput + "##"+string.substr( regGroups.index, regGroups[0].length ))
+
+                            output = output.replace(regGroups[0], tempOutput);
+                            print(`string: ${string} \ntempOut ${tempOutput} \nOutput ${output} \nre index: ${regGroups.index} `)
                         }else
                         {
                             output = tempOutput;
                         }
+
                         parsed = true;
 
                     }
