@@ -2,6 +2,21 @@
     "header": "Blogs",
     "subHeader": "Things I Write About",
     "contentTemplate": "blogs",
-    "content": [ "<p class='center' >Sorry, still need to add contet here. :( </p>" ]
+    "content": [ 
+        {
+            "name": "",
+            "date": "",
+            "body": [""]
+        }
+     ],
+    "sideContent": {
+        "mode": "CONTENT",
+        "template": "side-blog",
+        "content": {
+            "hash":   "$[content.name]",
+            "header": "$[content.name]",
+            "posted": "$[content.date]"
+        }
+    }
     
 }

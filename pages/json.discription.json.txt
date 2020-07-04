@@ -32,4 +32,43 @@
         "functionTwo"
     ]
 
+///////////////////////////////
+// Propsed json elements
+// Additional content
+
+    ${itemName}     | Additional content to be loaded.
+                    | ie.
+
+    "additionalContent": {
+        "itemName": "url/path" 
+    }
+
+    the '${itemName}' would be replaced with a span element for the content to be loaded into. 
+    this idea behid this is to load in large amount of text, that are not sutable for json
+
+// vars
+
+    $[json.path]    | path to json element.
+                    | use json element as a var (path must be in current json).
+                    | ie. we could use the header in the content
+    "content": [
+        "$[header] is a short demonstration of this json file :)"
+    ]
+
+    This would output: Example is a short demonstration of this json file :)
+
 }
+
+// Side Content.
+
+    "sideContent": {
+        "mode": "CONTENT",                          | this can either be 'CONTENT' or 'ITEMS'           // This seams a bit much but we'll see.
+                                                    | CONTENT:  Generates an item for each content
+                                                    | ITEMS:    sideContent.content is to be treaded as a list of items like content
+        "template": "side-blog",                    | side content template name
+        "content": {                                | the content.
+            "hash":   "$[content.name]",
+            "header": "$[content.name]",
+            "posted": "$[content.date]"
+        }
+    }
