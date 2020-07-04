@@ -13,7 +13,7 @@ class MarkDownParse{
 
         // define default html elements.
         // this alows use to replace any that are supplied by params
-        // while insuring that all required are still present.
+        // while ensuring that all required are still present.
         var outputs = { 
             header: {
                 "#": "<h1>{v0}</h1>",
