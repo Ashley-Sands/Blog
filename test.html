@@ -1,4 +1,4 @@
-
+<script src="./includes/js/mdParser.js"></script>
 <script>
 list = ["a", "b", "c"];
 dict = {"a": 1, "b": 2, "c": 3};
@@ -12,5 +12,9 @@ b = typeof null
 c = typeof dict
 d = typeof list 
 
-document.write(  isListList+" || "+ isDictList +" || "+ ` ${a} || ${b} || ${c} || ${d} || ainl: ${list.includes("h")}` )
+/*document.write(  isListList+" || "+ isDictList +" || "+ ` ${a} || ${b} || ${c} || ${d} || ainl: ${list.includes("h")}` )*/
+md = new MarkDownParse();
+document.write( md.parse("# dsagfda\n## fda\n### fdsfdsfsa\n#### fdsfasdfasd\n##### fdasfasd\n###### fsdafsadfewfsad\nBob\nThe  \nBuilder\n:)") );
+/*document.write( md.parse("\n[helloo link](https://github.com)\n543254325 \n") );*/
 </script>
+
