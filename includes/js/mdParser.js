@@ -44,9 +44,9 @@ class MarkDownParse{
 
         this.afterRegex = {
             boldItalic: {
-                regex: /((\*{2})([!-)+-~]+)\*{2})|((\*{1})([!-)+-~]+)\*{1}) /,
-                outKeyCapGroups: [1, 2],      // this ant right...
-                valueCapGroups: [[2], [3]],
+                regex: /((\*{2})([!-)+-~]+)\*{2})|((\*{1})([!-)+-~]+)\*{1})/,
+                outKeyCapGroups: [2, 5],      // this ant right...
+                valueCapGroups: [[3], [6]],
                 output: {
                     "*": "<i>{v0}</i>",
                     "**": "<b>{v0}</b>"
@@ -159,7 +159,7 @@ class MarkDownParse{
                         if ( update ){
 
                             output = output.replace(regGroups[0], tempOutput);
-                            print(`string: ${string} \ntempOut ${tempOutput} \nOutput ${output} \nre index: ${regGroups.index} `)
+
                         }else
                         {
                             output = tempOutput;
