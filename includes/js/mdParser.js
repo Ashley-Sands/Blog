@@ -53,7 +53,7 @@ class MarkDownParse{
         // update the output.
         var overrideOutputKeys = Object.keys( overrideOutputs ) 
 
-        for ( var ok = 0; ok < overrideOutputKeys.length; ++ek )
+        for ( var ok = 0; ok < overrideOutputKeys.length; ++ok )
         {
             var outputKey = overrideOutputKeys[ok];
             var overrideElementKeys = Object.keys[outputKey];
