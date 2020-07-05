@@ -27,8 +27,8 @@ class MarkDownParse{
                 "######": "<h6>{v0}</h6>"
             },
             paragraph: {
-                "undefined": "{v0}",
                 "  ": "{v0}<br />",
+                "====": "<hr />",
                 "$complete": "<p>{v}</p>" // additive must contatin an output var $compleat, for the accumulated text to be outputed into. Notice {v} rather than {v0}
             },
             boldItalic: {
@@ -72,10 +72,10 @@ class MarkDownParse{
                 
             },
             paragraph: {
-                regex: /(.+)( {2})(\r|\n|\r\n)/,            
+                regex: /((={4})=*)|((.+)( {2})(\r|\n|\r\n))/,            
                 /*regex: /(  )\n/,   */         
-                outKeyCapGroups: [2, 2],      //this list id must match the values list id
-                valueCapGroups: [[1], [0]],
+                outKeyCapGroups: [2, 5],      //this list id must match the values list id
+                valueCapGroups: [[], [3]],
                 lineMode: MarkDownParse.lineMode.ADDITIVE,
                 output: outputs.paragraph
             }
