@@ -21,6 +21,12 @@ class Common
         /**
          *  Loads content directly into a HTML element
          */
+
+        // if the responce Elem is a string we need to get the component
+        // otherwise it should be a html element
+        if ( typeof tempCont[keys[k]] == "string" || tempCont[keys[k]] instanceof String )
+        {}
+        
         var request = new XMLHttpRequest();
         request.onreadystatechange = function() 
         {

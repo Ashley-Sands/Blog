@@ -43,14 +43,17 @@
         "itemName": {
             "url": "url/path",
             "parseMd": False 
+        }
     }
-
+    
     the '${itemName}' would be replaced with a span element for the content to be loaded into.
     additionalContent would use Common.LoadHTMLContent so the data is added to HTML rather than
     replacing a string once loaded.
+
     '${itemName}' would be replaced with '<span></span>' the span element is passed directly into 
-    LoadHTMLContent, so we dont need to use an ID nor Class :)
+    LoadHTMLContent
     Also additionalContent is the method intended to load in MD files.
+    
 
 
     this idea behid this is to load in large amount of text, that are not sutable for json
@@ -66,7 +69,9 @@
 
     This would output: Example is a short demonstration of this json file :)
 
-}
+    regex to extract:
+    \$\[(([a-zA-Z]+|[0-9]+)\.)*([a-zA-Z]+|[0-9]+){1}\]
+
 
 // Side Content. (Idea Rejected, for now at least.)
 

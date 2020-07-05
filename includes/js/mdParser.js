@@ -85,7 +85,7 @@ class MarkDownParse{
         this.afterRegex = {
             boldItalic: {
                 regex: /((\*{2})([!-)+-~]+)\*{2})|((\*{1})([!-)+-~]+)\*{1})/, 
-                outKeyCapGroups: [2, 5],      // this ant right...
+                outKeyCapGroups: [2, 5],      
                 valueCapGroups: [[3], [6]],
                 output: outputs.boldItalic
             },

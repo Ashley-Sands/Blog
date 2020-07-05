@@ -9,7 +9,35 @@ var responceQueue = {
     jsonStr: null
 }
 
+    
+function contentObject (url, callback, parent=null, isTemplate=false){
+    /**
+     * @param url:          content url.
+     * @param callback:     the callback method, responsible for handlering the content
+     * @param parent:       the parent contentObject that triggered the request. null if user/origin request.
+     */
+
+    this.url = url;
+    this.callback = callback;
+    this.parent = parent;                  // if isTemplate and parent is set, parent is waiting for template to load.
+    this.isTemplate = isTemplate;
+
+    this.responce = "";
+    
+    this.loaded = false;
+    this.error = false;
+    this.canceled = false;
+    
+    this.Useable = function(){
+        return ( parent == null || parent.Usable() ) && !canceled && !error && loaded;
+    }
+
+}
+
+var content = {};   // object of contentObjects;
+
 var pages = [ "about", "git", "blogs"]  // assumed that element is the entry page
+var spanElementID = 0;
 
 LoadContent = function( page )
 {
@@ -28,14 +56,22 @@ JsonFormator = function( jsonStr, requestName )
 {
     
     var json = JSON.parse( jsonStr );
+
     var contentTemplate = null;
     var jsFunctions = null
+    var additionalContent = null
 
     if ( "contentTemplate" in json )
         contentTemplate = json.contentTemplate;
 
     if ( "jsFunctions" in json )
         jsFunctions = json.jsFunctions;
+
+    if ( "additionalContent" in json )
+    {
+        // reg ex to extract addCont vars var re = /\$\{([a-zA-Z][a-zA-Z0-9-_]*)(?<![-_])\}/
+        additionalContent = json.additionalContent;
+    }
 
     // load the template, if not already loaded
     if ( contentTemplate != null && ( !(contentTemplate in templates) ) )
@@ -94,6 +130,29 @@ JsonFormator = function( jsonStr, requestName )
             }
 
             outputContent += template;
+        }
+    }
+
+    // Now we have the final page we can load any additional Content,
+    var spanElement = "<span id='$ID' ></span>";
+
+    if ( additionalContent != null )
+    {
+        var addContKeys = Object.keys( additionalContent );
+        for ( var i = 0; i < addContKeys.length; i++ )
+        {
+            do{
+                var match = new RegExp(`$\{${addContKeys[i]}\}`, '').test(outputContent);
+
+                if ( match )
+                {
+                    Common.LoadHTMLContent( additionalContent[ addContKeys[i] ].url )
+
+                }
+
+                
+            }while( match )
+            
         }
     }
 
