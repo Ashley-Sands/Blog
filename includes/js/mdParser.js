@@ -1,5 +1,8 @@
 // a real simple MD parser
 // I'm only doing this to practice regEx :)
+
+// See ./mdParse.md for futher details.
+
 print = console.log;
 
 class MarkDownParse{
