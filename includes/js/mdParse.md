@@ -5,7 +5,7 @@
 #### WARNING: I have not covered any edge cases, so use at your own risk!
 ========
 ===
-## About 
+## About
 JsMd Parser is a simple md parser tool that convers to html (by default)   
 JsMd parses in 2 stages,  
 Stage one: Parse lines.                 (single pass per line)  

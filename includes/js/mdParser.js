@@ -33,11 +33,19 @@ class MarkDownParse{
             },
             boldItalic: {
                 "*": "<i>{v0}</i>",
-                "**": "<b>{v0}</b>"
+                "_": "<i>{v0}</i>",
+                "**": "<b>{v0}</b>",
+                "__": "<b>{v0}</b>",
+                "~~": "<strike>{v0}</strike>"
             },
             linksImages: {
                 "undefined": "<a href='{v1}'>{v0}</a>",
                 "!": "<img src='{v1}' alt='{v0}' />"
+            },
+            newLine:{
+                "\n\n": "<br />",
+                "\r\r": "<br />",
+                "\r\n\r\n": "<br />",
             }
 
         };
@@ -83,10 +91,16 @@ class MarkDownParse{
         };
 
         this.afterRegex = {
+            newLine:{
+                regex: /(\n{2}|(\r\n){2}|\r{2})/,
+                outKeyCapGroups: [0],      
+                valueCapGroups: [[]],
+                output: outputs.newLine
+            },
             boldItalic: {
-                regex: /((\*{2})([!-)+-~]+)\*{2})|((\*{1})([!-)+-~]+)\*{1})/, 
-                outKeyCapGroups: [2, 5],      
-                valueCapGroups: [[3], [6]],
+                regex: / ((\*{1,2}|~{2}|_{1,2})([!-)+-}]+)\2) /, 
+                outKeyCapGroups: [2],      
+                valueCapGroups: [[3]],
                 output: outputs.boldItalic
             },
             linksImages: {
