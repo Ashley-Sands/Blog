@@ -37,6 +37,8 @@ It is done in two passes for a few of reasons.
     which is a very unhappy web browser, as its not vaild HTML flow.
     
     ^^^ Good luck parsing this file :P ^^^
+    (after note, it seam all good. tbf to chrome its handled it well :) )
+
 
     Notes. regex (i will fix this edge case at some point)
     Finds tags with no end tag.

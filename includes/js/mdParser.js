@@ -72,7 +72,7 @@ class MarkDownParse{
                 
             },
             paragraph: {
-                regex: /(.+)(  )\n/,            
+                regex: /(.+)( {2})(\r|\n|\r\n)/,            
                 /*regex: /(  )\n/,   */         
                 outKeyCapGroups: [2, 2],      //this list id must match the values list id
                 valueCapGroups: [[1], [0]],
