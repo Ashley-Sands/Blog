@@ -32,15 +32,15 @@ class MarkDownParse{
                 "$complete": "<p>{v}</p>" // additive must contatin an output var $compleat, for the accumulated text to be outputed into. Notice {v} rather than {v0}
             },
             boldItalic: {
-                "*": "<i> {v0} </i>",
-                "_": "<i> {v0} </i>",
-                "**": "<b> {v0} </b>",
-                "__": "<b> {v0} </b>",
-                "~~": "<strike> {v0} </strike>"
+                "*": "<i>{v0}</i> ",
+                "_": "<i>{v0}</i> ",
+                "**": "<b>{v0}</b> ",
+                "__": "<b>{v0}</b> ",
+                "~~": "<strike>{v0}</strike> "
             },
             linksImages: {
                 "undefined": "<a href='{v1}'>{v0}</a>",
-                "!": "<img src='{v1}' alt='{v0}' />"
+                "!": "<img src='{v1}' alt='{v0}' style='max-width: 100%' />"
             },
             newLine:{
                 "\n\n": "<br />",
@@ -98,7 +98,7 @@ class MarkDownParse{
                 output: outputs.newLine
             },
             boldItalic: {
-                regex: /((\*{1,2}|~{2}|_{1,2})([!-~]+)\2)  /, 
+                regex: /((\*{1,2}|\~{2}|\_{1,2})([\!-\~]+)\2) /, 
                 outKeyCapGroups: [2],      
                 valueCapGroups: [[3]],
                 output: outputs.boldItalic

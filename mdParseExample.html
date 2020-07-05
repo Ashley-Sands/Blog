@@ -16,21 +16,20 @@ showRawMD = function(jsonStr, requestName)
 
 }
 
-/*document.write(  isListList+" || "+ isDictList +" || "+ ` ${a} || ${b} || ${c} || ${d} || ainl: ${list.includes("h")}` )*/
-/**/
-//document.write( md.parse("# dsagfda\n## fda\n### ***[FB](https://facebook.com)***\n#### fdsfasdfasd\n##### fdasfasd\n###### fsdafsadfewfsad\nBob\nThe  \nBuilder  \nasdsa[helloo link](https://github.com)\nbbb ![helloo link](./includes/images/me.jpeg)\n**Helloo**  \n***byebye***") );
-/*document.write( md.parse("DoraThenMotherFuckingExplorer\n[helloo link](https://github.com)\nabcdefghijklmnopqurstuvwxyz\n") );*/
-//Common.LoadContent("./old-site/index_blogPost.md", showRawMD);
-Common.LoadContent("./includes/js/mdParse.md", showRawMD);
+Common.LoadContent("./old-site/index_blogPost.md", showRawMD);
+//Common.LoadContent("./includes/js/mdParse.md", showRawMD);
 </script>
-<b>---------------------------------------------</b><br />
-<h3>Original MD File.</h3>
-<b>---------------------------------------------</b><br />
-<br />
-<code id="output"></code>
-<br />
-<b>---------------------------------------------</b><br />
-<h3>Parsed md output as HTML</h3>
-<b>---------------------------------------------</b><br />
-<br />
-<code id="output-1"></code>
+<div style=" display: inline-block; width: 100%;">
+    <div style="position: relative; box-sizing: border-box; padding: 2% 5% 2% 2%; margin: 0px; border-right: 5px black solid; width: 45%; display: inline-block; vertical-align: top;">
+        <hr />
+        <h3>Original MD File.</h3>
+        <hr /><br />
+        <code id="output" style="box-sizing: border-box; width: 40%; white-space: normal; overflow-wrap: break-word;"></code>
+    </div>
+    <div style="box-sizing: border-box; padding: 2% 5% 2% 5%; width: 45%; margin: 0px; display: inline-block; border-left: 5px black solid; vertical-align: top;">
+        <hr />
+        <h3>Parsed md output as HTML</h3>
+        <hr /><br />
+        <code id="output-1" ></code>
+    </div>
+</div>
