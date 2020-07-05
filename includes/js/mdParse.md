@@ -100,9 +100,10 @@ output:
 <p>Im the first line of the paragraph<br />and im the Second</p>
 
 #### Bold and Italic text.
-*text*     = italic
-**test**   = bold
-***text*** = bold and italic
+*text* or _text_   = italic  
+**test** or __text__  = bold  
+***text*** or  __*text*__  or **_text_** = bold and italic  
+~~text~~ = strike through
 
 #### images and links
 [linkText](link-href) = hyperlink

@@ -5,11 +5,11 @@
 showRawMD = function(jsonStr, requestName)
 {
     /*document.write( escape(jsonStr).replace(/%20/, "&nbsp;") );*/
-    document.getElementById("output").innerHTML = jsonStr.replace(/</gm, "&lt;")
-                                                         .replace(/>/gm, "&gt;")
-                                                         .replace(/ /gm, "&nbsp;")
-                                                         .replace(/\t/gm, "&nbsp;&nbsp;&nbsp;&nbsp;")
-                                                         .replace(/\n/gm, "<br />");
+    document.getElementById("output").innerHTML = jsonStr.replace(/</g, "&lt;")
+                                                         .replace(/>/g, "&gt;")
+                                                         .replace(/ /g, "&nbsp;")
+                                                         .replace(/\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;")
+                                                         .replace(/\n/g, "<br />");
     
     md = new MarkDownParse();
     document.getElementById("output-1").innerHTML = md.parse( jsonStr )
@@ -20,7 +20,8 @@ showRawMD = function(jsonStr, requestName)
 /**/
 //document.write( md.parse("# dsagfda\n## fda\n### ***[FB](https://facebook.com)***\n#### fdsfasdfasd\n##### fdasfasd\n###### fsdafsadfewfsad\nBob\nThe  \nBuilder  \nasdsa[helloo link](https://github.com)\nbbb ![helloo link](./includes/images/me.jpeg)\n**Helloo**  \n***byebye***") );
 /*document.write( md.parse("DoraThenMotherFuckingExplorer\n[helloo link](https://github.com)\nabcdefghijklmnopqurstuvwxyz\n") );*/
-Common.LoadContent("./old-site/index_blogPost.md", showRawMD);
+//Common.LoadContent("./old-site/index_blogPost.md", showRawMD);
+Common.LoadContent("./includes/js/mdParse.md", showRawMD);
 </script>
 <b>---------------------------------------------</b><br />
 <h3>Original MD File.</h3>
