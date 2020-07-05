@@ -40,15 +40,24 @@
                     | ie.
 
     "additionalContent": {
-        "itemName": "url/path" 
+        "itemName": {
+            "url": "url/path",
+            "parseMd": False 
     }
 
-    the '${itemName}' would be replaced with a span element for the content to be loaded into. 
+    the '${itemName}' would be replaced with a span element for the content to be loaded into.
+    additionalContent would use Common.LoadHTMLContent so the data is added to HTML rather than
+    replacing a string once loaded.
+    '${itemName}' would be replaced with '<span></span>' the span element is passed directly into 
+    LoadHTMLContent, so we dont need to use an ID nor Class :)
+    Also additionalContent is the method intended to load in MD files.
+
+
     this idea behid this is to load in large amount of text, that are not sutable for json
 
 // vars
 
-    $[json.path]    | path to json element.
+    $[json.path.0]    | path to json element.
                     | use json element as a var (path must be in current json).
                     | ie. we could use the header in the content
     "content": [
@@ -59,7 +68,7 @@
 
 }
 
-// Side Content.
+// Side Content. (Idea Rejected, for now at least.)
 
     "sideContent": {
         "mode": "CONTENT",                          | this can either be 'CONTENT' or 'ITEMS'           // This seams a bit much but we'll see.
@@ -72,3 +81,9 @@
             "posted": "$[content.date]"
         }
     }
+
+Rather then add items to the side pannle, im going to move tab/cards/items from content to the side pannle.
+while content will display the content for that tab/card/item.
+
+If i cant do what i need with CSS this may be reconsidered but hopfully it wont come to that.
+so i might have to toggle between content elements and side elements.

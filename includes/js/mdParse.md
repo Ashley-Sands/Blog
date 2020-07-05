@@ -5,26 +5,26 @@
 #### WARNING: I have not covered any edge cases, so use at your own risk!
 
 ## About 
-JsMd Parser is a simple md parser tool that convers to html (by default)
-
+JsMd Parser is a simple md parser tool that convers to html (by default)   
 JsMd parses in 2 stages,  
-Stage one: Parse lines.                 (single pass per line)
-Parses the file line by line to define headers and paragraphs.
-Building the output string without formating/images ect.
+Stage one: Parse lines.                 (single pass per line)  
+Parses the file line by line to define headers and paragraphs.  
+Building the output string without formating/images ect.  
 
-Stage two: Parse output string          (multiple passes output)
-Parses the entire output string untill there are not match remaining.
+Stage two: Parse output string          (multiple passes output)  
+Parses the entire output string untill there are not match remaining.  
 
-It is done in two passes for a few of reasons.
-1. headers can only be defined on a single line and consumes the intire line.
+It is done in two passes for a few of reasons.  
+1. headers can only be defined on a single line and consumes the intire line.  
 2. unformed text can span multiple lines, meaning we need to accumalte all the text with line breaks
    into a single 'p' tag
 
-3. Bold/Italic can also span multiple lines, and should be contatined within 'p' tags.
+3. Bold/Italic can also span multiple lines, and should be contatined within 'p' tags.  
    By doing it on the second pass, we are able to get a match across multiple lines
    and contatined with the header or pargraph tags
-   WARNING: there is a edge case that is not covered in the solution.
-   it is posible to define bold/italic that start in one tag and end in another.
+   WARNING: there is a edge case that is not covered in the solution.  
+   it is posible to define bold/italic that start in one tag and end in another.  
+     
    ie.
    '
    **start bold

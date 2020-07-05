@@ -192,7 +192,7 @@ class MarkDownParse{
                     {
                         var tempOutput = regexParseObj.output[ regGroups[ regexParseObj.outKeyCapGroups[j] ] ];
 
-                        // parsh all of the ca'pture group output values' into 
+                        // parsh all of the capture group output values' into 
                         // the output @ 'capture group output keys' html element.
                         for( var k = 0; k < regexParseObj.valueCapGroups[j].length; k++)
                         {
@@ -213,7 +213,7 @@ class MarkDownParse{
 
             }
 
-        }while(update && regGroups != null)
+        }while(update && regGroups != null);
 
         return parsed ? output : null;    
 
