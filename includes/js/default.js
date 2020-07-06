@@ -164,7 +164,7 @@ JsonFormator = function( contentObj )
     if ( "additionalContent" in json )
     {
         // reg ex to extract addCont vars var re = /\$\{([a-zA-Z][a-zA-Z0-9-_]*)(?<![-_])\}/
-        LoadAdditionalContent( json.additinalContent )
+        LoadAdditionalContent( json.additionalContent )
     }
 
     // load the template, if not already loaded
@@ -320,11 +320,18 @@ LoadAdditionalContent = function( additinalContent, requestParent )
             if ( contentValue.parseMd )
                 contentRequest.responceParser = markDownParser;
 
+            // Cache the content :)
+            contentCache.additinalContent[ contentKey ] = contentRequest;
+            
+            console.log(`Creating Content Object for ${contentKey} (AD)`);
         }
         else
         {
             contentRequest = contentCache.additinalContent[ contentKey ];
             contentRequest.parent = requestParent;      // update the parent to match the request.
+
+            console.log(`Useing Cached Content Object for ${contentKey} (AD)`);
+
         }
         
         if ( contentValue.preLoad )
