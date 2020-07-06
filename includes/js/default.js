@@ -1,7 +1,7 @@
 var headerElement = document.getElementById("content-header");
 var subHeaderElement = document.getElementById("content-sub-heading");
 var contentElement = document.getElementById("content-main");
-
+var lastUpdateElement = document.getElementById("last-updated");
  
 function ContentObject (url, callback, parent=null, requiresParentInUse=false){
     /**
@@ -11,12 +11,14 @@ function ContentObject (url, callback, parent=null, requiresParentInUse=false){
      */
 
     this.url = url;
+
     this.callback = callback;
     this.callbackParams = [];       // any parmas that should be passed into the callback along with content object
 
     this.parent = parent;  
     this.requiresParentInUse = requiresParentInUse; //??
 
+    this.responceHeaders = {"Last-Modified": ""}
     this.responce = "";
     
     this.state = 0;     // Initialized == 0. You can not put the object back into an Initialized state
@@ -98,11 +100,6 @@ LoadContent = function( page )
 
     contentCache.pages[page].Use(); 
 
-    // update the last updated.
-    Common.FetchHeader( url, "Last-Modified", 
-    document.getElementById("last-updated"), 
-    "Last Updated<br/>{responce}" )
-
 }
 
 JsonFormator = function( contentObj )
@@ -167,7 +164,7 @@ JsonFormator = function( contentObj )
             for ( var k = 0; k < keys.length; k++)
             {
                 var contentString = "error :(";
-
+ 
                 // find if the content @ key is a string or an array
                 if ( typeof tempCont[keys[k]] == "string" || tempCont[keys[k]] instanceof String )
                     contentString = tempCont[ keys[ k ] ]
@@ -187,6 +184,12 @@ JsonFormator = function( contentObj )
     headerElement.innerHTML = json.header;
     subHeaderElement.innerHTML = json.subHeader;
     contentElement.innerHTML = outputContent == "" ? "<p class='center'>No Content :(</p>" : outputContent;
+
+    if ( "Last-Modified" in contentObj.responceHeaders )
+    {
+        lastUpdateElement.innerHTML = `Last Updated<br />${contentObj.responceHeaders["Last-Modified"]}`
+    }
+
 
     if ( jsFunctions != null )
         for ( var i = 0; i < jsFunctions.length; i++)

@@ -28,11 +28,21 @@ class Common
         request.onreadystatechange = function() 
         {
             var status = this.status;
+            contentObj.responceStatus = this.statusText;
             if (this.readyState == 4 && status == 200) 
             {
-                contentObj.SetState.Loaded();
+                // retrive headers for the content object.
+                var headers = Object.keys( contentObj.responceHeaders );
+                for ( var i = 0; i < headers.length; i++ )
+                {
+                    var header = headers[i];
+                    contentObj.responceHeaders[ header ] = this.getResponseHeader( header );
+                }
+
                 contentObj.responce = this.responseText;
+                contentObj.SetState.Loaded();
                 contentObj.Use();
+
             }
             else if ( status >= 300)
             {
@@ -44,33 +54,6 @@ class Common
 
         request.open("GET", contentObj.url, true);
         request.send();
-    }
-
-    static FetchHeader(url, header, responceElem, responceStr="{responce}")
-    {
-        /**
-         * Fetches the header of a file.
-         * @param responceStr: the string that the responce should be formated into.
-         *                     the string must contain '{responce}' where the responce
-         *                     will be printed
-         */
-
-        var request = new XMLHttpRequest();
-        request.onreadystatechange = function() 
-        {
-            if (this.readyState == 4 && this.status == 200) 
-            {
-                responceElem.innerHTML = responceStr.replace( /{responce}/g, this.getResponseHeader(header) );
-            }
-            else if ( this.status >= 300)
-            {
-                responceElem.innerHTML = `Error: ${this.status}`
-            }
-        };
-
-        request.open("HEAD", url, true);
-        request.send();
-
     }
 
 }
