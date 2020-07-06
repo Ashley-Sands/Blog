@@ -39,7 +39,7 @@ class Common
                     contentObj.responceHeaders[ header ] = this.getResponseHeader( header );
                 }
 
-                contentObj.responce = this.responseText;
+                contentObj.SetResponce( this.responseText );
                 contentObj.SetState.Loaded();
                 contentObj.Use();
 

@@ -3,6 +3,17 @@ var subHeaderElement = document.getElementById("content-sub-heading");
 var contentElement = document.getElementById("content-main");
 var lastUpdateElement = document.getElementById("last-updated");
  
+var markDownParser = new MarkDownParse();
+
+var contentCache = {
+    templates: {},
+    pages: {},
+    additinalContent: {}
+};
+
+var pages = [ "about", "git", "blogs"]  // assumed that element is the entry page
+var nextHtmlElementId = 0;
+
 function ContentObject (url, callback, parent=null, requiresParentInUse=false){
     /**
      * @param url:          content url.
@@ -18,9 +29,14 @@ function ContentObject (url, callback, parent=null, requiresParentInUse=false){
     this.parent = parent;  
     this.requiresParentInUse = requiresParentInUse; //??
 
+    this._responceParser = null;
+
     this.responceHeaders = {"Last-Modified": ""}
     this.responce = "";
     
+    this.htmlElementId = null;
+    this.htmlElement = null;
+
     this.state = 0;     // Initialized == 0. You can not put the object back into an Initialized state
     this.canceled = false;
 
@@ -57,11 +73,45 @@ function ContentObject (url, callback, parent=null, requiresParentInUse=false){
 
     }
 
-    this.Load = function(){
+    this.Load = function( reload = false ){
 
-        Common.LoadContent( this );
+        if ( this.state == 0 || reload )
+        {
+            this.SetState.Loading();
+            Common.LoadContent( this );
+        }
 
         return this;
+    }
+
+    this.UpdateHTMLElement = function(){
+
+        if ( this.htmlElementId == null )
+        {
+            console.error("Unable to update html element no elementId set");
+            return;
+        }
+
+        try{
+
+            if ( this.htmlElement == null )
+                this.htmlElement = document.getElementById( this.htmlElementId );
+
+            this.htmlElement.innerHTML = this.responce;
+
+        }catch(error){
+            console.error( `Unable to update html element. (${error})` )
+        }
+
+    }
+
+    this.SetResponce = function( responceString ){
+
+        if ( this._responceParser )
+            this.responce = this._responceParser( responceString );
+        else
+            this.responce = responceString;
+
     }
 
     this.SetState = {   
@@ -70,16 +120,9 @@ function ContentObject (url, callback, parent=null, requiresParentInUse=false){
         InUse:       ()=>this.state = 3,
         Error:       ()=>this.state = 4,
     }
+
+
 }
-
-var contentCache = {
-    templates: {},
-    pages: {},
-    additinalContent: {}
-};
-
-var pages = [ "about", "git", "blogs"]  // assumed that element is the entry page
-var spanElementID = 0;
 
 LoadContent = function( page )
 {
@@ -121,7 +164,7 @@ JsonFormator = function( contentObj )
     if ( "additionalContent" in json )
     {
         // reg ex to extract addCont vars var re = /\$\{([a-zA-Z][a-zA-Z0-9-_]*)(?<![-_])\}/
-        additionalContent = json.additionalContent;
+        LoadAdditionalContent( json.additinalContent )
     }
 
     // load the template, if not already loaded
@@ -257,3 +300,42 @@ LoadContent( loadPage );
 
 // update the foot year
 document.getElementById("year").innerHTML = Common.Year();
+
+LoadAdditionalContent = function( additinalContent, requestParent )
+{
+
+    var contentKeys = Object.keys( additinalContent );
+
+    for ( var i = 0; i < contentKeys.length; i++ )
+    {
+        var contentKey = contentKeys[i];
+        var contentValue = additinalContent[contentKey];
+        var contentRequest = null;
+
+        if ( !(contentKey in contentCache.additinalContent) )
+        {
+            contentRequest = new ContentObject( contentValue.url, HandleAdditinalContent, requestParent, true );
+            contentRequest.callbackParams = [contentKey];
+
+            if ( contentValue.parseMd )
+                contentRequest.responceParser = markDownParser;
+
+        }
+        else
+        {
+            contentRequest = contentCache.additinalContent[ contentKey ];
+            contentRequest.parent = requestParent;      // update the parent to match the request.
+        }
+        
+        if ( contentValue.preLoad )
+            contentRequest.Load();
+
+    }
+
+}
+
+HandleAdditinalContent = function( contentObj, contentKey ){
+
+
+
+}
