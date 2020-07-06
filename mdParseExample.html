@@ -6,10 +6,20 @@ var loadPage = "./includes/js/mdParse.md";
 var getString = window.location.search;
 var getData = [...getString.matchAll( /(?:\&|\?){1}([a-zA-Z0-9-_]+)=([a-zA-Z0-9-_/.]+)/g )];  //[ full match, key, value ]
 
-for ( var i = 0; i < getData.length; i++ )
-{   console.log(getData[i][1] + " :: " + getData[i][2]);
-    if ( getData[i][1].toLowerCase() == "file" && getData[i].length > 2 )
-        loadPage = getData[i][2];
+var rawElement;
+var mdElement;
+
+getElements = function()
+{
+    rawElement = document.getElementById("raw");
+    mdElement = document.getElementById("md");
+}
+
+toggleActiveDisplay = function( showElement, hideElement )
+{
+    hideElement.style.display = "none";
+    showElement.style.display = "inline-block";
+    showElement.style.width = "90%";
 }
 
 showRawMD = function(jsonStr, requestName)
@@ -26,20 +36,60 @@ showRawMD = function(jsonStr, requestName)
 
 }
 
-Common.LoadContent(loadPage, showRawMD);
-//Common.LoadContent("./includes/js/mdParse.md", showRawMD);
+handleGetData = function()
+{
+
+    for ( var i = 0; i < getData.length; i++ )
+    {   console.log(getData[i][1] + " :: " + getData[i][2]);
+
+        if ( getData[i][1].toLowerCase() == "file" && getData[i].length > 2 )
+        {
+            loadPage = getData[i][2];
+        }
+        else if (getData[i][1].toLowerCase() == "mode" && getData[i].length > 2)
+        {
+            var mode = getData[i][2].toLowerCase();
+
+            if ( mode == "raw" )
+            {
+                toggleActiveDisplay( rawElement, mdElement );
+            }
+            else if ( mode == "md" )
+            {
+                toggleActiveDisplay( mdElement, rawElement );
+            }
+            else
+            {
+                rawElement.style.display = "inline-block";
+                mdElement.style.display = "inline-block";
+
+                rawElement.style.width = mdElement.style.width = "45%";
+            }
+
+        }
+    }
+
+}
+
 </script>
+
 <div style=" display: inline-block; width: 100%;">
-    <div style="position: relative; box-sizing: border-box; padding: 2% 5% 2% 2%; margin: 0px; border-right: 5px black solid; width: 45%; display: inline-block; vertical-align: top;">
+    <div id="raw" style="position: relative; box-sizing: border-box; padding: 2% 5% 2% 2%; margin: 0px; border-right: 5px black solid; width: 45%; display: inline-block; vertical-align: top;">
         <hr />
         <h3>Original MD File.</h3>
         <hr /><br />
         <code id="output" style="box-sizing: border-box; width: 40%; white-space: normal; overflow-wrap: break-word;"></code>
     </div>
-    <div style="box-sizing: border-box; padding: 2% 5% 2% 5%; width: 45%; margin: 0px; display: inline-block; border-left: 5px black solid; vertical-align: top;">
+    <div id="md" style="box-sizing: border-box; padding: 2% 5% 2% 5%; width: 45%; margin: 0px; display: inline-block; border-left: 5px black solid; vertical-align: top;">
         <hr />
         <h3>Parsed md output as HTML</h3>
         <hr /><br />
         <code id="output-1" ></code>
     </div>
 </div>
+
+<script>
+    getElements();
+    handleGetData();
+    Common.LoadContent(loadPage, showRawMD);
+</script>

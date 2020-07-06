@@ -33,11 +33,11 @@
     ]
 
 ==============================================================================================================
-// Propsals
-//
+# Propsals
+
 ==============================================================================================================
-// Propsed json elements
-// Additional content
+### Propsed json elements
+#### Additional content
 
     ${itemName}     | Additional content to be loaded.
                     | ie.
