@@ -184,7 +184,7 @@ JsonFormator = function( contentObj )
         if (content.length > 0 && ( typeof content[0] == "string" || content[0] instanceof String) )  // check both primitive and object
             outputContent = content.join(" ");
         else
-            console.log(`Warning: Either no content suppled or content is not a String (Content Len: ${content.length}) `)
+            console.warn(`Warning: Either no content suppled or content is not a String (Content Len: ${content.length}) `)
     }
     else
     {
@@ -197,7 +197,7 @@ JsonFormator = function( contentObj )
             // make sure that tempCont is not a string or array.
             if ( typeof tempCont == "string" || tempCont instanceof String || tempCont instanceof Array)  // check both primitive and object
             {
-                console.log("Error: Content supplied for template was a string or Array. must be json object")
+                console.error("Error: Content supplied for template was a string or Array. must be json object")
                 break;
             }
 
@@ -215,7 +215,7 @@ JsonFormator = function( contentObj )
                 else if( tempCont[keys[k]] instanceof Array )
                     contentString = tempCont[ keys[ k ] ].join( " " );
                 else
-                    console.log("Error: Could not parse content into html, content is nither a string or array");
+                    console.error("Error: Could not parse content into html, content is nither a string or array");
 
                 template = template.replace( `{${keys[k]}}`, contentString );
 
