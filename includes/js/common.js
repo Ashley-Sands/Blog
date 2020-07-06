@@ -16,16 +16,12 @@ class Common
         return Math.floor( ( new Date() - new Date(2008, 1) ) / Const.OneYearMillis )
     }
 
-    static LoadContent( url, responceHandler, requestName="" )
+    static LoadContent( contentObj )
     {
+        //url, responceHandler, requestName=""
         /**
          * Loads Content passing the responce into a responce handler function
-         * @param url:              request url
-         * @param responceHandler:  Function to handle the responce. ie formate json into html :)
-         *                          The function must contatin two params. 
-         *                          ResponceStr:    The responce from url
-         *                          requestName:    Name of request
-         * @param requestName:      Name of request, Only used to track request.
+         * @param contentObj:   The content object to load.
          */
 
         var request = new XMLHttpRequest();
@@ -34,17 +30,19 @@ class Common
             var status = this.status;
             if (this.readyState == 4 && status == 200) 
             {
-                responceHandler( this.responseText, requestName );
+                contentObj.SetState.Loaded();
+                contentObj.responce = this.responseText;
+                contentObj.Use();
             }
             else if ( status >= 300)
             {
-                //TODO: I need to do somthink about this, its not allways correct anymore.
-                // for instance, its doesent always return json anymore 
-                responceHandler( `{ "header": "${status}", "subHeader": "Error", "content": ["<p class='center'>Oops...</p>"] }`, requestName); 
+                contentObj.SetState.Error();
+                //contentObj.HandleHTTPError();
             }
+
         };
 
-        request.open("GET", url, true);
+        request.open("GET", contentObj.url, true);
         request.send();
     }
 

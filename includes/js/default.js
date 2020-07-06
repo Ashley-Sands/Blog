@@ -1,15 +1,9 @@
-
 var headerElement = document.getElementById("content-header");
 var subHeaderElement = document.getElementById("content-sub-heading");
 var contentElement = document.getElementById("content-main");
 
-var templates = {}
-var responceQueue = {
-    templateName: null,
-    jsonStr: null
-}
  
-function ContentObject (url, callback, parent=null, isTemplate=false){
+function ContentObject (url, callback, parent=null, requiresParentInUse=false){
     /**
      * @param url:          content url.
      * @param callback:     the callback method, responsible for handlering the content
@@ -18,19 +12,62 @@ function ContentObject (url, callback, parent=null, isTemplate=false){
 
     this.url = url;
     this.callback = callback;
-    this.parent = parent;                  // if isTemplate and parent is set, parent is waiting for template to load.
-    this.isTemplate = isTemplate;
+    this.callbackParams = [];       // any parmas that should be passed into the callback along with content object
+
+    this.parent = parent;  
+    this.requiresParentInUse = requiresParentInUse; //??
 
     this.responce = "";
     
-    this.loaded = false;
-    this.error = false;
+    this.state = 0;     // Initialized == 0. You can not put the object back into an Initialized state
     this.canceled = false;
-    
-    this.Useable = function(){
-        return ( parent == null || parent.Usable() ) && !canceled && !error && loaded;
+
+    this.handleHTTPError = null  // callback to handle any HTTP error. TODO: <<
+
+    this.Usable = function(parentInUse=false){
+        /**
+         * @param parentInUse:  Usable only if the TOP MOST parent (parent == null) is considered usable.
+         *                      Any objects with a parent (not top most) will considered usable in both loaded and inUse.
+         *                      // This may change at a later date.
+         */
+        // Aways use the greatest inUse value.
+        parentInUse = parentInUse || this.requiresParentInUse;
+
+        var parentUsable = ( parent == null || parent.Usable(parentInUse) );
+        var usable = parent == null && parentInUse && this.state == 3   || // if we the top most parent, and parentInUse is true, we must be in the IsUse state to be usable
+                    ( parent == null && !parentInUse || parent != null ) && 
+                    ( this.state == 2 || this.state == 3 );
+
+        return parentUsable && usable && !this.canceled;
+
     }
 
+    this.Use = function()
+    {
+        /** Loads the object if unloaded otherwise
+         *  trigger the callback if usable and not in use 
+         * */
+
+        if (this.state == 0)
+            this.Load();
+        else if ( this.state != 3 && this.Usable() )
+            callback( this, ...this.callbackParams );
+
+    }
+
+    this.Load = function(){
+
+        Common.LoadContent( this );
+
+        return this;
+    }
+
+    this.SetState = {   
+        Loading:     ()=>this.state = 1,
+        Loaded:      ()=>this.state = 2,
+        InUse:       ()=>this.state = 3,
+        Error:       ()=>this.state = 4,
+    }
 }
 
 var contentCache = {
@@ -44,9 +81,22 @@ var spanElementID = 0;
 
 LoadContent = function( page )
 {
-    var url = Const.basePath + "/pages/" + page + ".json";
-    Common.LoadContent( url, JsonFormator, page );
-    location.hash = page
+
+    var path = "/pages/" + page + ".json";
+    var url = Const.basePath + path;
+
+    if ( !(page in contentCache.pages) )    // load content if not in chach.
+    {
+        var contentRequest = new ContentObject( url, JsonFormator );
+        contentCache.pages[page] = contentRequest;
+        console.log(`loading content: ${path} `)
+    }
+    else
+    {
+        console.log( `using chached page for ${page}` )
+    }
+
+    contentCache.pages[page].Use(); 
 
     // update the last updated.
     Common.FetchHeader( url, "Last-Modified", 
@@ -55,10 +105,10 @@ LoadContent = function( page )
 
 }
 
-JsonFormator = function( jsonStr, requestName )
+JsonFormator = function( contentObj )
 {
-    
-    var json = JSON.parse( jsonStr );
+
+    var json = JSON.parse( contentObj.responce );
 
     var contentTemplate = null;
     var jsFunctions = null
@@ -77,12 +127,10 @@ JsonFormator = function( jsonStr, requestName )
     }
 
     // load the template, if not already loaded
-    if ( contentTemplate != null && ( !(contentTemplate in templates) ) )
+    if ( contentCache.templates != null && ( !(contentTemplate in contentCache.templates) ) )
     {
         console.log( `Loading Template for page ${contentTemplate}` )
-        LoadTemplate( contentTemplate )
-        responceQueue.templateName = requestName;
-        responceQueue.jsonStr = jsonStr;
+        LoadTemplate( contentTemplate, contentObj );
         return;
     }
 
@@ -114,7 +162,7 @@ JsonFormator = function( jsonStr, requestName )
 
 
             keys = Object.keys( tempCont );
-            template = templates[ contentTemplate ];
+            template = contentCache.templates[ contentTemplate ].responce;
 
             for ( var k = 0; k < keys.length; k++)
             {
@@ -164,27 +212,33 @@ TriggerFunction = function( functName )
     }
 }
 
-LoadTemplate = function( template )
+LoadTemplate = function( templateName, parentRequest )
 {
-    if ( template in templates ) return;
+    if ( templateName in contentCache.templates ) return;
 
-    Common.LoadContent( Const.basePath + "/pages/templates/" + template + ".html", StoreTemplate, template )
-    templates[template] = null; // Add the template to the templates so we dont handle the same request brfore a responce comes back.
+    var templateRequest = new ContentObject( Const.basePath + "/pages/templates/" + templateName + ".html",
+                                             StoreTemplate, 
+                                             parentRequest );
+
+    templateRequest.Load();
+    contentCache.templates[ templateName ] = templateRequest;
 
 }
 
-StoreTemplate = function( templateStr, pageName )
+StoreTemplate = function( contentObj )
 {
 
-    // TODO. check for error responce.
-    templates[pageName] = templateStr;
-
-    // trigger the Json Formater if this page is in the responce Queue.
-    if ( responceQueue.templateName == pageName )
+    if ( !contentObj.Usable() )
     {
-        JsonFormator( responceQueue.jsonStr );
-        responceQueue.templateName = null;
-        responceQueue.jsonStr = null;
+        console.log("Error reciving template.");
+        return;
+    }
+
+    // trigger the parent if available
+    if ( contentObj.parent != null )
+    {
+        contentObj.parent.callback( contentObj.parent );
+        contentObj.parent = null;
     }
 
 }
@@ -192,8 +246,6 @@ StoreTemplate = function( templateStr, pageName )
 // Load the request page, (TODO: it might be worth change if from hash to the history method )
 requestPage = location.hash.substring(1).toLowerCase();
 loadPage = pages[0];
-
-console.log("requestPage is "+requestPage)
 
 if ( pages.includes(requestPage) )
     loadPage = requestPage;
