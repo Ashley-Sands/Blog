@@ -9,15 +9,20 @@
             "date": "3 April 2020",
             "body": [""]
         }
-     ],
-    "sideContent": {
-        "mode": "CONTENT",
-        "template": "side-blog",
-        "content": {
-            "hash":   "$[content.name]",
-            "header": "$[content.name]",
-            "posted": "$[content.date]"
+    ],
+    "additionalContent": {
+        "blog0":{
+            "url": "url/path",
+            "preLoad": false,
+            "cache": false,
+            "parseMd": true
+        },
+        "blog1":{
+            "url": "url/path",
+            "preLoad": false,
+            "cache": false,
+            "parseMd": true
         }
     }
-    
+        
 }

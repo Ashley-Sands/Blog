@@ -190,7 +190,6 @@ JsonFormator = function( contentObj )
         lastUpdateElement.innerHTML = `Last Updated<br />${contentObj.responceHeaders["Last-Modified"]}`
     }
 
-
     if ( jsFunctions != null )
         for ( var i = 0; i < jsFunctions.length; i++)
         {
