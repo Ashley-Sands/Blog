@@ -99,6 +99,7 @@ LoadContent = function( page )
     }
 
     contentCache.pages[page].Use(); 
+    location.hash = page;
 
 }
 
