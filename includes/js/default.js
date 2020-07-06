@@ -133,29 +133,6 @@ JsonFormator = function( jsonStr, requestName )
         }
     }
 
-    // Now we have the final page we can load any additional Content,
-    var spanElement = "<span id='$ID' ></span>";
-
-    if ( additionalContent != null )
-    {
-        var addContKeys = Object.keys( additionalContent );
-        for ( var i = 0; i < addContKeys.length; i++ )
-        {
-            do{
-                var match = new RegExp(`$\{${addContKeys[i]}\}`, '').test(outputContent);
-
-                if ( match )
-                {
-                    Common.LoadHTMLContent( additionalContent[ addContKeys[i] ].url )
-
-                }
-
-                
-            }while( match )
-            
-        }
-    }
-
     headerElement.innerHTML = json.header;
     subHeaderElement.innerHTML = json.subHeader;
     contentElement.innerHTML = outputContent == "" ? "<p class='center'>No Content :(</p>" : outputContent;
