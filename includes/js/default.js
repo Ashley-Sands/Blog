@@ -10,7 +10,7 @@ var responceQueue = {
 }
 
     
-function contentObject (url, callback, parent=null, isTemplate=false){
+function ContentObject (url, callback, parent=null, isTemplate=false){
     /**
      * @param url:          content url.
      * @param callback:     the callback method, responsible for handlering the content

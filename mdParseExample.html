@@ -2,6 +2,16 @@
 <script src="./includes/js/common.js"></script>
 <script>
 
+var loadPage = "./includes/js/mdParse.md";
+var getString = window.location.search;
+var getData = [...getString.matchAll( /(?:\&|\?){1}([a-zA-Z0-9-_]+)=([a-zA-Z0-9-_/.]+)/g )];  //[ full match, key, value ]
+
+for ( var i = 0; i < getData.length; i++ )
+{   console.log(getData[i][1] + " :: " + getData[i][2]);
+    if ( getData[i][1].toLowerCase() == "file" && getData[i].length > 2 )
+        loadPage = getData[i][2];
+}
+
 showRawMD = function(jsonStr, requestName)
 {
     /*document.write( escape(jsonStr).replace(/%20/, "&nbsp;") );*/
@@ -16,7 +26,7 @@ showRawMD = function(jsonStr, requestName)
 
 }
 
-Common.LoadContent("./old-site/index_blogPost.md", showRawMD);
+Common.LoadContent(loadPage, showRawMD);
 //Common.LoadContent("./includes/js/mdParse.md", showRawMD);
 </script>
 <div style=" display: inline-block; width: 100%;">
