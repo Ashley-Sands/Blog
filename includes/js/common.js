@@ -16,34 +16,6 @@ class Common
         return Math.floor( ( new Date() - new Date(2008, 1) ) / Const.OneYearMillis )
     }
 
-    static LoadHTMLContent( url, responceElem )
-    {
-        /**
-         *  Loads content directly into a HTML element
-         */
-
-        // if the responce Elem is a string we need to get the component
-        // otherwise it should be a html element
-        if ( typeof tempCont[keys[k]] == "string" || tempCont[keys[k]] instanceof String )
-        {}
-        
-        var request = new XMLHttpRequest();
-        request.onreadystatechange = function() 
-        {
-            if (this.readyState == 4 && this.status == 200) 
-            {
-                responceElem.innerHTML = this.responseText;
-            }
-            else if ( this.status >= 300)
-            {
-                responceElem.innerHTML = `Error: ${this.status}`
-            }
-        };
-
-        request.open("GET", url, true);
-        request.send();
-    }
-
     static LoadContent( url, responceHandler, requestName="" )
     {
         /**
