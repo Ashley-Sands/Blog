@@ -81,7 +81,6 @@ function ContentObject (url, callback, parent=null, requiresParentInUse=false){
             Common.LoadContent( this );
         }
 
-        return this;
     }
 
     this.UpdateHTMLElement = function(){
@@ -114,6 +113,10 @@ function ContentObject (url, callback, parent=null, requiresParentInUse=false){
 
     }
 
+    this.HasResponce = function(){
+        return this.state == 2 || this.state == 3;
+    }
+
     this.SetState = {   
         Loading:     ()=>this.state = 1,
         Loaded:      ()=>this.state = 2,
@@ -126,7 +129,6 @@ function ContentObject (url, callback, parent=null, requiresParentInUse=false){
 
 LoadContent = function( page )
 {
-
     var path = "/pages/" + page + ".json";
     var url = Const.basePath + path;
 
@@ -163,7 +165,7 @@ JsonFormator = function( contentObj )
 
     if ( "additionalContent" in json )
     {
-        // reg ex to extract addCont vars var re = /\$\{([a-zA-Z][a-zA-Z0-9-_]*)(?<![-_])\}/
+        
         LoadAdditionalContent( json.additionalContent )
     }
 
@@ -173,6 +175,13 @@ JsonFormator = function( contentObj )
         console.log( `Loading Template for page ${contentTemplate}` )
         LoadTemplate( contentTemplate, contentObj );
         return;
+    }
+
+    // unset any page content set as inUse
+    for ( var i = 0; i < contentCache.pages.length; i++)
+    {
+        if ( contentCache.pages[i].state == 3 )
+            contentCache.pages[i].SetState.Loaded();
     }
 
     var content = json.content;
@@ -222,12 +231,17 @@ JsonFormator = function( contentObj )
             }
 
             outputContent += template;
+
         }
     }
+
+    outputContent = FormatContentElements( outputContent );
 
     headerElement.innerHTML = json.header;
     subHeaderElement.innerHTML = json.subHeader;
     contentElement.innerHTML = outputContent == "" ? "<p class='center'>No Content :(</p>" : outputContent;
+
+    contentObj.SetState.InUse();
 
     if ( "Last-Modified" in contentObj.responceHeaders )
     {
@@ -263,7 +277,7 @@ LoadTemplate = function( templateName, parentRequest )
     if ( templateName in contentCache.templates ) return;
 
     var templateRequest = new ContentObject( Const.basePath + "/pages/templates/" + templateName + ".html",
-                                             StoreTemplate, 
+                                             CacheTemplate, 
                                              parentRequest );
 
     templateRequest.Load();
@@ -271,7 +285,7 @@ LoadTemplate = function( templateName, parentRequest )
 
 }
 
-StoreTemplate = function( contentObj )
+CacheTemplate = function( contentObj )
 {
 
     if ( !contentObj.Usable() )
@@ -289,17 +303,39 @@ StoreTemplate = function( contentObj )
 
 }
 
-// Load the request page, (TODO: it might be worth change if from hash to the history method )
-requestPage = location.hash.substring(1).toLowerCase();
-loadPage = pages[0];
+FormatContentElements = function( contentString ){
 
-if ( pages.includes(requestPage) )
-    loadPage = requestPage;
+    // Replace any formating elements with html elements  
+    // inputing any content that is already available in the cache
+    
+    var regex = /\$\{([a-zA-Z][a-zA-Z0-9-_]*)(?<![-_])\}/;
+    var reMatch = regex.exec( contentString );
 
-LoadContent( loadPage );
+    while( reMatch != null )
+    {
+        var cachedContent = "";
+        var elementId = reMatch[1] +"-"+ nextHtmlElementId++;
 
-// update the foot year
-document.getElementById("year").innerHTML = Common.Year();
+        if ( reMatch[1] in contentCache )
+        {
+            if ( contentCache.additinalContent[ reMatch[1] ].HasResponce() )
+                cachedContent = contentCache.additinalContent[ reMatch[1] ].responce;
+
+            cachedContent.htmlElementId = elementId;
+
+        }
+        
+        var elementString = `<span id="${elementId}">${cachedContent}</span>`;
+
+        contentString = contentString.replace( reMatch[0], elementString );
+
+        reMatch = regex.exec( contentString );
+        console.log( reMatch );
+    }
+
+    return contentString;
+
+}
 
 LoadAdditionalContent = function( additinalContent, requestParent )
 {
@@ -323,14 +359,14 @@ LoadAdditionalContent = function( additinalContent, requestParent )
             // Cache the content :)
             contentCache.additinalContent[ contentKey ] = contentRequest;
             
-            console.log(`Creating Content Object for ${contentKey} (AD)`);
+            console.log(`Creating Content Object for ${contentKey} (ADC)`);
         }
         else
         {
             contentRequest = contentCache.additinalContent[ contentKey ];
             contentRequest.parent = requestParent;      // update the parent to match the request.
 
-            console.log(`Useing Cached Content Object for ${contentKey} (AD)`);
+            console.log(`Useing Cached Content Object for ${contentKey} (ADC)`);
 
         }
         
@@ -346,3 +382,30 @@ HandleAdditinalContent = function( contentObj, contentKey ){
 
 
 }
+
+UseContent = function( contentKey )
+{
+    /** Uses caches content in additinalContent */
+
+    if ( !(contentKey in contentCache.additinalContent) )
+    {
+        console.error( `No Content Found for ${contentKey}` );
+        return;
+    }
+
+    var content = contentCache.additinalContent[ contentKey ];
+    content.Use()
+
+}
+
+// Load the request page, (TODO: it might be worth change if from hash to the history method )
+requestPage = location.hash.substring(1).toLowerCase();
+loadPage = pages[0];
+
+if ( pages.includes(requestPage) )
+    loadPage = requestPage;
+
+LoadContent( loadPage );
+
+// update the foot year
+document.getElementById("year").innerHTML = Common.Year();
