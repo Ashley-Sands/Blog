@@ -87,7 +87,8 @@
     The ContentObject is then be passed into the ContentLoader where the responce will be 
     updated when ready, setting the loaded flag, also triggering the callback if useable.
     (Content is consisdered useable if the parent is null or useable and it is loaded, 
-    no error and not canceled)
+    no error and not canceled). The callback parmas can be changed to ContentObject as it
+    containes all the required info.
 
     If an object is not useable after loading (without being in an error/canceled state),
     it will be waiting for the parent to complete loading. In which case the parent callback 
