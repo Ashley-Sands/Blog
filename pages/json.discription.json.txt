@@ -32,33 +32,100 @@
         "functionTwo"
     ]
 
-///////////////////////////////
+==============================================================================================================
+// Propsals
+//
+==============================================================================================================
 // Propsed json elements
 // Additional content
 
     ${itemName}     | Additional content to be loaded.
                     | ie.
+    
+    To solve the issue of having large bodys of text in json files, there sould be a method to
+    load additional content from txt or md files.
+
+    Additional content must be define within the json object, contatining the url/path, if it should 
+    be pre loaded and wether or not it should be parsed from md. eg.
 
     "additionalContent": {
         "itemName": {
             "url": "url/path",
+            "preLoad": false,
             "parseMd": False 
         }
     }
+
+    The additional content should be defined in the content string using ${additionalContent-ItemName}
+    eg. (using the defined additionalContent above)
+
+    "content": [
+        {
+            "title": "Example Content using additional content",
+            "body": "${itemName}"
+        }
+    ]
+
+    This would format the content at 'additionalContent.itemName.url' into '${itemName}'
+    Parsing from md as necessary.
+
+    The problum with this is how and when should the additional content be loaded
+    without holding back the user for to long. As we dont know what additional data 
+    needs to be loaded until the inital json payload is returned, not forgeting that 
+    we need to load in templates if not already loaded and cached.
+
+    To combat that, there needs to be a farly large change to the way that we handle content
+    loaded via ajax. 
+
+    To start with there will a ContentObject introduced, to replace the current template
+    cacheing, then the ContentObject will be made available to all content.
+
+    The ContentObject is responcable for the content 'url', ref to the 'callback' function,
+    the owning 'parent', if 'isTemplate' or not, the 'responce', along with 'loaded', 'error' 
+    and 'canceled'. Which is stored into the content cache.
+
+    The ContentObject is then be passed into the ContentLoader where the responce will be 
+    updated when ready, setting the loaded flag, also triggering the callback if useable.
+    (Content is consisdered useable if the parent is null or useable and it is loaded, 
+    no error and not canceled)
+
+    If an object is not useable after loading (without being in an error/canceled state),
+    it will be waiting for the parent to complete loading. In which case the parent callback 
+    must trigger child callbacks.
+
+    Because of this we can also remove the responceQueue, as if ContentObject if set to 
+    isTemplate and the parent is set we know that we need to call the parent callback 
+    once the template is loaded (also usetting the parent, as templates are cached for the
+    duration of the users visit).
+
+    Futhermore, we can remove the LoadHTMLContent function as well, since we can supply a 
+    HTML handler as the callback, meaning we have more felixablity and controle in the long 
+    run over the current approch.
+
+    Caching is a dificult one, to start all template are cached for the duration of the visit,
+    (for now at leaset, we only have 3 and there tiny), but json and additionalContent is another 
+    story. For now when a user navigates away from the page, the page json and additinalContent
+    will be unloaded, but we'll see what happens.
+
+    It might be worth adding 'cache' to the json file, so we know weather or not to cache when
+    the user navigates aways from the page.
+
+    Negatives for the system, is we use more memory along with having to load multiple pices of content
+    but the positives out-weigh the negitives in the long run.
+
+    To be far most sites proberly load multiple pices of content these days and we are very unlikey to
+    use extream amounts of memory even with excessive cache as we only cache text.
+
+    On the other hand this allows us to load additinal content before the parent has finised parsing,
+    reducing content bottle necks, faster loading times when returning to pages and much greater 
+    felexiblity over content sources and content formating. (especially with the md parser)
+
+    Eg. with the addision of 'additinal content' we can load content from github directly into
+    web pages.
     
-    the '${itemName}' would be replaced with a span element for the content to be loaded into.
-    additionalContent would use Common.LoadHTMLContent so the data is added to HTML rather than
-    replacing a string once loaded.
-
-    '${itemName}' would be replaced with '<span></span>' the span element is passed directly into 
-    LoadHTMLContent
-    Also additionalContent is the method intended to load in MD files.
-    
-
-
-    this idea behid this is to load in large amount of text, that are not sutable for json
-
+==============================================================================================================
 // vars
+==============================================================================================================
 
     $[json.path.0]    | path to json element.
                     | use json element as a var (path must be in current json).

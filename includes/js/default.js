@@ -8,8 +8,7 @@ var responceQueue = {
     templateName: null,
     jsonStr: null
 }
-
-    
+ 
 function ContentObject (url, callback, parent=null, isTemplate=false){
     /**
      * @param url:          content url.
@@ -34,7 +33,11 @@ function ContentObject (url, callback, parent=null, isTemplate=false){
 
 }
 
-var content = {};   // object of contentObjects;
+var contentCache = {
+    templates: {},
+    pages: {},
+    additinalContent: {}
+};
 
 var pages = [ "about", "git", "blogs"]  // assumed that element is the entry page
 var spanElementID = 0;
