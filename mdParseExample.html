@@ -1,7 +1,10 @@
 <script src="./includes/js/mdParser.js"></script>
 <script src="./includes/js/common.js"></script>
-<script>
 
+<script src="./includes/js/const.js"></script>      <!-- required for default -->
+<script src="./includes/js/default.js"></script>    <!-- TODO: Move Content Obj to own file. -->
+
+<script>
 var loadPage = "./includes/js/mdParse.md";
 var getString = window.location.search;
 var getData = [...getString.matchAll( /(?:\&|\?){1}([a-zA-Z0-9-_]+)=([a-zA-Z0-9-_/.]+)/g )];  //[ full match, key, value ]
@@ -22,17 +25,17 @@ toggleActiveDisplay = function( showElement, hideElement )
     showElement.style.width = "90%";
 }
 
-showRawMD = function(jsonStr, requestName)
+showRawMD = function(contentObj)
 {
     /*document.write( escape(jsonStr).replace(/%20/, "&nbsp;") );*/
-    document.getElementById("output").innerHTML = jsonStr.replace(/</g, "&lt;")
+    document.getElementById("output").innerHTML = contentObj.responce.replace(/</g, "&lt;")
                                                          .replace(/>/g, "&gt;")
                                                          .replace(/ /g, "&nbsp;")
                                                          .replace(/\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;")
                                                          .replace(/\n/g, "<br />");
     
     md = new MarkDownParse();
-    document.getElementById("output-1").innerHTML = md.parse( jsonStr )
+    document.getElementById("output-1").innerHTML = md.parse( contentObj.responce )
 
 }
 
@@ -91,5 +94,5 @@ handleGetData = function()
 <script>
     getElements();
     handleGetData();
-    Common.LoadContent(loadPage, showRawMD);
+    Common.LoadContent( new ContentObject( loadPage, showRawMD ) );
 </script>

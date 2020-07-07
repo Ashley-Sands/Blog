@@ -54,7 +54,7 @@ function ContentObject (url, callback, parent=null, requiresParentInUse=false){
         var parentUsable = ( parent == null || parent.Usable(parentInUse) );
         var usable = parent == null && parentInUse && this.state == 3   || // if we are the top most parent, and parentInUse is true, we must be in the IsUse state to be usable
                     ( parent == null && !parentInUse || parent != null ) && 
-                    ( this.state == 2 || this.state == 3 );
+                    ( this.state >= 2 );
 
         return parentUsable && usable && !this.canceled;
 
@@ -65,16 +65,21 @@ function ContentObject (url, callback, parent=null, requiresParentInUse=false){
         /** Loads the object if unloaded otherwise
          *  trigger the callback if usable and not in use 
          * */
-        var parentState = null;
-        if (this.parent)
-            parentState = this.parent.state;
+ 
 
         if (this.state == 0)
             this.Load();
-        else if ( this.state != 3 && this.Usable() )
+        else if ( this.state >= 2 && this.Usable() )
             callback( this, ...this.callbackParams );
         else
-            console.warn(`Unable to use content from url: ${this.url} (State: ${this.state} Usable: ${this.Usable()}. Parent: ${this.parent} pState: ${parentState})`);
+            console.warn(`Unable to use content from url: ${this.url}`)
+        
+        var parentState = null;
+
+        if (this.parent)
+            parentState = this.parent.state;
+
+        console.log( `Use info for ${this.url} || State: ${this.state} Usable: ${this.Usable()}. Parent: ${this.parent} pState: ${parentState})` );
 
     }
 
@@ -119,14 +124,15 @@ function ContentObject (url, callback, parent=null, requiresParentInUse=false){
     }
 
     this.HasResponce = function(){
-        return this.state == 2 || this.state == 3;
+        return this.state >= 2;
     }
 
     this.SetState = {   
+        Error:       ()=>this.state = -1,
+      //Initialize   ()=>this.state = 0,         // Note this only here for clarity. You can NEVER put a contentObj back into an init state.
         Loading:     ()=>this.state = 1,
-        Loaded:      ()=>this.state = 2,
+        Loaded:      ()=>this.state = 2,         // any value above 2 singles that we have a valid/usable responce.
         InUse:       ()=>this.state = 3,
-        Error:       ()=>this.state = 4,
     }
 
 
@@ -155,7 +161,6 @@ LoadContent = function( page )
 
 JsonFormator = function( contentObj )
 {
-    console.log("Boo");
     var json = JSON.parse( contentObj.responce );
 
     var contentTemplate = null;
@@ -244,7 +249,7 @@ JsonFormator = function( contentObj )
     subHeaderElement.innerHTML = json.subHeader;
     contentElement.innerHTML = outputContent == "" ? "<p class='center'>No Content :(</p>" : outputContent;
 
-    //contentObj.SetState.InUse();  //<< this breaks things :|
+    contentObj.SetState.InUse();  //<< this breaks things :|
 
     if ( "Last-Modified" in contentObj.responceHeaders )
     {
@@ -316,19 +321,22 @@ FormatContentElements = function( contentString ){
 
     while( reMatch != null )
     {
-        var cachedContent = "";
+        var cachedContent = null;
+        var cachedResponce = "";
         var elementId = reMatch[1] +"-"+ nextHtmlElementId++;
-
-        if ( reMatch[1] in contentCache )
+        console.log( reMatch[1] + " in AC content " + Object.keys( contentCache.additinalContent ) + " :: " + (reMatch[1] in contentCache.additinalContent) );
+        if ( reMatch[1] in contentCache.additinalContent )
         {
-            if ( contentCache.additinalContent[ reMatch[1] ].HasResponce() )
-                cachedContent = contentCache.additinalContent[ reMatch[1] ].responce;
+            cachedContent = contentCache.additinalContent[ reMatch[1] ];
+
+            if ( cachedContent.HasResponce() )
+                cachedResponce = contentCache.additinalContent[ reMatch[1] ].responce;
 
             cachedContent.htmlElementId = elementId;
 
         }
         
-        var elementString = `<span id="${elementId}">${cachedContent}</span>`;
+        var elementString = `<span id="${elementId}">${cachedResponce}</span>`;
 
         contentString = contentString.replace( reMatch[0], elementString );
 
@@ -382,7 +390,7 @@ LoadAdditionalContent = function( additinalContent, requestParent )
 
 HandleAdditinalContent = function( contentObj, contentKey ){
 
-    console.log("HandleAdditinalContent " + contentObj,Usable() );
+    console.log("HandleAdditinalContent " + contentObj.Usable() );
     if ( !contentObj.Usable() )
         return;
 
