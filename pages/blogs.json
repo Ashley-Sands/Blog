@@ -7,19 +7,20 @@
             "title": "Designing A Scaleable solution for an multiplayer game server",
             "subTitle": "From a single 'all-in-one' solution to micro services spaning multiple nodes",
             "date": "3 April 2020",
+            "loadContentName": "blog1",
             "body": ["${blog1}"]
         }
     ],
     "additionalContent": {
         "blog0":{
             "url": "./pages/md/blog-0-Audio-2.md",
-            "preLoad": true,
+            "preLoad": false,
             "cache": false,
             "parseMd": true
         },
         "blog1":{
             "url": "./pages/md/blog-1-Designing-A-Scaleable-solution-for-an-multiplayer-game-server.md",
-            "preLoad": true,
+            "preLoad": false,
             "cache": false,
             "parseMd": true
         }
