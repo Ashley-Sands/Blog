@@ -1,13 +1,14 @@
-<div id="blog-element">
 
-    <a onclick="UseContent('{loadContentName}')" >
+<div id="blog-element" class="blog-element-main">
+
+    <div onclick="UseContent('{loadContentName}')" class="link" >
         <h2>{title}</h2>
         <h4>{subTitle}</h4>
         <p>Posted {date}</p>
-    </a>
-
-    <div class="blog-content" >
-        {body}
     </div>
 
+</div>
+
+<div class="blog-content" >
+    {body}
 </div>

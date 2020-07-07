@@ -3,17 +3,17 @@ body{
     background-color: #e0e0e0;
 }
 
-a{
+.link, a{
     color: black;
     text-decoration: underline;
     cursor: pointer;
 }
 
-a:hover{
+.link:hover, a:hover{
     color: #484848;
 }
 
-a:active{
+.link:active, a:active{
     color: #282828
 }
 
@@ -176,7 +176,7 @@ h2.nav-button-content{
 }
 
 div.content-header-hold{
-    position: sticky;
+    /*position: sticky;*/
     top: 25px;
 }
 
@@ -367,4 +367,31 @@ p.git-discription{
 a.git-link{
     display: inline;
 }
+
 /* **blogs */
+
+.blog-element-main{
+
+    position: relative;
+    left: 0%;
+    top: 10px;
+    width: 100%;
+
+    margin: 0px;
+
+    transition: left 2s, top 2s, width 2s, font-size 2s;
+    transition-timing-function: ease-in-out;
+
+}
+
+.blog-element-side{
+    position: relative;
+    left: -33%;
+    top: 80px;
+    width: 28%;
+    font-size: 10px;
+
+    transition: left 2s, top 2s, width 2s, font-size 2s;
+    transition-timing-function: ease-in-out;
+
+}

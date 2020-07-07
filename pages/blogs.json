@@ -4,11 +4,25 @@
     "contentTemplate": "blogs",
     "content": [ 
         {
+            "title": "Audio 2.0",
+            "subTitle": "Designing An Audio System Where User Input and Timing is Critical",
+            "date": "some time in 2019",
+            "loadContentName": "blog1",
+            "body": ["${blog0}"]
+        },
+        {
             "title": "Designing A Scaleable solution for an multiplayer game server",
             "subTitle": "From a single 'all-in-one' solution to micro services spaning multiple nodes",
             "date": "3 April 2020",
             "loadContentName": "blog1",
             "body": ["${blog1}"]
+        },
+        {
+            "title": "TEST ELEMENT2",
+            "subTitle": "Im only here for the purpose of testing",
+            "date": "3 April 2020",
+            "loadContentName": "brockenLink",
+            "body": []
         }
     ],
     "additionalContent": {
