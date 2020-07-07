@@ -42,6 +42,10 @@ function ContentObject (url, callback, parent=null, requiresParentInUse=false){
 
     this.handleHTTPError = null  // callback to handle any HTTP error. TODO: <<
 
+    this.SetResponceParser = function( parser ){
+        this._responceParser = parser;
+    }
+
     this.Usable = function(parentInUse=false){
         /**
          * @param parentInUse:  Usable only if the TOP MOST parent (parent == null) is considered usable.
@@ -365,7 +369,7 @@ LoadAdditionalContent = function( additinalContent, requestParent )
             contentRequest.callbackParams = [contentKey];
 
             if ( contentValue.parseMd )
-                contentRequest.responceParser = markDownParser;
+                contentRequest.SetResponceParser( (string)=>markDownParser.parse(string) );
 
             // Cache the content :)
             contentCache.additinalContent[ contentKey ] = contentRequest;
