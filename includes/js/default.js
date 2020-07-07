@@ -22,6 +22,7 @@ LoadContent = function( page )
     if ( !(page in contentCache.pages) )    // load content if not in chach.
     {
         var contentRequest = new ContentObject( url, JsonFormator );
+        contentRequest.SetResponceParser( (jsonStr)=>JSON.parse(jsonStr) );
         contentCache.pages[page] = contentRequest;
         console.log(`loading content: ${path} `)
     }
@@ -37,7 +38,7 @@ LoadContent = function( page )
 
 JsonFormator = function( contentObj )
 {
-    var json = JSON.parse( contentObj.responce );
+    var json = contentObj.responce;
     var content = json.content;
     var contentTemplate = null; // remove.
     var jsFunctions = null;
@@ -240,7 +241,7 @@ LoadAdditionalContent = function( additinalContent, requestParent )
             contentRequest.callbackParams = [contentKey];
 
             if ( contentValue.parseMd )
-                contentRequest.SetResponceParser( (string)=>markDownParser.parse(string) );
+                contentRequest.SetResponceParser( (mdStr)=>markDownParser.parse(mdStr) );
 
             // Cache the content :)
             contentCache.additinalContent[ contentKey ] = contentRequest;

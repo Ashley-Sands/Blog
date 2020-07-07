@@ -149,7 +149,7 @@ content = [
     }
 ]
 
-notice the tilde (~) around template ('~template~') this tells the json formater to not parse the value.
+notice the tilde (~) befor template ('~template') this tells the json formater to not parse the value.
 This also means that we have to drop inline content support.
 When it comes to loading templates, we will load in all the required tempalates befor formating data into 
 them (pritty much that same, except we can load more than one), there may become a point that we make
