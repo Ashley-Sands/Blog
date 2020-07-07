@@ -43,11 +43,15 @@ class Common
                 contentObj.SetState.Loaded();
                 contentObj.Use();
 
+                console.log("URL: "+contentObj.url+" loaded");
+
             }
             else if ( status >= 300)
             {
                 contentObj.SetState.Error();
                 //contentObj.HandleHTTPError();
+                console.error("URL: "+contentObj.url+" error");
+
             }
 
         };

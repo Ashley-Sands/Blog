@@ -52,7 +52,7 @@ function ContentObject (url, callback, parent=null, requiresParentInUse=false){
         parentInUse = parentInUse || this.requiresParentInUse;
 
         var parentUsable = ( parent == null || parent.Usable(parentInUse) );
-        var usable = parent == null && parentInUse && this.state == 3   || // if we the top most parent, and parentInUse is true, we must be in the IsUse state to be usable
+        var usable = parent == null && parentInUse && this.state == 3   || // if we are the top most parent, and parentInUse is true, we must be in the IsUse state to be usable
                     ( parent == null && !parentInUse || parent != null ) && 
                     ( this.state == 2 || this.state == 3 );
 
@@ -65,11 +65,16 @@ function ContentObject (url, callback, parent=null, requiresParentInUse=false){
         /** Loads the object if unloaded otherwise
          *  trigger the callback if usable and not in use 
          * */
+        var parentState = null;
+        if (this.parent)
+            parentState = this.parent.state;
 
         if (this.state == 0)
             this.Load();
         else if ( this.state != 3 && this.Usable() )
             callback( this, ...this.callbackParams );
+        else
+            console.warn(`Unable to use content from url: ${this.url} (State: ${this.state} Usable: ${this.Usable()}. Parent: ${this.parent} pState: ${parentState})`);
 
     }
 
@@ -150,12 +155,11 @@ LoadContent = function( page )
 
 JsonFormator = function( contentObj )
 {
-
+    console.log("Boo");
     var json = JSON.parse( contentObj.responce );
 
     var contentTemplate = null;
-    var jsFunctions = null
-    var additionalContent = null
+    var jsFunctions = null;
 
     if ( "contentTemplate" in json )
         contentTemplate = json.contentTemplate;
@@ -165,14 +169,13 @@ JsonFormator = function( contentObj )
 
     if ( "additionalContent" in json )
     {
-        
-        LoadAdditionalContent( json.additionalContent )
+        LoadAdditionalContent( json.additionalContent, contentObj );
     }
 
     // load the template, if not already loaded
     if ( contentCache.templates != null && ( !(contentTemplate in contentCache.templates) ) )
     {
-        console.log( `Loading Template for page ${contentTemplate}` )
+        console.log( `Loading Template for page ${contentTemplate}` );
         LoadTemplate( contentTemplate, contentObj );
         return;
     }
@@ -241,7 +244,7 @@ JsonFormator = function( contentObj )
     subHeaderElement.innerHTML = json.subHeader;
     contentElement.innerHTML = outputContent == "" ? "<p class='center'>No Content :(</p>" : outputContent;
 
-    contentObj.SetState.InUse();
+    //contentObj.SetState.InUse();  //<< this breaks things :|
 
     if ( "Last-Modified" in contentObj.responceHeaders )
     {
@@ -379,7 +382,11 @@ LoadAdditionalContent = function( additinalContent, requestParent )
 
 HandleAdditinalContent = function( contentObj, contentKey ){
 
+    console.log("HandleAdditinalContent " + contentObj,Usable() );
+    if ( !contentObj.Usable() )
+        return;
 
+    contentObj.UpdateHTMLElement();
 
 }
 
