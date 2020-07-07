@@ -40,11 +40,11 @@ JsonFormator = function( contentObj )
 {
     var json = contentObj.responce;
     var content = json.content;
-    var contentTemplate = null; // remove.
+    var defaultTemplate = null;
     var jsFunctions = null;
 
-    if ( "contentTemplate" in json )
-        contentTemplate = json.contentTemplate;
+    if ( "~defaultTemplate" in json )
+        defaultTemplate = json["~defaultTemplate"];
 
     if ( "jsFunctions" in json )
         jsFunctions = json.jsFunctions;
@@ -54,13 +54,29 @@ JsonFormator = function( contentObj )
         LoadAdditionalContent( json.additionalContent, contentObj );
     }
 
-    // load the template, if not already loaded
-    if ( contentCache.templates != null && ( !(contentTemplate in contentCache.templates) ) )
+    // load any templates, that are not already loaded
+    // while blocking if any templates are still loading.
+    var loadingTemplate = defaultTemplate != null                               && 
+                          defaultTemplate in contentCache.templates             && 
+                          contentCache.templates[defaultTemplate].IsLoading();
+
+    if ( defaultTemplate && !loadingTemplate)
+        LoadTemplate( defaultTemplate, contentObj );
+
+    for ( var i = 0; i < content.length; i++ )
     {
-        console.log( `Loading Template for page ${contentTemplate}` );
-        LoadTemplate( contentTemplate, contentObj );
-        return;
+        let contentTemplate = "~template" in content[i] ? content[i]["~template"] : null;
+        console.log(i + "@@ "+contentTemplate);
+
+        if ( contentTemplate != null && content[i]["~template"] in contentCache.templates)
+            loadingTemplate = contentCache.templates[ content[i]["~template"] ].IsLoading();
+
+        if ( contentTemplate != null && !loadingTemplate )
+            LoadTemplate( contentTemplate, contentObj );
+
     }
+
+    if ( loadingTemplate ) return;  // wait for all template to be loaded.
 
     // unset any page content set as inUse
     for ( var i = 0; i < contentCache.pages.length; i++)
@@ -71,13 +87,10 @@ JsonFormator = function( contentObj )
 
     var outputContent = "";
 
-    if ( contentTemplate == null )
-    {
-        // make sure the fist element of content is a string.
-        if (content.length > 0 && ( typeof content[0] == "string" || content[0] instanceof String) )  // check both primitive and object
-            outputContent = content.join(" ");
-        else
-            console.warn(`Warning: Either no content suppled or content is not a String (Content Len: ${content.length}) `)
+    if ( content.length > 0 && ( typeof content[0] == "string" || content[0] instanceof String) )
+    {   // if content is supplied as a list of strings, format the content without a template.
+        console.log("Building Content Without Tempalte")
+        outputContent = content.join(" ");
     }
     else
     {
@@ -94,27 +107,55 @@ JsonFormator = function( contentObj )
                 break;
             }
 
-
             keys = Object.keys( tempCont );
-            template = contentCache.templates[ contentTemplate ].responce;
+            var template = defaultTemplate != null ? contentCache.templates[ defaultTemplate ].responce : null ; 
+            console.log( contentCache.templates[ defaultTemplate ] );
+            console.log("responce "+ contentCache.templates[ defaultTemplate ].responce );
+            console.log("responce "+ template );
+
+            if ( "~template" in tempCont && !contentCache.templates[ tempCont["~template"] ].HasResponce() )
+            { 
+                console.log("ccontinue Temp");      
+                console.log( contentCache.templates[ tempCont["~template"] ] ); 
+                continue;     
+            }
+            else if ( "~template" in tempCont )
+            {
+                template = contentCache.templates[ tempCont["~template"] ].responce;
+                console.log("No cTemp");      
+                console.log( template );    
+                //console.log( template.responce );    
+            }
 
             for ( var k = 0; k < keys.length; k++)
             {
+                // any key starting with '~', as treated as content formating option
+                // therefore the value should not be parsed to the outputContent.
+                if ( keys[k][0] == "~")
+                    continue;
+
                 var contentString = "error :(";
  
                 // find if the content @ key is a string or an array
                 if ( typeof tempCont[keys[k]] == "string" || tempCont[keys[k]] instanceof String )
                     contentString = tempCont[ keys[ k ] ]
-                else if( tempCont[keys[k]] instanceof Array )
+                else if( tempCont[keys[k]] instanceof Array )   // multipline support. values must be strings.
                     contentString = tempCont[ keys[ k ] ].join( " " );
                 else
                     console.error("Error: Could not parse content into html, content is nither a string or array");
 
-                template = template.replace( `{${keys[k]}}`, contentString );
+                console.log( (template==null)+" && "+ (defaultTemplate!=null) );
+                console.log( template +" \n fuck you ");
+                if ( template != null)
+                    template = template.replace( `{${keys[k]}}`, contentString );
+                else    // if there no template parse the content directly into the output.
+                    outputContent += contentString;
 
             }
+            console.log( "final " + template != null );
 
-            outputContent += template;
+            if ( template != null )
+                outputContent += template;
 
         }
     }

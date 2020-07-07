@@ -56,8 +56,10 @@ class Common
 
         };
 
-        request.open("GET", contentObj.url, true);
-        request.send();
+            console.log("Request for" + contentObj.url );
+            request.open("GET", contentObj.url, true);
+            request.send();
+
     }
 
 }

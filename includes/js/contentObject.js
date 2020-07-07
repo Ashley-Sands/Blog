@@ -116,6 +116,10 @@ function ContentObject (url, callback, parent=null, requiresParentInUse=false){
         return this.state >= 2;
     }
 
+    this.IsLoading = function(){
+        return this.state == 1;
+    }
+
     this.SetState = {   
         Error:       ()=>this.state = -1,
       //Initialize   ()=>this.state = 0,         // Note this only here for clarity. You can NEVER put a contentObj back into an init state.
