@@ -166,8 +166,8 @@ LoadContent = function( page )
 JsonFormator = function( contentObj )
 {
     var json = JSON.parse( contentObj.responce );
-
-    var contentTemplate = null;
+    var content = json.content;
+    var contentTemplate = null; // remove.
     var jsFunctions = null;
 
     if ( "contentTemplate" in json )
@@ -196,7 +196,6 @@ JsonFormator = function( contentObj )
             contentCache.pages[i].SetState.Loaded();
     }
 
-    var content = json.content;
     var outputContent = "";
 
     if ( contentTemplate == null )

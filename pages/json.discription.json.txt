@@ -38,6 +38,7 @@
 ==============================================================================================================
 ### Propsed json elements
 #### Additional content
+==============================================================================================================
 
     ${itemName}     | Additional content to be loaded.
                     | ie.
@@ -123,7 +124,46 @@
 
     Eg. with the addision of 'additinal content' we can load content from github directly into
     web pages.
-    
+
+==============================================================================================================
+### Propsed json content change
+#### felix content.
+==============================================================================================================
+
+As it stands we can only have a single template per page. which is fine for the most part.
+But i want the additinal content to load into a single element, external to the template.
+which is no possible with the current implermentation.
+
+### Propsal
+the content template will be moved into list of content objects. eg.
+content = [
+    {
+        "~template~" : "exampleTemplate",
+        "postData": "1st june 2020",
+        "body": "helloo World"
+    },
+    {
+        "~template~" : "exampleTemplate-TheSecond",
+        "postData": "1st june 2020",
+        "body": "goodbey World"
+    }
+]
+
+notice the tilde (~) around template ('~template~') this tells the json formater to not parse the value.
+This also means that we have to drop inline content support.
+When it comes to loading templates, we will load in all the required tempalates befor formating data into 
+them (pritty much that same, except we can load more than one), there may become a point that we make
+the jsonFormator 'async'. Futher, this would incress how offtern we parse json string to objects
+so the json parse needs to be set in the ContentObject (i dont why i only just thourt of this. 
+Its what its intended for :| ) 
+
+The next issue we face, if parsing the additionalContent into the element.
+To solve the issue, there will be 'map' added to the additinalContent object.
+
+if map is not present in the additinalContent object, then the object name will be used (so the same as now)
+the format value remains the same '${ac-Name}'/'${ac-mapName}'
+
+
 ==============================================================================================================
 // vars
 ==============================================================================================================
