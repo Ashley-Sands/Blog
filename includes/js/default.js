@@ -66,7 +66,6 @@ JsonFormator = function( contentObj )
     for ( var i = 0; i < content.length; i++ )
     {
         let contentTemplate = "~template" in content[i] ? content[i]["~template"] : null;
-        console.log(i + "@@ "+contentTemplate);
 
         if ( contentTemplate != null && content[i]["~template"] in contentCache.templates)
             loadingTemplate = contentCache.templates[ content[i]["~template"] ].IsLoading();
@@ -109,23 +108,11 @@ JsonFormator = function( contentObj )
 
             keys = Object.keys( tempCont );
             var template = defaultTemplate != null ? contentCache.templates[ defaultTemplate ].responce : null ; 
-            console.log( contentCache.templates[ defaultTemplate ] );
-            //console.log("responce "+ contentCache.templates[ defaultTemplate ].responce );
-            console.log("responce "+ template );
 
             if ( "~template" in tempCont && !contentCache.templates[ tempCont["~template"] ].HasResponce() )
-            { 
-                console.log("ccontinue Temp");      
-                console.log( contentCache.templates[ tempCont["~template"] ] ); 
                 continue;     
-            }
             else if ( "~template" in tempCont )
-            {
                 template = contentCache.templates[ tempCont["~template"] ].responce;
-                console.log("No cTemp");      
-                console.log( template );    
-                //console.log( template.responce );    
-            }
 
             for ( var k = 0; k < keys.length; k++)
             {
@@ -144,15 +131,12 @@ JsonFormator = function( contentObj )
                 else
                     console.error("Error: Could not parse content into html, content is nither a string or array");
 
-                console.log( (template==null)+" && "+ (defaultTemplate!=null) );
-                console.log( template +" \n fuck you ");
                 if ( template != null)
                     template = template.replace( `{${keys[k]}}`, contentString );
                 else    // if there no template parse the content directly into the output.
                     outputContent += contentString;
 
             }
-            console.log( "final " + template != null );
 
             if ( template != null )
                 outputContent += template;
@@ -308,8 +292,6 @@ LoadAdditionalContent = function( additinalContent, requestParent )
 
 HandleAdditinalContent = function( contentObj, contentKey ){
 
-    console.log("HandleAdditinalContent " + contentObj.Usable() );
-
     if ( !contentObj.Usable() )
         return;
 
@@ -324,7 +306,6 @@ HTTPErrorHandler = function( errorContentObject )
     // TEMP FIX: for now until i get round to making it async
     // the parent must still be called. 
     // (any error elements just get ignored. what they dont know wont kill em)
-
     if ( errorContentObject.parent != null )
         errorContentObject.parent.callback( errorContentObject.parent )
 
