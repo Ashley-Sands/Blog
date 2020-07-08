@@ -1,7 +1,7 @@
 {
     "header": "About",
     "subHeader": "Who Am I",
-    "contentTemplate": "about",
+    "~defaultTemplate": "about",
     "content": [
             {
                 "image": "./includes/images/me.jpeg",

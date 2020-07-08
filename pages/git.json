@@ -1,7 +1,7 @@
 {
     "header": "Git",
     "subHeader": "My Projects",
-    "contentTemplate": "git",
+    "~defaultTemplate": "git",
     "content": [        
         {
             "project_name": "Pancake Sim 2000",
