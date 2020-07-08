@@ -1,5 +1,5 @@
 
-function ContentObject (url, callback, parent=null, requiresParentInUse=false){
+function ContentObject (url, callback, HTTPErrorHandler, parent=null, requiresParentInUse=false){
     /**
      * @param url:          content url.
      * @param callback:     the callback method, responsible for handlering the content
@@ -17,6 +17,7 @@ function ContentObject (url, callback, parent=null, requiresParentInUse=false){
     this._responceParser = null;
 
     this.responceHeaders = {"Last-Modified": ""}
+    this.responceStatus = "Initalized (Request not triggered)"
     this.responce = "";
     
     this.htmlElementId = null;
@@ -25,7 +26,7 @@ function ContentObject (url, callback, parent=null, requiresParentInUse=false){
     this.state = 0;     // Initialized == 0. You can not put the object back into an Initialized state
     this.canceled = false;
 
-    this.handleHTTPError = null  // callback to handle any HTTP error. TODO: <<
+    this.handleHTTPError = HTTPErrorHandler  // callback to handle any HTTP error. TODO: <<
 
     this.SetResponceParser = function( parser ){
         this._responceParser = parser;

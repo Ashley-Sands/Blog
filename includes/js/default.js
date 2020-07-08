@@ -21,7 +21,7 @@ LoadContent = function( page )
 
     if ( !(page in contentCache.pages) )    // load content if not in chach.
     {
-        var contentRequest = new ContentObject( url, JsonFormator );
+        var contentRequest = new ContentObject( url, JsonFormator, HTTPErrorHandler );
         contentRequest.SetResponceParser( (jsonStr)=>JSON.parse(jsonStr) );
         contentCache.pages[page] = contentRequest;
         console.log(`loading content: ${path} `)
@@ -110,7 +110,7 @@ JsonFormator = function( contentObj )
             keys = Object.keys( tempCont );
             var template = defaultTemplate != null ? contentCache.templates[ defaultTemplate ].responce : null ; 
             console.log( contentCache.templates[ defaultTemplate ] );
-            console.log("responce "+ contentCache.templates[ defaultTemplate ].responce );
+            //console.log("responce "+ contentCache.templates[ defaultTemplate ].responce );
             console.log("responce "+ template );
 
             if ( "~template" in tempCont && !contentCache.templates[ tempCont["~template"] ].HasResponce() )
@@ -203,7 +203,8 @@ LoadTemplate = function( templateName, parentRequest )
 
     var templateRequest = new ContentObject( Const.basePath + "/pages/templates/" + templateName + ".html",
                                              CacheTemplate, 
-                                             parentRequest );
+                                             HTTPErrorHandler,
+                                             parentRequest    );
 
     templateRequest.Load();
     contentCache.templates[ templateName ] = templateRequest;
@@ -278,7 +279,7 @@ LoadAdditionalContent = function( additinalContent, requestParent )
 
         if ( !(contentKey in contentCache.additinalContent) )
         {
-            contentRequest = new ContentObject( contentValue.url, HandleAdditinalContent, requestParent, true );
+            contentRequest = new ContentObject( contentValue.url, HandleAdditinalContent, HTTPErrorHandler, requestParent, true );
             contentRequest.callbackParams = [contentKey];
 
             if ( contentValue.parseMd )
@@ -308,10 +309,24 @@ LoadAdditionalContent = function( additinalContent, requestParent )
 HandleAdditinalContent = function( contentObj, contentKey ){
 
     console.log("HandleAdditinalContent " + contentObj.Usable() );
+
     if ( !contentObj.Usable() )
         return;
 
     contentObj.UpdateHTMLElement();
+
+}
+
+HTTPErrorHandler = function( errorContentObject )
+{
+    console.error( `An Error Occurred load content from ${errorContentObject.url} (resopnce: ${errorContentObject.responceStatus})` );
+
+    // TEMP FIX: for now until i get round to making it async
+    // the parent must still be called. 
+    // (any error elements just get ignored. what they dont know wont kill em)
+
+    if ( errorContentObject.parent != null )
+        errorContentObject.parent.callback( errorContentObject.parent )
 
 }
 
@@ -337,6 +352,7 @@ loadPage = pages[0];
 if ( pages.includes(requestPage) )
     loadPage = requestPage;
 
+LoadTemplate( "error", null);
 LoadContent( loadPage );
 
 // update the foot year

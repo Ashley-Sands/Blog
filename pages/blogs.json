@@ -3,7 +3,7 @@
     "subHeader": "Things I Write About",
     "~defaultTemplate": "blogs",
     "content": [
-        {       
+        {   
             "title": "TEST ELEMENT",
             "subTitle": "Im only here for the purpose of testing",
             "date": "Someday",
