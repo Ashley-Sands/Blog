@@ -49,7 +49,7 @@ class Common
             else if ( status >= 300)
             {
                 contentObj.SetState.Error();
-                contentObj.HandleHTTPError( contentObj );
+                contentObj.handleHTTPError( contentObj );
                 console.error("URL: "+contentObj.url+" error");
 
             }

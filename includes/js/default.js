@@ -21,7 +21,7 @@ LoadContent = function( page )
 
     if ( !(page in contentCache.pages) )    // load content if not in chach.
     {
-        var contentRequest = new ContentObject( url, JsonFormator, HTTPErrorHandler );
+        var contentRequest = new ContentObject( url, JsonFormator, (errorCO)=>HTTPErrorHandler(errorCO) );
         contentRequest.SetResponceParser( (jsonStr)=>JSON.parse(jsonStr) );
         contentCache.pages[page] = contentRequest;
         console.log(`loading content: ${path} `)
@@ -187,7 +187,7 @@ LoadTemplate = function( templateName, parentRequest )
 
     var templateRequest = new ContentObject( Const.basePath + "/pages/templates/" + templateName + ".html",
                                              CacheTemplate, 
-                                             HTTPErrorHandler,
+                                             (errorCO)=>HTTPErrorHandler(errorCO),
                                              parentRequest    );
 
     templateRequest.Load();
@@ -263,7 +263,7 @@ LoadAdditionalContent = function( additinalContent, requestParent )
 
         if ( !(contentKey in contentCache.additinalContent) )
         {
-            contentRequest = new ContentObject( contentValue.url, HandleAdditinalContent, HTTPErrorHandler, requestParent, true );
+            contentRequest = new ContentObject( contentValue.url, HandleAdditinalContent, (errorCO)=>HTTPErrorHandler(errorCO), requestParent, true );
             contentRequest.callbackParams = [contentKey];
 
             if ( contentValue.parseMd )
