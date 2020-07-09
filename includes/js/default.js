@@ -144,7 +144,7 @@ JsonFormator = function( contentObj )
         }
     }
 
-    outputContent = FormatContentElements( outputContent );
+    outputContent = FormatContentElements( outputContent, json.additionalContent );
 
     headerElement.innerHTML = json.header;
     subHeaderElement.innerHTML = json.subHeader;
@@ -213,37 +213,53 @@ CacheTemplate = function( contentObj )
 
 }
 
-FormatContentElements = function( contentString ){
+FormatContentElements = function( contentString, additionalContentJsonObj ){
 
     // Replace any formating elements with html elements  
-    // inputing any content that is already available in the cache
+    // inputing any content that is already available in the cache only if the key is matched
     
     var regex = /\$\{([a-zA-Z][a-zA-Z0-9-_]*)(?<![-_])\}/;
     var reMatch = regex.exec( contentString );
 
+    var keys = Object.keys(additionalContentJsonObj);
     while( reMatch != null )
     {
-        var cachedContent = null;
+
         var cachedResponce = "";
         var elementId = reMatch[1] +"-"+ nextHtmlElementId++;
-        console.log( reMatch[1] + " in AC content " + Object.keys( contentCache.additinalContent ) + " :: " + (reMatch[1] in contentCache.additinalContent) );
-        if ( reMatch[1] in contentCache.additinalContent )
+
+        for ( var i = keys.length-1; i >= 0 ; i-- )
         {
-            cachedContent = contentCache.additinalContent[ reMatch[1] ];
+            var key = keys[i];
+            var match = false;
 
-            if ( cachedContent.HasResponce() )
-                cachedResponce = contentCache.additinalContent[ reMatch[1] ].responce;
+            if ( reMatch[1] == key )                                        // match AC key 
+            {
+                if ( contentCache.additinalContent[ key ].HasResponce() )
+                    cachedResponce = contentCache.additinalContent[ key ].responce;
+                
+                match = true;
+            }
+            else if ( reMatch[1] == additionalContentJsonObj[key].map )     // match maps
+            {
+                match = true;
+            }
 
-            cachedContent.htmlElementId = elementId;
+            // remove the matched elements
+            if ( match )
+            {
+                contentCache.additinalContent[ key ].htmlElementId = elementId;
+                keys.splice(i);
+            }
 
         }
-        
-        var elementString = `<span id="${elementId}">${cachedResponce}</span>`;
 
+        var elementString = `<span id="${elementId}">${cachedResponce}</span>`;
         contentString = contentString.replace( reMatch[0], elementString );
 
+        if ( keys.length == 0) break;
         reMatch = regex.exec( contentString );
-        console.log( reMatch );
+
     }
 
     return contentString;

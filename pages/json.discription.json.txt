@@ -163,6 +163,73 @@ To solve the issue, there will be 'map' added to the additinalContent object.
 if map is not present in the additinalContent object, then the object name will be used (so the same as now)
 the format value remains the same '${ac-Name}'/'${ac-mapName}'
 
+(After note about map)
+It is very importent that map names ARE NOT keys for the AC object. as they will be ignored.
+Why? Map is intended to dynamicly loading and switching content in a single HTML element. 
+For this reason maped values can also NOT be auto parsed on load (if the content is pre catched).
+
+So basicly 
+if key ${AC-key-Name} : Can auto parse on template load, but will prevent any map values of the same name
+if map value ${AC-Map-Name} : Can Not auto parsh, but can switch content in a single HTML element.
+                              map values CAN not match key names. eg.
+
+DO
+
+"additionalContent": {
+    "AC-key-Name":{
+            "url": "./pages/md/blog-0-Audio-2.md",
+            "preLoad": false,
+            //....
+    }
+}
+
+OR
+
+"additionalContent": {
+    "AC-key-Name":{
+            "map: "AC-Map-Name",
+            "url": "./pages/md/blog-0-Audio-2.md",
+            "preLoad": false,
+            //....
+    }
+}
+
+DONT DO
+
+"additionalContent": {
+    "AC-key-Name":{
+            "map: "AC-key-Name",
+            "url": "./pages/md/blog-0-Audio-2.md",
+            "preLoad": false,
+            //....
+    }
+}
+
+above would not be an issue, but just plain old poinless
+
+OR
+
+"additionalContent": {
+    "AC-key-Name":{
+            "url": "./pages/md/blog-0-Audio-2.md",
+            "preLoad": false,
+            //....
+    },
+    "AC-key-Name-1":{
+            "map: "AC-key-Name",
+            "url": "./pages/md/blog-0-Audio-2.md",
+            "preLoad": false,
+            //....
+    }
+}
+
+the issue with above is, if 'AC-Key-Name' is matched it WILL NOT search for a map value of the same key.
+So in the example about 'AC-Key-Name-1' will not be maped to AC-key-name, it will still expect to be maped
+to 'AC-Key-Name-1' Meaning the map value will just get ignored.
+
+to reiterate, map names CAN NOT be shared with key names.
+
+Maybe i'll add support later for this one.
 
 ==============================================================================================================
 // vars
