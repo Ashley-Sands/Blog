@@ -1,17 +1,18 @@
 {
+    "$ac-map-key": "blog-content",
     "header": "Blogs",
     "subHeader": "Things I Write About",
     "~defaultTemplate": "blogs",
     "content": [
         {   
             "~template": "blogContent",
-            "body": "${blogPost}"
+            "body": "${$[ac-map-key]}"
         },
         {
             "title": "Audio 2.0",
             "subTitle": "Designing An Audio System Where User Input and Timing is Critical",
             "date": "some time in 2019",
-            "loadContentName": "blog1"
+            "loadContentName": "blog0"
         },
         {
             "title": "Designing A Scaleable solution for an multiplayer game server",
@@ -22,14 +23,14 @@
     ],
     "additionalContent": {
         "blog0":{
-            "map": "blogPost",
+            "map": "$[ac-map-key]",
             "url": "./pages/md/blog-0-Audio-2.md",
             "preLoad": false,
             "cache": false,
             "parseMd": true
         },
         "blog1":{
-            "map": "blogPost",
+            "map": "$[ac-map-key]",
             "url": "./pages/md/blog-1-Designing-A-Scaleable-solution-for-an-multiplayer-game-server.md",
             "preLoad": false,
             "cache": false,

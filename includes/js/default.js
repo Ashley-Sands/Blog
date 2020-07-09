@@ -22,7 +22,7 @@ LoadContent = function( page )
     if ( !(page in contentCache.pages) )    // load content if not in chach.
     {
         var contentRequest = new ContentObject( url, JsonFormator, (errorCO)=>HTTPErrorHandler(errorCO) );
-        contentRequest.SetResponceParser( (jsonStr)=>JSON.parse(jsonStr) );
+        contentRequest.SetResponceParser( (jsonStr)=>JSParse.Parse(jsonStr) );
         contentCache.pages[page] = contentRequest;
         console.log(`loading content: ${path} `)
     }
