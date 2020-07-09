@@ -1,10 +1,12 @@
 
-<div id="blog-element" class="blog-element-main">
+<div id="blog-element" class="blog-element-main" onClick="ToggleClass(this, 'blog-element-main', 'blog-element-side', ToggleMode.SIGLE, ToggleMode.MULTIPLE)" >
 
-    <div onclick="UseContent('{loadContentName}')" class="link" >
+    <div onclick="UseContent('{loadContentName}');" class="link" >
         <h2>{title}</h2>
         <h4>{subTitle}</h4>
         <p>Posted {date}</p>
+    <br />
+    <hr />
     </div>
 
 </div>

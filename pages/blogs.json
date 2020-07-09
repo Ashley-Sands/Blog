@@ -4,10 +4,6 @@
     "subHeader": "Things I Write About",
     "~defaultTemplate": "blogs",
     "content": [
-        {   
-            "~template": "blogContent",
-            "body": "${$[ac-map-key]}"
-        },
         {
             "title": "Audio 2.0",
             "subTitle": "Designing An Audio System Where User Input and Timing is Critical",
@@ -19,6 +15,10 @@
             "subTitle": "From a single 'all-in-one' solution to micro services spaning multiple nodes",
             "date": "3 April 2020",
             "loadContentName": "blog1"
+        },
+        {   
+            "~template": "blogContent",
+            "body": "${$[ac-map-key]}"
         }
     ],
     "additionalContent": {
