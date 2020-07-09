@@ -370,11 +370,13 @@ a.git-link{
 
 /* **blogs */
 
+
 .blog-post{
     position: relative;
-    top: 0px;       /* -(blog-element-side height * blog element count + 25) = in position 600 = out position*/
-
+    top: 200px;       /* -(blog-element-side height * blog element count + 25) = in position 600 = out position*/
+    min-height: 100px;
     transition: top 2s;
+    transition-delay: 1s;
     transition-timing-function: ease-in-out;
 
 }
@@ -399,7 +401,7 @@ a.git-link{
     top: 80px;
     width: 28%;
     font-size: 10px;
-    height: 115px;
+    height: 125px;
 
     transition: left 2s, top 2s, width 2s, font-size 2s;
     transition-timing-function: ease-in-out;

@@ -1,7 +1,10 @@
 
-<div id="blog-element" class="blog-element-main" onClick="SwitchClass(this, 'blog-element-main', 'blog-element-side', false)" >
+<div id="blog-element" class="blog-element-main" 
+                       onClick="SwitchClass(this, 'blog-element-main', 'blog-element-side', false);
+                       UseContent('{loadContentName}');
+                       SetElementTopPosition('blog-post-hold', 'blog-element-side', 150, true, 15)" >
 
-    <div onclick="UseContent('{loadContentName}');" class="link" >
+    <div class="link" >
         <h2>{title}</h2>
         <h4>{subTitle}</h4>
         <p>Posted {date}</p>

@@ -94,3 +94,20 @@ UpdateElementClassName = function( element, from, to )
     element.classList.remove( from );
     element.classList.add(to); 
 }
+
+SetElementTopPosition = function( elementIdToSet, classToCount, classHeight, negitive=true, offset=0 ){
+    /** 
+     * Sets the top position of element of elementIdToSet. to classHeight * elements with class classToCount + offset
+     * @param elementIdToSet:   Name of Element Id To Set
+     * @param classToCount:     the name of the element class to count
+     * @param classheight:      (int) the height of the elements in px
+     * @param negive:           should the value be mutlipled by -1
+     * @param offset            (int) any addisional offset that shold be applied in px
+     */
+    console.warn("SetTopPosition..................")
+    var classElements = document.getElementsByClassName(classToCount).length;
+    var topOffset = (classElements * classHeight + offset) * (negitive ? -1 : 1);
+
+    document.getElementById(elementIdToSet).style.top = `${topOffset}px`;
+
+}
