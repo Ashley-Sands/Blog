@@ -42,6 +42,7 @@ JsonFormator = function( contentObj )
     var content = json.content;
     var defaultTemplate = null;
     var jsFunctions = null;
+    var additionalContent = null
 
     if ( "~defaultTemplate" in json )
         defaultTemplate = json["~defaultTemplate"];
@@ -51,7 +52,8 @@ JsonFormator = function( contentObj )
 
     if ( "additionalContent" in json )
     {
-        LoadAdditionalContent( json.additionalContent, contentObj );
+        additionalContent = json.additionalContent;
+        LoadAdditionalContent( additionalContent, contentObj );
     }
 
     // load any templates, that are not already loaded
@@ -144,7 +146,8 @@ JsonFormator = function( contentObj )
         }
     }
 
-    outputContent = FormatContentElements( outputContent, json.additionalContent );
+    if ( additionalContent != null )
+        outputContent = FormatContentElements( outputContent, json.additionalContent );
 
     headerElement.innerHTML = json.header;
     subHeaderElement.innerHTML = json.subHeader;
