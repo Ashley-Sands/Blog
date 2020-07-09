@@ -51,6 +51,31 @@ ToggleClass = function( element, toggleA, toggleB, activeModeA=ToggleMode.SINGLE
 
 }
 
+SwitchClass = function(element, fromClass, toClass, reversible=false)
+{
+    /**
+     * Switch all elements with class to another class
+     * @param element: the element that trigger the event
+     * @param fromClass: the class to switch from
+     * @param toClass: the class to switch to.
+     * @param reversible: can the change be reversed.
+     */
+
+    // find the current state of the element that triggered the event,
+    // to find if the class needs changing.
+    var elemClasses = element.classList;
+    var isFrom = elemClasses.contains( fromClass );
+    var isTo   = elemClasses.contains( toClass );
+
+    console.warn(isFrom +" && "+ isTo)
+
+    if ( !isFrom && !isTo ) return;
+    else if ( isTo && reversible ) UpdateElementsWithClassName(toClass, fromClass);
+    else if ( isFrom ) UpdateElementsWithClassName(fromClass, toClass);
+    else console.warn("Unable to switch class, non reversible or some how we're in both states?")
+
+}
+
 UpdateElementsWithClassName = function( from, to )
 {
     /** Updates all elements with class name 'from' to 'to' */
