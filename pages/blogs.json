@@ -1,5 +1,4 @@
 {
-    "$ac-map-key": "blog-content",
     "header": "Blogs",
     "subHeader": "Things I Write About",
     "~defaultTemplate": "blogs",
@@ -8,29 +7,25 @@
             "title": "Designing A Scaleable solution for an multiplayer game server",
             "subTitle": "From a single 'all-in-one' solution to micro services spaning multiple nodes",
             "date": "3 April 2020",
-            "loadContentName": "blog1"
+            "loadContentName": "blog1",
+            "body": "${blog1}"
         },
         {
             "title": "Audio 2.0",
             "subTitle": "Designing An Audio System Where User Input and Timing is Critical",
             "date": "some time in 2019",
-            "loadContentName": "blog0"
-        },
-        {   
-            "~template": "blogContent",
-            "body": "${$[ac-map-key]}"
-        }
+            "loadContentName": "blog0",
+            "body": "${blog0}"
+        }        
     ],
     "additionalContent": {
         "blog0":{
-            "map": "$[ac-map-key]",
             "url": "./pages/md/blog-0-Audio-2.md",
             "preLoad": false,
             "cache": false,
             "parseMd": true
         },
         "blog1":{
-            "map": "$[ac-map-key]",
             "url": "./pages/md/blog-1-Designing-A-Scaleable-solution-for-an-multiplayer-game-server.md",
             "preLoad": false,
             "cache": false,

@@ -253,11 +253,19 @@ img.socal-handles{
 
 /* Content Stack Git/Blogs/... */
 
+.thin-stack{
+    height: 150px;
+}
+
+.default-stack{
+    height: 250px;
+}
+
 .content-hold-stack-element{
     background-color: gray;
     background: linear-gradient(0deg, gray 0%, rgba(147,147,147,0) 100%);
 
-    height: 250px;
+    /*height: 250px;*/
     width: 94%;
     display: inline-table;
     margin: 2%;
@@ -376,6 +384,10 @@ p.content-stack-discription{
     padding-bottom: 0px;
 }
 
+p.thin-stack-discription{
+    padding-top: 12px;
+}
+
 a.content-stack-heading-link{
     display: inline-block;
 }
@@ -392,6 +404,16 @@ a.content-stack-heading-link{
 
 .content-hold-stack-element-active .content-stack-body{
     top: 200px;
+}
+
+
+p.content-stack-body-hold{
+    padding: 16px;
+}
+
+p.content-stack-body-hold img{
+    display: block;
+    margin: auto;
 }
 /* **blogs */
 

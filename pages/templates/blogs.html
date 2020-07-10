@@ -1,15 +1,26 @@
+<div class="thin-stack content-hold-stack-element" 
+     onmouseup="ToggleClass(this, 'content-hold-stack-element-active', 'content-hold-stack-element', ToggleMode.SINGLE, ToggleMode.MULTIPLE);
+                UseContent('{loadContentName}');" >
+    
+    <!--<div class="content-stack-inner-bg" style="background-image: {background};"></div>-->
 
-<div id="blog-element" class="blog-element-main" 
-                       onClick="SwitchClass(this, 'blog-element-main', 'blog-element-side', false);
-                       UseContent('{loadContentName}');
-                       SetElementTopPosition('blog-post-hold', 'blog-element-side', 150, true, 15)" >
+    <h3 class="content-stack-heading" >
+        {title}
+        <br />
+    </h3>
 
-    <div class="link" >
-        <h2>{title}</h2>
-        <h4>{subTitle}</h4>
-        <p>Posted {date}</p>
-    <br />
-    <hr />
+    <div class="content-stack-discription-hold">
+        <p class="thin-stack-discription content-stack-discription">
+            <span class="content-stack-discription">
+                    {subTitle}  
+            </span>
+        </p>
+    </div>
+
+    <div class="content-stack-body">
+        <p class="content-stack-body-hold">
+            {body} gfgds
+        </p>
     </div>
 
 </div>
