@@ -19,8 +19,8 @@ class MarkDownParse{
         // while ensuring that all required are still present.
         var outputs = { 
             header: {
-                "#": "<h1>{v0}</h1>",
-                "##": "<h2>{v0}</h2>",
+                "#": "<h1>{v0}</h1><hr/>",
+                "##": "<h2>{v0}</h2><hr/>",
                 "###": "<h3>{v0}</h3>",
                 "####": "<h4>{v0}</h4>",
                 "#####": "<h5>{v0}</h5>",
