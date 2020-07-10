@@ -84,7 +84,7 @@ class MarkDownParse{
                 output: outputs.newLine
             },
             boldItalic: {
-                regex: /((\*{1,2}|\~{2}|\_{1,2})([\!-\~ \t]+?)\2)/, 
+                regex: /((\*{1,2}|\~{2}|\_{1,2})([\!-\~ \t]+?)\2) /,        //TODO: remove the end space, this is a tep fix for links and images
                 outKeyCapGroups: [2],      
                 valueCapGroups: [[3]],
                 output: outputs.boldItalic
@@ -129,7 +129,7 @@ class MarkDownParse{
 
         // we must add the newline back to the end of string
         // so we can detect line breaks '/(  )\n/'
-        var output = `${string}`+ !update ?? '\n' ; 
+        var output = string ; 
         var parsed = false;
 
         // parse the string at least once.
