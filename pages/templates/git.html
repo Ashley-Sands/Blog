@@ -1,19 +1,25 @@
-<div class="git-element" onmouseup="ToggleClass(this, 'git-element-active', 'git-element', ToggleMode.SINGLE, ToggleMode.MULTIPLE);" >
+<div class="content-hold-stack-element" onmouseup="ToggleClass(this, 'content-hold-stack-element-active', 'content-hold-stack-element', ToggleMode.SINGLE, ToggleMode.MULTIPLE);" >
     
-    <div class="git-inner-bg" style="background-image: {background};"></div>
+    <div class="content-stack-inner-bg" style="background-image: {background};"></div>
 
-    <h3 class="git-heading" >
+    <h3 class="content-stack-heading" >
         {project_name}
         <br />
-        <a href="{url}" class="git-link" target="_blank"><img src="./includes/images/GitHub-Mark-Dark.png" width="24px" class="git-link" /></a>
+        <a href="{url}" class="content-stack-heading-link" target="_blank"><img src="./includes/images/GitHub-Mark-Dark.png" width="24px" class="content-stack-heading-link" /></a>
     </h3>
 
-    <div class="git-discription-hold">
-        <p class="git-discription">
-            <span class="git-discription">
+    <div class="content-stack-discription-hold">
+        <p class="content-stack-discription">
+            <span class="content-stack-discription">
                     {discription}  
             </span>
         </p>
+    </div>
+
+    <div class="content-stack-body">
+        <span>
+            {TEMP CONTENT STRING}
+        </span>
     </div>
 
 </div>

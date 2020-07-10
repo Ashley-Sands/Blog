@@ -251,11 +251,12 @@ img.socal-handles{
     margin-right: 16px;
 }
 
-/* **git */
+/* Content Stack Git/Blogs/... */
 
-.git-element{
+.content-hold-stack-element{
     background-color: gray;
     background: linear-gradient(0deg, gray 0%, rgba(147,147,147,0) 100%);
+
     height: 250px;
     width: 94%;
     display: inline-table;
@@ -268,7 +269,22 @@ img.socal-handles{
 
 }
 
-.git-inner-bg{
+.content-hold-stack-element-active{
+    background-color: gray;
+    background: linear-gradient(0deg, gray 0%, rgba(147,147,147,0) 100%);
+
+    height: 555px;
+    width: 94%;
+    margin: 2%;
+    display: inline-table;
+    border: solid 2px black;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    transition: width 1.5s, height 1.5s, background 0.5s;
+}
+
+.content-stack-inner-bg{
     position: absolute;
     
     background-repeat: no-repeat;
@@ -289,34 +305,20 @@ img.socal-handles{
     transition: width 1.5s, height 1.5s, filter 0.5s, -webkit-filter 0.5s, background-position 0.5s;
 }
 
-div.git-inner-bg:hover{
+div.content-stack-inner-bg:hover{
     background-position: center;
     filter: blur(1px);
     -webkit-filter: blur(1px);
     transition:  width 1.5s, height 1.5s, filter 0.5s, -webkit-filter 0.5s, background-position 0.5s;
 }
 
-.git-element:hover{
+.content-hold-stack-element:hover{
     cursor: pointer;
     background: linear-gradient(0deg, gray 10%, rgba(147,147,147,0) 100%);
 }
 
-.git-element-active{
-    background-color: gray;
-    background: linear-gradient(0deg, gray 0%, rgba(147,147,147,0) 100%);
 
-    min-height: 255px;
-    height: 555px;
-    width: 94%;
-    margin: 2%;
-    display: inline-table;
-    border: solid 2px black;
-    box-sizing: border-box;
-
-    transition: width 1.5s, height 1.5s, background 0.5s;
-}
-
-.git-element-active .git-inner-bg{
+.content-hold-stack-element-active .content-stack-inner-bg{
     background-position: center;
     width: 93.6%;
     height: 350px;
@@ -326,7 +328,7 @@ div.git-inner-bg:hover{
 
 }
 
-h3.git-heading{
+h3.content-stack-heading{
 
     position: relative;
     background-color: #c0c0c0;
@@ -341,7 +343,7 @@ h3.git-heading{
     z-index: 3;
 }
 
-div.git-discription-hold{
+div.content-stack-discription-hold{
 
     position: relative;
     /*background-color: rgb(205,205,205);*/
@@ -355,7 +357,7 @@ div.git-discription-hold{
 
 }
 
-span.git-discription{
+span.content-stack-discription{
     background-color: rgba(200, 200, 200, 50%);
     border: solid 4px rgba(235, 235, 235, 40%);
     background-blend-mode: saturation;
@@ -367,17 +369,30 @@ span.git-discription{
     
 }
 
-p.git-discription{
+p.content-stack-discription{
     text-align: center;
     padding-top: 50px;
     letter-spacing: 3px;
     padding-bottom: 0px;
 }
 
-a.git-link{
+a.content-stack-heading-link{
     display: inline-block;
 }
 
+.content-stack-body{
+    position: relative;
+    transition: top 1.5s;
+    /*transition-timing-function: ease-in-out;*/
+}
+
+.content-hold-stack-element .content-stack-body{
+    top: 85px;
+}
+
+.content-hold-stack-element-active .content-stack-body{
+    top: 200px;
+}
 /* **blogs */
 
 
