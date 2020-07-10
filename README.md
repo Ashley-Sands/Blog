@@ -1,25 +1,14 @@
-# Blog
+# header 1
+## header 2
+### header 3
+#### header 4
+##### header 5
+###### header 6
 
+im on the top line  
+i should be on the second line
 
-*Italic Astric*  
-_Italic Under_  
-**Bold Astric**  
-__Bold Under__  
-~~strike Throught~~  
+and i should be on the third
 
-
-
-*Italic Astric*
-
- _Italic Under_**Bold Astric**__Bold Under__~~strike Throught~~
-
-fdsfasdfadsf
-
-*Italic Astric* _Italic Under_ **Bold Astric** __Bold Under__ ~~strike Throught~~
-
-
-
-
-
-
-[Helloo](www.google.com)
+===
+====

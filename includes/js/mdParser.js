@@ -26,10 +26,8 @@ class MarkDownParse{
                 "#####": "<h5>{v0}</h5>",
                 "######": "<h6>{v0}</h6>"
             },
-            paragraph: {
-                "  ": "{v0}<br />",
+            hozRule: {
                 "===": "<hr />",
-                "$complete": "<p>{v}</p>" // additive must contatin an output var $compleat, for the accumulated text to be outputed into. Notice {v} rather than {v0}
             },
             boldItalic: {
                 "*": "<i>{v0}</i> ",
@@ -43,9 +41,8 @@ class MarkDownParse{
                 "!": "<img src='{v1}' alt='{v0}' style='max-width: 100%' />"
             },
             newLine:{
+                "  \n": "<br />",
                 "\n\n": "<br />",
-                "\r\r": "<br />",
-                "\r\n\r\n": "<br />",
             }
 
         };
@@ -66,35 +63,24 @@ class MarkDownParse{
 
         }
 
-        // define regexParseObjs
-        // The line regex parses line by line, to create the basic output with headers, paragraphs and line breaks, 
-        // then the after regex is executed untill there are no more regex matches.
-        // (after regex is preformed on the whole output in one go, rather than line by line.) 
-        this.lineRegex = {
+        this.afterRegex = {
             header: {
-                regex: /(^##{0,5}) (.+)/,            
+                regex: /(^##{0,5}) (.+)/m,            
                 outKeyCapGroups: [1],      //this list id must match the values list id
                 valueCapGroups: [[2]],
-                lineMode: MarkDownParse.lineMode.NORMAL,
                 output: outputs.header
                 
             },
-            paragraph: {
-                regex: /((={3})=*)|((.+)( {2})(\r|\n|\r\n))/,            
-                /*regex: /(  )\n/,   */         
-                outKeyCapGroups: [2, 5],      //this list id must match the values list id
-                valueCapGroups: [[], [3]],
-                lineMode: MarkDownParse.lineMode.ADDITIVE,
-                output: outputs.paragraph
-            }
-
-        };
-
-        this.afterRegex = {
-            newLine:{
-                regex: /(\n{2}|(\r\n){2}|\r{2})/,
-                outKeyCapGroups: [0],      
+            hozRule: {
+                regex: /(={3})=*/,              
+                outKeyCapGroups: [1],      //this list id must match the values list id
                 valueCapGroups: [[]],
+                output: outputs.hozRule
+            },
+            newLine:{
+                regex: /( {2}\n)|(\n{2})/,
+                outKeyCapGroups: [0, 1],      
+                valueCapGroups: [[], []],
                 output: outputs.newLine
             },
             boldItalic: {
@@ -115,52 +101,11 @@ class MarkDownParse{
 
     parse(string){
 
-        var lines = string.split(/\n/);
-        var additiveString = null;    // if null, currently not in addative mode, otherwise string
-        var additiveOutputString = null;
-        var output = "";
+        // remove all carage returns, so the string is consistent between platforms
+        string = string.replace(/\r/g, "");
+        console.log("-------------------->", /\n/.test(string))
+        var output = string;
         
-         
-        for ( var i = 0; i < lines.length; ++i)
-        {
-            // parse line as a header.
-            var header = this._parse( this.lineRegex.header, lines[i] );
-
-            if ( header != null )
-            {
-                // if we're been in additive mode, add the additive text to the output
-                // befor adding the header
-                if ( additiveString != null)    
-                {
-                    output += additiveOutputString.replace(/{v}/, additiveString);
-                    additiveString = null;  // disable additive mode.
-                }
-
-                output += header;
-                continue;
-            }
-
-            // parse paragraphs and line breaks.
-            var paragraph = this._parse( this.lineRegex.paragraph, lines[i] );        
-            
-            if ( additiveString == null )   // enable additive mode.
-            {
-                additiveString = paragraph == null ? lines[i] : paragraph;
-                additiveOutputString = this.lineRegex.paragraph.output["$complete"];
-            }
-            else
-            {
-                additiveString += paragraph == null ? lines[i] : paragraph;
-            }
-
-        }
-
-        if ( additiveString != null)    // if we where in additive mode, add it to the output.
-        {
-            output += additiveOutputString.replace(/{v}/, additiveString);
-            additiveString = null;
-        }
-
         // parse all of the affter regex
         var values = Object.values(this.afterRegex);
         
@@ -193,11 +138,15 @@ class MarkDownParse{
         do{
 
             var regGroups = regexParseObj.regex.exec(output);
-
+            //console.log(regGroups);
+            console.log(regexParseObj.regex);
+            console.log(output);
             if ( regGroups != null )
             {
 
                 print(regGroups);
+                var foundReplacement = false;
+                var noMatchString = "";
 
                 for ( var j = 0; j < regexParseObj.outKeyCapGroups.length; j++ )
                 {
@@ -220,9 +169,21 @@ class MarkDownParse{
                         
 
                         parsed = true;
-
+                        foundReplacement = true
+                    }
+                    else
+                    {
+                        noMatchString += `[${regGroups[ regexParseObj.outKeyCapGroups[j] ]}], `
                     }
 
+                }
+
+                if ( !foundReplacement )
+                {
+                    console.error("Failed To Parse, A match without a replacement has occurred. This caused infinity loops.");
+                    console.error(`Make sure the following keys are set in the output strings for regex '${regexParseObj.regex}' `);
+                    console.error(noMatchString.replace(/\n/g, "\\n"));
+                    return;
                 }
 
             }
