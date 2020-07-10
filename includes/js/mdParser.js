@@ -98,7 +98,7 @@ class MarkDownParse{
                 output: outputs.newLine
             },
             boldItalic: {
-                regex: /((\*{1,2}|\~{2}|\_{1,2})([\!-\~]+)\2) /, 
+                regex: /((\*{1,2}|\~{2}|\_{1,2})([\!-\~ \t]+?)\2)/, 
                 outKeyCapGroups: [2],      
                 valueCapGroups: [[3]],
                 output: outputs.boldItalic
