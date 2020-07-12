@@ -7,9 +7,10 @@ print = console.log;
 
 class MarkDownParse{
 
-    static lineMode = {
-        "NORMAL": 0,
-        "ADDITIVE": 1
+    static ReplaceMode = {
+        "NORMAL": 0,        // does a strete replace
+        "EXTRACT": 1        // extracts the values, to ensure that it does not get parsed a second time. ie
+                            // a link url may contatin /a_b_c.png   this would pasre b as italic
     }
 
     constructor( overrideOutputs={} ){
@@ -66,32 +67,32 @@ class MarkDownParse{
         this.afterRegex = {
             header: {
                 regex: /(^##{0,5}) (.+)/m,            
-                outKeyCapGroups: [1],      //this list id must match the values list id
+                keyCapGroups: [1],      //this list id must match the values list id
                 valueCapGroups: [[2]],
                 output: outputs.header
                 
             },
             hozRule: {
                 regex: /(={3})=*/,              
-                outKeyCapGroups: [1],      //this list id must match the values list id
+                keyCapGroups: [1],      //this list id must match the values list id
                 valueCapGroups: [[]],
                 output: outputs.hozRule
             },
             newLine:{
                 regex: /( {2}\n)|(\n{2})/,
-                outKeyCapGroups: [0, 1],      
+                keyCapGroups: [0, 1],      
                 valueCapGroups: [[], []],
                 output: outputs.newLine
             },
             boldItalic: {
                 regex: /((\*{1,2}|\~{2}|\_{1,2})([\!-\~ \t]+?)\2) /,        //TODO: remove the end space, this is a tep fix for links and images
-                outKeyCapGroups: [2],      
+                keyCapGroups: [2],      
                 valueCapGroups: [[3]],
                 output: outputs.boldItalic
             },
             linksImages: {
                 regex: /(!)*\[([ -Z\\^-~]*)\]\(([ -'*-~]*)\)/,
-                outKeyCapGroups: [1],      
+                keyCapGroups: [1],      
                 valueCapGroups: [[2, 3]],
                 output: outputs.linksImages
             }
@@ -148,12 +149,12 @@ class MarkDownParse{
                 var foundReplacement = false;
                 var noMatchString = "";
 
-                for ( var j = 0; j < regexParseObj.outKeyCapGroups.length; j++ )
+                for ( var j = 0; j < regexParseObj.keyCapGroups.length; j++ )
                 {
                     // find if any of the 'capture group output keys' are in the output object
-                    if ( regGroups[ regexParseObj.outKeyCapGroups[j] ] in regexParseObj.output )
+                    if ( regGroups[ regexParseObj.keyCapGroups[j] ] in regexParseObj.output )
                     {
-                        var tempOutput = regexParseObj.output[ regGroups[ regexParseObj.outKeyCapGroups[j] ] ];
+                        var tempOutput = regexParseObj.output[ regGroups[ regexParseObj.keyCapGroups[j] ] ];
 
                         // parsh all of the capture group output values' into 
                         // the output @ 'capture group output keys' html element.
@@ -173,7 +174,7 @@ class MarkDownParse{
                     }
                     else
                     {
-                        noMatchString += `[${regGroups[ regexParseObj.outKeyCapGroups[j] ]}], `
+                        noMatchString += `[${regGroups[ regexParseObj.keyCapGroups[j] ]}], `
                     }
 
                 }
