@@ -7,10 +7,11 @@ print = console.log;
 
 class MarkDownParse{
 
-    static ReplaceMode = {
-        "NORMAL": 0,        // does a strete replace
-        "EXTRACT": 1        // extracts the values, to ensure that it does not get parsed a second time. ie
-                            // a link url may contatin /a_b_c.png   this would pasre b as italic
+    PARSEMODE = {
+        "NORMALL": 0,       // parses untill there nothing left to parse.
+        "ONCE": 1,          // ensures that the values is parsed only once if at all, befor the next instruction set
+        "FINAL": 2,         // parses the value only once if at all, preventing the value from parsing any further
+        "RAW": 3            // Same as FINAL also converting the parsed value into raw output
     }
 
     constructor( overrideOutputs={} ){
@@ -19,6 +20,16 @@ class MarkDownParse{
         // this alows use to replace any that are supplied by params
         // while ensuring that all required are still present.
         var outputs = { 
+            paragraph: {
+                "": "<p>{v0}</p>",
+            },
+            inlineCode: {               // this could just be paragraph but as it need to be convered to raw, it needs to be in its own thing.
+                ">": "<code>{v0}</code>"
+            },
+            blockCode: {
+                "'''": "<code>{v0}</code>",
+                "```": "<code>{v0}</code>"
+            },
             header: {
                 "#": "<h1>{v0}</h1><hr/>",
                 "##": "<h2>{v0}</h2><hr/>",
@@ -44,6 +55,10 @@ class MarkDownParse{
             newLine:{
                 "  \n": "<br />",
                 "\n\n": "<br />",
+            },
+            space:{
+                " ": "&nbsp;",
+                "\t": "&nbsp;&nbsp;&nbsp;&nbsp;"
             }
 
         };
@@ -64,38 +79,80 @@ class MarkDownParse{
 
         }
 
-        this.afterRegex = {
+        // regex to be run line by run. (only once)
+        // Also accumaltes lines if its the same match line after line.
+        // ie. line 1: > helloo
+        //     line 2: > world
+        // would acculate as the start of the line both match '>'
+        this.lineRegex = {
+            inlineCode: {
+                regex: /[ \t]*(>{1}).*/,            
+                keyCapGroups: [1],             
+                valueCapGroups: [[]],            
+                parseMode: this.PARSEMODE.RAW,               
+                output: outputs.inlineCode
+            }
+        }
+
+        // regex to be run on the entire body (untill there nothing left to parse)
+        this.bodyRegex = {
+            /*paragraph: {
+                regex: /()^[ \t]*([^#>]*(?![ #>]))/m,            // the empty capture group used for the key. (minor issue, this doent check for a space after # or >)
+                keyCapGroups: [1],             
+                valueCapGroups: [[2]],            
+                parseMode: this.PARSEMODE.ONCE,               
+                output: outputs.paragraph
+            },*/
             header: {
                 regex: /(^##{0,5}) (.+)/m,            
-                keyCapGroups: [1],      //this list id must match the values list id
-                valueCapGroups: [[2]],
-                output: outputs.header
-                
+                keyCapGroups: [1],                  // this list id must match the values list id
+                valueCapGroups: [[2]],              // the corrisponding capture groups that belong with KeyCap. list id 0 matches format {v0}, 1 {v1} ect..
+                parseMode: this.PARSEMODE.FINAL,               
+                output: outputs.header    
             },
-            hozRule: {
-                regex: /(={3})=*/,              
-                keyCapGroups: [1],      //this list id must match the values list id
-                valueCapGroups: [[]],
-                output: outputs.hozRule
+            blockCode: {
+                regex: /('{3}|`{3})([!-~\s]*?)\1/,            
+                keyCapGroups: [1],             
+                valueCapGroups: [[2]],            
+                parseMode: this.PARSEMODE.RAW,               
+                output: outputs.blockCode
             },
             newLine:{
                 regex: /( {2}\n)|(\n{2})/,
                 keyCapGroups: [0, 1],      
                 valueCapGroups: [[], []],
+                parseMode: this.PARSEMODE.NORMALL,
                 output: outputs.newLine
             },
-            boldItalic: {
-                regex: /((\*{1,2}|\~{2}|\_{1,2})([\!-\~ \t]+?)\2) /,        //TODO: remove the end space, this is a tep fix for links and images
-                keyCapGroups: [2],      
-                valueCapGroups: [[3]],
-                output: outputs.boldItalic
+            hozRule: {
+                regex: /(={3})=*/,              
+                keyCapGroups: [1],
+                valueCapGroups: [[]],
+                parseMode: this.PARSEMODE.NORMALL,
+                output: outputs.hozRule
             },
             linksImages: {
                 regex: /(!)*\[([ -Z\\^-~]*)\]\(([ -'*-~]*)\)/,
                 keyCapGroups: [1],      
                 valueCapGroups: [[2, 3]],
+                parseMode: this.PARSEMODE.FINAL,
                 output: outputs.linksImages
-            }
+            },
+            boldItalic: {
+                regex: /((\*{1,2}|\~{2}|\_{1,2})([\!-\~ \t]+?)\2)/,        //TODO: remove the end space, this is a tep fix for links and images
+                keyCapGroups: [2],      
+                valueCapGroups: [[3]],
+                parseMode: this.PARSEMODE.NORMALL,
+                output: outputs.boldItalic
+            }/*,
+            spaceing:{
+                regex: /( )|(\t)/,
+                keyCapGroups: [0, 1],      
+                valueCapGroups: [[], []],
+                parseMode: this.PARSEMODE.NORMALL,
+                output: outputs.space
+            }*/
+            
         };
 
     }
@@ -104,25 +161,33 @@ class MarkDownParse{
 
         // remove all carage returns, so the string is consistent between platforms
         string = string.replace(/\r/g, "");
-        console.log("-------------------->", /\n/.test(string))
+        
+        var extractedValues = [];
         var output = string;
         
         // parse all of the affter regex
-        var values = Object.values(this.afterRegex);
+        var values = Object.values(this.bodyRegex);
         
         for ( var i = 0; i < values.length; ++i)
         {
-            var temp = this._parse( values[i], output, true )
+            var temp = this._parse( values[i], output, extractedValues )
 
             if ( temp != null ) // if nothing was parsed insert the original string.
                 output = temp;
         }
 
+        // put the extracted (final) values back into the output
+        console.log( extractedValues )
+        for ( var i = 0; i < extractedValues.length; i++)
+        {
+            console.log(`{${i}}, ${extractedValues[i]}`)
+            output = output.replace(`{${i}}`, extractedValues[i]);
+        }
         return output;
 
     }
 
-    _parse(regexParseObj, string, update=false)
+    _parse(regexParseObj, string, extractedValuesList)
     {
         /**
          * @returns: null if no match, otherwise parsed string
@@ -130,22 +195,18 @@ class MarkDownParse{
 
         // we must add the newline back to the end of string
         // so we can detect line breaks '/(  )\n/'
-        var output = string ; 
+        var output = string; 
         var parsed = false;
+        var parsedOnce = [];
 
         // parse the string at least once.
-        // when not in update, the string is only parsed once (line by line mode),
-        // otherwise parse untill theres no regex matches remaining.
         do{
 
             var regGroups = regexParseObj.regex.exec(output);
-            //console.log(regGroups);
-            console.log(regexParseObj.regex);
-            console.log(output);
+            console.log(regGroups);
             if ( regGroups != null )
             {
 
-                print(regGroups);
                 var foundReplacement = false;
                 var noMatchString = "";
 
@@ -160,14 +221,26 @@ class MarkDownParse{
                         // the output @ 'capture group output keys' html element.
                         for( var k = 0; k < regexParseObj.valueCapGroups[j].length; k++)
                         {
-                            tempOutput =  tempOutput.replace(`{v${k}}`, regGroups[ regexParseObj.valueCapGroups[j][k] ]);  
+                            if ( regexParseObj.parseMode == this.PARSEMODE.RAW )
+                                tempOutput =  tempOutput.replace(`{v${k}}`, this.ConvertToRaw( regGroups[ regexParseObj.valueCapGroups[j][k] ] ) );
+                            else
+                                tempOutput =  tempOutput.replace(`{v${k}}`, regGroups[ regexParseObj.valueCapGroups[j][k] ]);  
                         }
                         
-                        if ( update )
-                            output = output.replace(regGroups[0], tempOutput);  // replace the (whole) match with the output value.
+                        if ( regexParseObj.parseMode == this.PARSEMODE.FINAL || regexParseObj.parseMode == this.PARSEMODE.RAW )
+                        {
+                            output = output.replace(regGroups[0], `{${extractedValuesList.length}}`);  // replace the (whole) match with the output value.
+                            extractedValuesList.push( tempOutput );
+                        }
+                        else if( regexParseObj.parseMode == this.PARSEMODE.ONCE )
+                        {
+                            output = output.replace(regGroups[0], `>>>>>@${extractedValuesList.length}@<<<<<`);  // replace the (whole) match with the output value.
+                            parsedOnce.push( tempOutput )
+                        }
                         else
-                            output = tempOutput;
-                        
+                        {    
+                            output = output.replace(regGroups[0], tempOutput);  // replace the (whole) match with the output value.
+                        }
 
                         parsed = true;
                         foundReplacement = true
@@ -189,10 +262,24 @@ class MarkDownParse{
 
             }
 
-        }while(update && regGroups != null);
+        }while( regGroups != null );
+
+        // replace the parsed once values back into the output
+        if (regexParseObj.parseMode == this.PARSEMODE.ONCE )
+            for ( var i = 0; i < parsedOnce.length; i++)
+                output = output.replace(`>>>>>@${i}}@<<<<<`, parsedOnce[i] );
 
         return parsed ? output : null;    
 
+    }
+
+    ConvertToRaw = function( htmlString )
+    {
+        return htmlString.replace(/</g, "&lt;")
+                         .replace(/>/g, "&gt;")
+                         .replace(/ /g, "&nbsp;")
+                         .replace(/\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;")
+                         .replace(/\n/g, "<br />")
     }
 
 }
