@@ -8,10 +8,12 @@ print = console.log;
 class MarkDownParse{
 
     PARSEMODE = {
-        "NORMALL": 0,       // parses untill there nothing left to parse.
-        "ONCE": 1,          // ensures that the values is parsed only once if at all, befor the next instruction set
-        "FINAL": 2,         // parses the value only once if at all, preventing the value from parsing any further
-        "RAW": 3            // Same as FINAL also converting the parsed value into raw output
+        "NORMALL":      0,          // parses untill there nothing left to parse.
+        "LINE":         1,          // parses line by line, accumlating each line that matches
+        "ONCE":         2,          // ensures that the values is parsed only once if at all, befor the next instruction set
+        "FINAL":        3,          // parses the value only once if at all, preventing the value from parsing any further
+        "FINALGROUP":   4,          // Parses untill there nothing left to parse within the group, prevent the final values from parsing any futher 
+        "RAW":          5           // Same as FINAL also converting the parsed value into raw output
     }
 
     constructor( overrideOutputs={} ){
@@ -169,12 +171,8 @@ class MarkDownParse{
         var values = Object.values(this.bodyRegex);
         
         for ( var i = 0; i < values.length; ++i)
-        {
-            var temp = this._parse( values[i], output, extractedValues )
-
-            if ( temp != null ) // if nothing was parsed insert the original string.
-                output = temp;
-        }
+            output = this._parse( values[i], output, extractedValues )
+        
 
         // put the extracted (final) values back into the output
         console.log( extractedValues )
@@ -182,6 +180,7 @@ class MarkDownParse{
         {
             output = output.replace(`{${i}}`, extractedValues[i]);
         }
+        
         return output;
 
     }
@@ -268,7 +267,7 @@ class MarkDownParse{
             for ( var i = 0; i < parsedOnce.length; i++)
                 output = output.replace(`>>>>>@${i}}@<<<<<`, parsedOnce[i] );
 
-        return parsed ? output : null;    
+        return output;    
 
     }
 
