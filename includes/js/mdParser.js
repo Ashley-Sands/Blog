@@ -180,7 +180,6 @@ class MarkDownParse{
         console.log( extractedValues )
         for ( var i = 0; i < extractedValues.length; i++)
         {
-            console.log(`{${i}}, ${extractedValues[i]}`)
             output = output.replace(`{${i}}`, extractedValues[i]);
         }
         return output;
@@ -203,7 +202,7 @@ class MarkDownParse{
         do{
 
             var regGroups = regexParseObj.regex.exec(output);
-            console.log(regGroups);
+
             if ( regGroups != null )
             {
 
