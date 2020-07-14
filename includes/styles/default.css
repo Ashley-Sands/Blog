@@ -433,3 +433,9 @@ p.content-stack-body-hold img{
     display: block;
     margin: auto;
 }
+
+/* lazy values to override defaults :) */
+.content-padding{
+    padding-left: 8px;
+    padding-right: 8px;
+}
