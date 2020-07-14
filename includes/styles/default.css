@@ -17,14 +17,6 @@ body{
     color: #282828
 }
 
-div.site-logo
-{
-    display: block;
-    border: none;
-    float: none;
-    padding-left: 45px;
-}
-
 #outter-content-hold{
     position: relative;
     max-width: 1200px;
@@ -33,14 +25,13 @@ div.site-logo
     margin-right: auto;
     padding: 0px;
     box-sizing: content-box;
-    /* TEMP, help[ to visulize*/
-    /*border: 1px solid gray;*/
+    
 }
 
 ul.nav-content{
     list-style-type: none;
     height: 120px;
-    padding-left: 0px;/*40px;*/
+    padding-left: 0px;
     box-sizing: border-box;
 }
 
@@ -61,6 +52,7 @@ li.nav-content{
     float: left;
     background-color: #d8d8d8;
 
+    transition: background-color 0.333s, color 0.333s;
 }
 
 li.nav-right-border{
