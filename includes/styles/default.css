@@ -262,16 +262,13 @@ img.socal-handles{
 }
 
 .content-hold-stack-element{
-    background-color: gray;
-    background: linear-gradient(0deg, gray 0%, rgba(147,147,147,0) 100%);
+    background: #f0f0f0;
 
-    /*height: 250px;*/
-    width: 94%;
+    height: 250px;
+    width: 100%;
     display: inline-table;
-    margin: 2%;
-    border: solid 2px black;
     box-sizing: border-box;
-    transition: width 1.5s, height 1.5s, background 1.5s;
+    transition: height 0.5s, background 0.5s;
 
     overflow: hidden;
 
@@ -279,17 +276,23 @@ img.socal-handles{
 
 .content-hold-stack-element-active{
     background-color: gray;
-    background: linear-gradient(0deg, gray 0%, rgba(147,147,147,0) 100%);
+    background: #f0f0f0;
 
     height: 555px;
-    width: 94%;
-    margin: 2%;
+    width: 100%;
     display: inline-table;
-    border: solid 2px black;
     box-sizing: border-box;
     overflow: hidden;
 
-    transition: width 1.5s, height 1.5s, background 0.5s;
+    transition: height 0.5s, background 0.5s;
+}
+
+.bg-overflow-hide{
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height: 260px;
+    transition: height 0.5s;
 }
 
 .content-stack-inner-bg{
@@ -297,49 +300,58 @@ img.socal-handles{
     
     background-repeat: no-repeat;
     background-size: cover;
-    background-position-y: 48%;
+    background-position: center;
 
     filter: blur(3px);
     -webkit-filter: blur(3px);
 
-    width: 93.6%;
-    height: 247px;
+    width: 101%;
+    height: 260px;
 
     margin: 0px;
     border-top: none;
     z-index: 0;
     box-sizing: border-box;
 
-    transition: width 1.5s, height 1.5s, filter 0.5s, -webkit-filter 0.5s, background-position 0.5s;
+    transition: height 0.5s, filter 0.5s, -webkit-filter 0.5s, background-position 0.5s;
 }
 
 div.content-stack-inner-bg:hover{
-    background-position: center;
+    background-position-y: 52%;
+    height: 350px;
     filter: blur(1px);
     -webkit-filter: blur(1px);
-    transition:  width 1.5s, height 1.5s, filter 0.5s, -webkit-filter 0.5s, background-position 0.5s;
+    transition: height 0.5s, filter 0.5s, -webkit-filter 0.5s, background-position 0.5s;
 }
 
 .content-hold-stack-element:hover{
     cursor: pointer;
-    background: linear-gradient(0deg, gray 10%, rgba(147,147,147,0) 100%);
+    background: #d8d8d8;
+    height: 300px;
 }
 
+.bg-overflow-hide:hover, .content-hold-stack-element-active .bg-overflow-hide{
+    width: 100%;
+    height: 400px;
+    transition: height 0.5s;
+}
 
-.content-hold-stack-element-active .content-stack-inner-bg{
-    background-position: center;
-    width: 93.6%;
-    height: 350px;
+.content-hold-stack-element-active .content-stack-inner-bg, 
+.content-hold-stack-element-active .content-stack-inner-bg:hover{
+    background-position-y: 52%;
+    width: 101%;
+    height: 400px;
     filter: blur(1px);
     -webkit-filter: blur(1px);
-    transition: width 1.5s, height 1.5s, filter 0.5s, -webkit-filter 0.5s, background-position 0.5s;
+    transition: height 0.5s, filter 0.5s, -webkit-filter 0.5s, background-position 0.5s;
 
 }
 
 h3.content-stack-heading{
 
     position: relative;
-    background-color: #c0c0c0;
+    background-color: #e0e0e0;
+    border-top: solid 8px #b0b0b0;
     border-bottom: solid 4px black;
     box-shadow: 0px 4px 6px black;
     
@@ -394,16 +406,16 @@ a.content-stack-heading-link{
 
 .content-stack-body{
     position: relative;
-    transition: top 1.5s;
+    transition: top 0.5s;
     /*transition-timing-function: ease-in-out;*/
 }
 
 .content-hold-stack-element .content-stack-body{
-    top: 85px;
+    top: 175px;
 }
 
 .content-hold-stack-element-active .content-stack-body{
-    top: 200px;
+    top: 225px;
 }
 
 
@@ -414,43 +426,4 @@ p.content-stack-body-hold{
 p.content-stack-body-hold img{
     display: block;
     margin: auto;
-}
-/* **blogs */
-
-
-.blog-post{
-    position: relative;
-    top: 200px;       /* -(blog-element-side height * blog element count + 25) = in position 600 = out position*/
-    min-height: 100px;
-    transition: top 2s;
-    transition-delay: 1s;
-    transition-timing-function: ease-in-out;
-
-}
-
-.blog-element-main{
-
-    position: relative;
-    left: 0%;
-    top: 10px;
-    width: 100%;
-
-    margin: 0px;
-
-    transition: left 2s, top 2s, width 2s, font-size 2s;
-    transition-timing-function: ease-in-out;
-
-}
-
-.blog-element-side{
-    position: relative;
-    left: -33%;
-    top: 80px;
-    width: 28%;
-    font-size: 10px;
-    height: 125px;
-
-    transition: left 2s, top 2s, width 2s, font-size 2s;
-    transition-timing-function: ease-in-out;
-
 }
