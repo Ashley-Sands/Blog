@@ -412,19 +412,28 @@ a.content-stack-heading-link{
 }
 
 .content-stack-body{
+    display: none;
     position: relative;
     transition: top 0.5s;
-    /*transition-timing-function: ease-in-out;*/
-}
-
-.content-hold-stack-element .content-stack-body{
+    color: rgba(0,0,0,0%);
+    transition: top 0.5s, color 0.333s;
     top: 175px;
+
 }
 
 .content-hold-stack-element-active .content-stack-body{
     top: 225px;
+    display: block;
+    color: black;
+
+    transition: color .333s;
+
 }
 
+.content-hold-stack-element-active .content-stack-body-blog{
+    top: 50px;
+    padding-bottom: 100px;
+}
 
 p.content-stack-body-hold{
     padding: 16px;
