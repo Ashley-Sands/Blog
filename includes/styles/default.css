@@ -449,3 +449,16 @@ p.content-stack-body-hold img{
     padding-left: 8px;
     padding-right: 8px;
 }
+
+/* Blog MD parse elements */
+
+span.code{
+    margin-top: 12px;
+    margin-bottom: 12px;
+    font-family: monospace;
+    width: 700px;   /* I need to workout how to make this resize */
+    display: block;
+    overflow-x: auto;
+    padding: 8px;
+    background-color: white;
+}

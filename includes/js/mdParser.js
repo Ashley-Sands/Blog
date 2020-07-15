@@ -29,8 +29,8 @@ class MarkDownParse{
                 ">": "<code>{v0}</code>"
             },
             blockCode: {
-                "'''": "<code>{v0}</code>",
-                "```": "<code>{v0}</code>"
+                "'''": "<span class='code'>{v0}</span>",//*/"<code>{v0}</code>",
+                "```": "<span class='code'>{v0}</span>"//*/"<code>{v0}</code>"
             },
             header: {
                 "#": "<h1>{v0}</h1><hr/>",
