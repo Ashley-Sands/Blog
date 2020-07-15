@@ -7,45 +7,52 @@
             "project_name": "Pancake Sim 2000",
             "discription": "Arduino and SDL Project all about fliping Pancakes.",
             "url": "https://github.com/Ashley-Sands/PancakeSim2000",
-            "background": "url(./includes/images/backgrounds/PancakeSim2000.jpg)"
-
+            "background": "url(./includes/images/backgrounds/PancakeSim2000.jpg)",
+            "content": ""
         },
         {
             "project_name": "FPS Pacman",
             "discription": "A Pac man like game with a first person mode :)",
             "url": "https://github.com/Ashley-Sands/FPS-Pacman",
-            "background": "url(./includes/images/backgrounds/Pacmanish.png)"
+            "background": "url(./includes/images/backgrounds/Pacmanish.png)",
+            "content": ""
         },
         {
             "project_name": "SQLight Explorer",
             "discription": "A simple SQLight Explorer writen in python",
-            "url": "https://github.com/Ashley-Sands/SQLightExplorer"
+            "url": "https://github.com/Ashley-Sands/SQLightExplorer",
+            "content": ""
         },
         {
             "project_name": "HTTP Server for FPS pacman and SQLight Explorer",
             "discription": "A simple SQLight Explorer writen in python",
-            "url": "https://github.com/Ashley-Sands/Comp-280-PythonServer"
+            "url": "https://github.com/Ashley-Sands/Comp-280-PythonServer",
+            "content": ""
         },
         {
             "project_name": "Scalable Multiplayer RPG server",
             "discription": "Multiplayer RPG server that can scale to any number of instances across multiple servers. Using python and Docker.",
             "url": "https://github.com/Ashley-Sands/Comp-260-TB-RPG-Server",
-            "background": "url(./includes/images/backgrounds/console.png)"
+            "background": "url(./includes/images/backgrounds/console.png)",
+            "content": ""
         },
         {
             "project_name": "Multiplayer RPG Game",
             "discription": "An extreamly simple game made in Unity to use with the multiplayer server.",
-            "url": "https://github.com/Ashley-Sands/Comp-280-PythonServer"
+            "url": "https://github.com/Ashley-Sands/Comp-280-PythonServer",
+            "content": ""
         },
         {
             "project_name": "Node Graph for Unity",
             "discription": "Base classes for node editor window. ",
-            "url": "https://github.com/gizzmo123456/Simple-Unity-Node-Editor"
+            "url": "https://github.com/gizzmo123456/Simple-Unity-Node-Editor",
+            "content": ""
         },
         {
             "project_name": "WellEscape",
             "discription": "Top Down Dungeon Crawler Made with PyGame",
-            "url": "https://github.com/Team-Goulash/comp150-game"
+            "url": "https://github.com/Team-Goulash/comp150-game",
+            "content": ""
         }
      ]
 }
