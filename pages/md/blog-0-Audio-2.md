@@ -1,5 +1,8 @@
+<!-- Original Blog Title, now defined in json file :) -->
+<!--
 ## Audio 2.0
 ##### Date: 24/03/19
+-->
 
 Helloo all! I'm Ashley and I’m 1 of 3 programmers at OverScope Studios who is currently working on Jazz Odyssey an audio rhythmic targeted at the mobile market. I am also currently a first-year student at Falmouth university studying Computing for Games.
 

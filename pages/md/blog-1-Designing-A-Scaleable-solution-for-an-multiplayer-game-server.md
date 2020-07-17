@@ -1,5 +1,8 @@
+<!-- Original Blog Title, now defined in json file :) -->
+<!--
 # Designing A Scaleable solution for an multiplayer game server
 ###### From a single "all-in-one" solution to micro services spaning multiple nodes
+-->
 
 # A simple Muliplayer Server
 
