@@ -146,15 +146,23 @@ h2.nav-button-content{
     position: relative;
 }
 
-#content-spacer, #large-content-spacer{
+#content-spacer, #large-content-spacer, #end-content-spacer{
     position: relative;
     height: 3vh;
     width: 100%;
 }
 
-#large-content-spacer{
+#large-content-spacer, #end-content-spacer{
     height: 8vh;
     min-height: 25px;
+}
+
+#end-content-spacer{
+    
+    background-color: #e0e0e0;
+    border-top: solid 8px #b0b0b0;
+    border-bottom: solid 4px black;
+
 }
 
 .min-space{
@@ -252,11 +260,7 @@ img.socal-handles{
 /* Content Stack Git/Blogs/... */
 
 .thin-stack{
-    height: 150px;
-}
-
-.default-stack{
-    height: 250px;
+    height: 5550px;
 }
 
 .content-hold-stack-element{
@@ -300,6 +304,8 @@ img.socal-handles{
     background-size: cover;
     background-position: center;
 
+    border-bottom: solid 2px #c0c0c0;
+
     filter: blur(3px);
     -webkit-filter: blur(3px);
 
@@ -314,7 +320,7 @@ img.socal-handles{
     transition: height 0.5s, filter 0.5s, -webkit-filter 0.5s, background-position 0.5s;
 }
 
-div.content-stack-inner-bg:hover{
+.content-stack-inner-bg:hover{
     background-position-y: 52%;
     height: 350px;
     filter: blur(1px);
@@ -323,7 +329,6 @@ div.content-stack-inner-bg:hover{
 }
 
 .content-hold-stack-element:hover{
-    cursor: pointer;
     background: #d8d8d8;
     height: 300px;
 }
@@ -353,6 +358,29 @@ div.content-stack-inner-bg:hover{
     transition: height 0.5s, filter 0.5s, -webkit-filter 0.5s, background-position 0.5s;
 
 }
+
+/* override default stack height*/
+.thin-stack{
+    height: 150px;
+}
+
+.thin-stack:hover{
+    height: 200px;
+}
+
+.thin-stack-bg{
+    height: 160px;
+}
+
+.content-hold-stack-element:hover .thin-stack-bg,
+.content-hold-stack-element:hover .thin-stack-bg-hide,
+.content-hold-stack-element-active .thin-stack-bg,
+.content-hold-stack-element-active:hover .thin-stack-bg
+{
+    height: 200px;
+}
+
+/* eof */
 
 h3.content-stack-heading{
 

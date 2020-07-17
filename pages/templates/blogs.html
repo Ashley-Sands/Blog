@@ -1,13 +1,19 @@
-<div class="thin-stack content-hold-stack-element" 
-     onmouseup="ToggleClass(this, 'content-hold-stack-element-active', 'content-hold-stack-element', ToggleMode.SINGLE, ToggleMode.MULTIPLE);
-                UseContent('{loadContentName}');" >
+<div class="thin-stack content-hold-stack-element" >
     
-    <!--<div class="content-stack-inner-bg" style="background-image: {background};"></div>-->
+    <div class="link" 
+         onmouseup="ToggleClass(this.parentNode, 'content-hold-stack-element-active', 'content-hold-stack-element', ToggleMode.SINGLE, ToggleMode.MULTIPLE);
+                    UseContent('{loadContentName}');" >
 
-    <h3 class="content-stack-heading" >
-        {title}
-        <br />
-    </h3>
+        <div class="bg-overflow-hide thin-stack-bg-hide">
+            <!-- div class="content-stack-inner-bg" style="background-image: {background};"></div> -->
+            <div class="content-stack-inner-bg thin-stack-bg" style="background-image: {background};"></div>
+        </div>
+
+        <h3 class="content-stack-heading" >
+            {title}
+            <br />
+        </h3>
+    </div>
 
     <div class="content-stack-discription-hold">
         <p class="thin-stack-discription content-stack-discription">

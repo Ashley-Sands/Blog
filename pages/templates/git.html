@@ -1,14 +1,16 @@
-<div class="default-stack content-hold-stack-element" onmouseup="ToggleClass(this, 'content-hold-stack-element-active', 'content-hold-stack-element', ToggleMode.SINGLE, ToggleMode.MULTIPLE);" >
+<div class="content-hold-stack-element"  >
     
-    <div class="bg-overflow-hide">
-        <div class="content-stack-inner-bg" style="background-image: {background};"></div>
-    </div>
+    <div class="link" onmouseup="ToggleClass(this.parentNode, 'content-hold-stack-element-active', 'content-hold-stack-element', ToggleMode.SINGLE, ToggleMode.MULTIPLE);">
+        <div class="bg-overflow-hide">
+            <div class="content-stack-inner-bg" style="background-image: {background};"></div>
+        </div>
 
-    <h3 class="content-stack-heading" >
-        {project_name}
-        <br />
-        <a href="{url}" class="content-stack-heading-link" target="_blank"><img src="./includes/images/GitHub-Mark-Dark.png" width="24px" class="content-stack-heading-link" /></a>
-    </h3>
+        <h3 class="content-stack-heading" >
+            {project_name}
+            <br />
+            <a href="{url}" class="content-stack-heading-link" target="_blank"><img src="./includes/images/GitHub-Mark-Dark.png" width="24px" class="content-stack-heading-link" /></a>
+        </h3>
+    </div>
 
     <div class="content-stack-discription-hold">
         <p class="content-stack-discription">
