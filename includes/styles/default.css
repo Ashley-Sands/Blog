@@ -355,8 +355,18 @@ img.socal-handles{
     height: 400px;
     filter: blur(1px);
     -webkit-filter: blur(1px);
-    transition: height 0.5s, filter 0.5s, -webkit-filter 0.5s, background-position 0.5s;
+    transition: height 0.5s, filter 0.5s, -webkit-filter 0.5s, background 0.5s;
 
+}
+
+.content-hold-stack-element-active .content-stack-inner-bg{
+    background-color: #d8d8d8;
+    transition: background 0.5s;
+}
+
+.content-hold-stack-element-active .content-stack-inner-bg:hover{
+    background-color: #c0c0c0;
+    /*transition: background 0.5s;*/
 }
 
 /* override default stack height*/
@@ -380,6 +390,9 @@ img.socal-handles{
     height: 200px;
 }
 
+.content-hold-stack-element-active.thin-stack{
+    height: 1000px;
+}
 /* eof */
 
 h3.content-stack-heading{
