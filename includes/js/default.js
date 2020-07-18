@@ -58,25 +58,18 @@ JsonFormator = function( contentObj )
 
     // load any templates, that are not already loaded
     // while blocking if any templates are still loading.
-    var loadingTemplate = defaultTemplate != null                               && 
-                          defaultTemplate in contentCache.templates             && 
-                          contentCache.templates[defaultTemplate].IsLoading();
 
-    if ( defaultTemplate && !loadingTemplate)
-        LoadTemplate( defaultTemplate, contentObj );
 
+    var loadingTemplate = LoadTemplate( defaultTemplate, contentObj ); // load default template if defined
+    
     for ( var i = 0; i < content.length; i++ )
     {
         let contentTemplate = "~template" in content[i] ? content[i]["~template"] : null;
-
-        if ( contentTemplate != null && content[i]["~template"] in contentCache.templates)
-            loadingTemplate = contentCache.templates[ content[i]["~template"] ].IsLoading();
-
-        if ( contentTemplate != null && !loadingTemplate )
-            LoadTemplate( contentTemplate, contentObj );
+        loadingTemplate = loadingTemplate || LoadTemplate( contentTemplate, contentObj );
 
     }
 
+    console.log( "Template Loading "+ loadingTemplate );
     if ( loadingTemplate ) return;  // wait for all template to be loaded.
 
     // unset any page content set as inUse
@@ -186,7 +179,13 @@ TriggerFunction = function( functName )
 
 LoadTemplate = function( templateName, parentRequest )
 {
-    if ( templateName in contentCache.templates ) return;
+    /**
+     * Loads Template if not already loaded/chached, immediately cachcing the content obj
+     * @return: false if null teplate, otherwise if template.IsLoading().
+     */
+
+    if ( templateName == null ) return false;
+    else if ( templateName in contentCache.templates ) return contentCache.templates[ templateName ].IsLoading();
 
     var templateRequest = new ContentObject( Const.basePath + "/pages/templates/" + templateName + ".html",
                                              CacheTemplate, 
@@ -195,6 +194,8 @@ LoadTemplate = function( templateName, parentRequest )
 
     templateRequest.Load();
     contentCache.templates[ templateName ] = templateRequest;
+
+    return contentCache.templates[ templateName ].IsLoading()
 
 }
 
