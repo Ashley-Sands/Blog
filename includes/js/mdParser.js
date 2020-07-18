@@ -175,7 +175,6 @@ class MarkDownParse{
         
 
         // put the extracted (final) values back into the output
-        console.log( extractedValues )
         for ( var i = 0; i < extractedValues.length; i++)
         {
             output = output.replace(`{${i}}`, extractedValues[i]);

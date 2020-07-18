@@ -30,7 +30,6 @@ class JSParse{
 
         }
 
-        console.log( jsonString );
         return JSON.parse( jsonString );
 
 

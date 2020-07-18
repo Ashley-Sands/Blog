@@ -69,7 +69,6 @@ JsonFormator = function( contentObj )
 
     }
 
-    console.log( "Template Loading "+ loadingTemplate );
     if ( loadingTemplate ) return;  // wait for all template to be loaded.
 
     // unset any page content set as inUse
