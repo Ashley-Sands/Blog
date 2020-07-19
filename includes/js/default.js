@@ -11,11 +11,30 @@ var contentCache = {
     additinalContent: {}
 };
 
-var pages = [ "about", "git", "blogs"]  // assumed that element is the entry page
+var pages = [ "about", "git", "blogs"]  // assumed that the about element is the entry page
+var currentPage = "";
 var nextHtmlElementId = 0;
 
-LoadContent = function( page )
+LoadContent = function()
 {
+
+    var page;
+    var requestPage = location.hash.substring(1).toLowerCase();
+
+    if ( requestPage == null || requestPage == "")
+    {
+        page = "about";
+    }
+    else if ( !pages.includes( requestPage ) )
+    {
+        page = "NotFound";
+    }
+    else
+    {
+        page = requestPage;
+    }
+
+    if ( page == currentPage) return;
 
     var path = "/pages/" + page + ".json";
     var url = Const.basePath + path;
@@ -33,8 +52,8 @@ LoadContent = function( page )
         console.log( `using chached page for ${page}` )
     }
 
+    currentPage = page;
     contentCache.pages[page].Use(); 
-    location.hash = page;
 
 }
 
@@ -352,16 +371,11 @@ SetLoading = function(){
     contentElement.innerHTML = "<p class='loading' id='loading-icon' ><img src='./includes/images/loading.svg' width='50px' /><br />Loading</p>"
 }
 
+window.onhashchange = LoadContent;
+
 SetLoading();
-// Load the request page, (TODO: it might be worth change if from hash to the history method )
-requestPage = location.hash.substring(1).toLowerCase();
-loadPage = pages[0];
-
-if ( pages.includes(requestPage) )
-    loadPage = requestPage;
-
 LoadTemplate( "error", null);
-LoadContent( loadPage );
+LoadContent();
 
 // update the foot year
 document.getElementById("year").innerHTML = Common.Year();
