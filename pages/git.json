@@ -5,7 +5,7 @@
     "content": [       
         {
             "~template": "pageInfo",
-            "content": "This is a small amout of my git projects"
+            "content": "${pageinfo}"
         }, 
         {
             "project_name": "Pancake Sim 2000",
@@ -58,5 +58,13 @@
             "url": "https://github.com/Team-Goulash/comp150-game",
             "content": ""
         }
-     ]
+    ],
+    "additionalContent": {
+        "pageinfo":{
+            "url": "./pages/md/git-pageInfo.md",
+            "preLoad": true,
+            "cache": false,
+            "parseMd": true
+        }
+    }
 }

@@ -5,7 +5,7 @@
     "content": [
         {
             "~template": "pageInfo",
-            "content": "This is some  of the blog post i have writen "
+            "content": "${blogpageinfo}"
         },
         {
             "title": "Designing A Scaleable solution for an multiplayer game server",
@@ -34,7 +34,14 @@
             "preLoad": false,
             "cache": false,
             "parseMd": true
+        },
+        "blogpageinfo":{
+            "url": "./pages/md/blog-pageInfo.md",
+            "preLoad": true,
+            "cache": false,
+            "parseMd": true
         }
+        
     }
         
 }
