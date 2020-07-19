@@ -254,6 +254,7 @@ FormatContentElements = function( contentString, additionalContentJsonObj ){
             if ( match )
             {
                 contentCache.additinalContent[ key ].htmlElementId = elementId;
+                contentCache.additinalContent[ key ].htmlElement = null;
                 keys.splice(i);
             }
 
