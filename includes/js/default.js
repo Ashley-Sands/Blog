@@ -27,7 +27,7 @@ LoadContent = function()
     }
     else if ( !pages.includes( requestPage ) )
     {
-        page = "NotFound";
+        page = "notFound";
     }
     else
     {
@@ -194,6 +194,8 @@ TriggerFunction = function( functName )
         case "started-years-ago":
             document.getElementById("started-years-ago").innerHTML = Common.StartedYearsAgo();
             break;
+        case "hash":
+            document.getElementById("error-hash").innerHTML = location.hash.substring(1).toLowerCase();
     }
 }
 

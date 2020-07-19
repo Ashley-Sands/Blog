@@ -1,0 +1,13 @@
+{
+    "header": "404",
+    "subHeader": "Not Found",
+    "~defaultTemplate": "error",
+    "content": [
+            {
+                "error": "Page '<span id='error-hash' ></span>' not found" 
+            }       
+        ],
+    "jsFunctions": [
+        "hash"
+    ]
+}
