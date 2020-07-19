@@ -2,7 +2,11 @@
     "header": "Git",
     "subHeader": "My Projects",
     "~defaultTemplate": "git",
-    "content": [        
+    "content": [       
+        {
+            "~template": "pageInfo",
+            "content": "This is a small amout of my git projects"
+        }, 
         {
             "project_name": "Pancake Sim 2000",
             "discription": "Arduino and SDL Project all about fliping Pancakes.",

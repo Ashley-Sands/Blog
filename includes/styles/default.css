@@ -139,6 +139,11 @@ h2.nav-button-content{
 
 /* Content area */
 
+.content-hold-stack-page-info{
+    padding: 0px 8px 24px 8px;
+
+}
+
 .side-content-hold{
     box-sizing: border-box;
     position: absolute;
