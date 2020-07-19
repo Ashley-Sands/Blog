@@ -23,6 +23,22 @@ p.loading
     color: #282828
 }
 
+svg.logo{
+    position: relative;
+    top: 45%;
+    overflow: overlay;
+}
+
+text.logo{
+
+    font-family: amshw, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 32px;
+    letter-spacing: 2px;
+
+    fill: #d8d8d8;
+}
+
 #outter-content-hold{
     position: relative;
     max-width: 1200px;
@@ -36,7 +52,7 @@ p.loading
 
 ul.nav-content{
     list-style-type: none;
-    height: 120px;
+    height: 90px;
     padding-left: 0px;
     box-sizing: border-box;
 }
@@ -82,7 +98,6 @@ li.nav-button-logo{
     width: 25%;
     background-color: #484848;
     border-left: solid 2px black;
-    color: #d8d8d8;
     
 }
 
@@ -104,11 +119,11 @@ p.nav-button-content, h2.nav-button-content{
 }
 
 .nav-upper-center-align{
-    bottom: 55%;
+    bottom: 45%;
 }
 
 .nav-lower-center-align{
-    top: 45%
+    top: 55%
 }
 
 .button-pointer:hover{
