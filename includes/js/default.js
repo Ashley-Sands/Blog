@@ -16,11 +16,13 @@ var nextHtmlElementId = 0;
 
 LoadContent = function( page )
 {
+
     var path = "/pages/" + page + ".json";
     var url = Const.basePath + path;
 
     if ( !(page in contentCache.pages) )    // load content if not in chach.
     {
+        SetLoading();
         var contentRequest = new ContentObject( url, JsonFormator, (errorCO)=>HTTPErrorHandler(errorCO) );
         contentRequest.SetResponceParser( (jsonStr)=>JSParse.Parse(jsonStr) );
         contentCache.pages[page] = contentRequest;
@@ -345,6 +347,11 @@ UseContent = function( contentKey )
 
 }
 
+SetLoading = function(){
+    contentElement.innerHTML = "<p class='loading' id='loading-icon' ><img src='./includes/images/loading.svg' width='50px' /><br />Loading</p>"
+}
+
+SetLoading();
 // Load the request page, (TODO: it might be worth change if from hash to the history method )
 requestPage = location.hash.substring(1).toLowerCase();
 loadPage = pages[0];
