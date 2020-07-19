@@ -24,13 +24,13 @@
     ],
     "additionalContent": {
         "blog0":{
-            "url": "./pages/md/blog-0-Audio-2.md",
+            "url": "./pages/md/blogs/blog-0-Audio-2.md",
             "preLoad": false,
             "cache": false,
             "parseMd": true
         },
         "blog1":{
-            "url": "./pages/md/blog-1-Designing-A-Scaleable-solution-for-an-multiplayer-game-server.md",
+            "url": "./pages/md/blogs/blog-1-Designing-A-Scaleable-solution-for-an-multiplayer-game-server.md",
             "preLoad": false,
             "cache": false,
             "parseMd": true
